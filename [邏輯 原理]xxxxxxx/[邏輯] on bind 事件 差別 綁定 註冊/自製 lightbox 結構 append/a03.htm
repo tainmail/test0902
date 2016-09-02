@@ -1,0 +1,80 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>無標題文件</title>
+<style>
+*{ margin:0px; padding:0px; font-family: "微軟正黑體";}
+* { 
+-webkit-box-sizing: border-box;
+-moz-box-sizing: border-box;
+box-sizing: border-box;
+
+}
+
+/*清除 clearfix*/
+.clearfix:after { content: "."; display: block; height: 0; clear: both; visibility: hidden; }
+.clearfix {*zoom: 1; _zoom: 1; }
+
+/*控制pre*/
+pre { border:2px solid pink; padding:5px; font-size:12px; background:#fff; clear:both; font-size:12px; font-family:Verdana;}
+pre strong { color:#CC0000; }
+pre em { font-style:normal; font-weight:bold; color:#006600; }
+
+.wrapper{ width:800px; height:1500px; border:5px dashed green; margin:0 auto;}
+
+
+.mylb{  width:100%;  position:fixed; left:0px; top:0px; display:none;}
+.mylb .overlap{ background:rgba(0,0,0,0.8); height:1500px;}
+.mylb .content{ width:700px; margin-left:-350px; background:#fff;  border:5px solid purple; position:absolute; top:100px; left: 50%;}
+.mylb .btn_close{ width:50px; height:50px; background:pink; position:absolute; right:20px; top:20px;}
+
+</style>
+
+</head>
+<script src="js/jquery.js"></script>
+<script>
+$(function(){
+	
+	var mylbhtml = '<div class="mylb">\
+						<div class="overlap"></div>\
+						<div class="content"></div>\
+						<div class="btn_close">X</div>\
+					</div>'
+	
+	
+	$(".lb_open").on("click", function(){
+		
+		if($(".mylb").length < 1){
+			$("body").append(mylbhtml)
+		}
+		
+		$(".mylb .content").html('<img src="'+$(this).data("src")+'"/>')
+		$(".mylb").show();
+	});
+	
+	$(document).on("click", ".mylb .btn_close", function(){
+		$(".mylb").hide();
+	});
+	
+	$(document).on("click", ".mylb .overlap", function(){
+		$(".mylb").hide();
+	});
+	
+});
+</script>
+<body>
+
+<div class="wrapper">
+<hl></hl>
+<p>本例： lightbox 的結構是後來append進去 需要on網定去live</p>
+<img class="lb_open" data-src="images/pic_1.jpg" src="images/pic_1s.jpg"/>
+<img class="lb_open" data-src="images/pic_2.jpg" src="images/pic_2s.jpg"/>
+</div>
+
+
+
+
+
+</body>
+</html>

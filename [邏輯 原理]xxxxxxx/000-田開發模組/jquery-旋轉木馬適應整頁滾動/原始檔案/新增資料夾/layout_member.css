@@ -1,0 +1,88 @@
+/********************會員中心*********************/
+.mcHead{
+	margin: 0px 0px 0px 0px;
+	width: 948px;
+	height: auto;
+	float: left;
+	border: 1px solid #999;
+	border-bottom: 5px solid #000;
+}
+#mcMenuBox{
+	margin: 0px 0px 0px 0px;
+	width: 950px;
+	height: 40px;
+	float: left;
+	background-color: #666;
+}
+.mcMenu{
+	margin: 0px 0px 0px 10px;
+	width: 140px;
+	height: 40px;
+	float: left;
+	font-size: 15px;
+	font-weight: bold;
+	color: #CCC;
+	cursor: pointer;
+	text-align: center;
+	line-height: 36px;
+	line-height: 40px \9;
+}
+.mcMenu:hover{
+	color: #FFF;
+	background-image: url(../images/mcMenuHover.png);
+}
+.orderSearchBox{
+	margin: 8px 0px 0px 0px;
+	width: 940px;
+	height: 40px;
+	float: left;
+	border: 5px solid #CCC;
+}
+
+.tableBox{
+	margin: 8px 0px 0px 0px;
+	width: 942px;
+	height: auto;
+	float: left;
+	border: 4px solid #CCC;
+}
+.tableBox a:link {
+	text-decoration: none;
+	color: #006A6A;
+}
+.tableBox a:visited {
+	text-decoration: none;
+	color: #006A6A;
+}
+.tableBox a:hover {
+	text-decoration: underline;
+	color: #006A6A;
+}
+.ItemTxtBox{
+	margin: 20px 0px 0px 0px;
+	width: 950px;
+	height: auto;
+	float: left;
+	line-height: 1.8;
+	font-size: 14px;
+}
+.ItemTxtBox2{
+	margin: 10px 0px 0px 15px;
+	width: 920px;
+	height: auto;
+	float: left;
+	line-height: 1.8;
+	font-size: 14px;
+}
+.topBo1 td{
+	border-top: 1px dotted #999;
+}
+.topBo0 td{
+	border: 0px;
+}
+
+
+
+
+
+

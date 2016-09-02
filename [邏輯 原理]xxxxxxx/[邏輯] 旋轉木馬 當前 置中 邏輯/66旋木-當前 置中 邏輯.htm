@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>66旋木-當前 置中 邏輯</title>
+<style>
+* { margin:0px; padding:0px; font-family: "微軟正黑體", Microsoft Yahei, Verdana, Geneva, sans-serif, "新細明體"; }
+/*清除 clearfix*/
+.clearfix:after { content: "."; display: block; height: 0; clear: both; visibility: hidden; }
+.clearfix {
+*zoom: 1; _zoom: 1; }
+/*控制pre*/
+pre { border:2px solid pink; padding:5px; font-size:12px; background:#fff; clear:both; font-size:12px; font-family:Verdana; }
+pre strong { color:#CC0000; }
+pre em { font-style:normal; font-weight:bold; color:#006600; }
+</style>
+<link href="js/jquery.bxslider/jquery.bxslider.css" rel="stylesheet" type="text/css" />
+<script src="js/jquery.js"></script>
+<script src="js/jquery.bxslider/jquery.bxslider.js"></script>
+<script>
+$(function(){
+	var mySlider = $('.gallery_1 .run .inner').bxSlider({
+		slideWidth:200,
+		moveSlides : 1,
+		minSlides: 5,
+		maxSlides:5
+	});
+	
+	//邏輯本例顯示5張===============================================
+	//點到的序 - (顯示張數/2的商)  如果小於0   =====>   前往 = 點到的序 - (顯示張數/2的商) + 總張數
+	//例  0-(5/2)<0    0-(5/2)+9=7
+	//點到的序 - (顯示張數/2的商)  如果大於0   =====>   前往 = 點到的序 - (顯示張數/2的商)
+	//例  3-(5/2)>0    3-(5/2)=1
+	
+	var iDisplay = 5 //顯示張數
+	var iTotal = 9   //總張數
+	var iBack = null //要倒退的數
+	
+	$(".gallery_1 .piece").on("click", function(){
+		var iNo = $(this).attr("rel");
+		//要倒退的數
+		var iBack = iNo - parseInt(iDisplay/2); 
+		
+		if( iBack < 0){   
+			mySlider.goToSlide(iBack + 9);
+		}else{
+			mySlider.goToSlide(iBack);
+		};
+	});
+});
+</script>
+</head>
+
+<body>
+<h1>旋木-當前 置中</h1>
+
+
+<!--圖集 開始-->
+<div class="gallery_1"> 
+    <!--滾動 開始-->
+    <div class="run">
+        <div class="inner">
+            <div class="piece" rel="0"><img src="images/pic_1.jpg"/></div>
+            <div class="piece" rel="1"><img src="images/pic_2.jpg"/></div>
+            <div class="piece" rel="2"><img src="images/pic_3.jpg"/></div>
+            <div class="piece" rel="3"><img src="images/pic_4.jpg"/></div>
+            <div class="piece" rel="4"><img src="images/pic_5.jpg"/></div>
+            <div class="piece" rel="5"><img src="images/pic_6.jpg"/></div>
+            <div class="piece" rel="6"><img src="images/pic_7.jpg"/></div>
+            <div class="piece" rel="7"><img src="images/pic_8.jpg"/></div>
+            <div class="piece" rel="8"><img src="images/pic_9.jpg"/></div>
+        </div>
+    </div>
+    <!--滾動 結束--> 
+</div>
+<!--圖集 結束-->
+
+</body>
+</html>

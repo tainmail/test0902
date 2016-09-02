@@ -1,0 +1,113 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>sample</title>
+<style>
+*{ margin:0px; padding:0px; font-family: "微軟正黑體";}
+* { 
+-webkit-box-sizing: border-box;
+-moz-box-sizing: border-box;
+box-sizing: border-box;
+
+}
+
+/*清除 clearfix*/
+.clearfix:after { content: "."; display: block; height: 0; clear: both; visibility: hidden; }
+.clearfix {*zoom: 1; _zoom: 1; }
+
+/*控制pre*/
+pre { border:2px solid pink; padding:5px; font-size:12px; background:#fff; clear:both; font-size:12px; font-family:Verdana;}
+pre strong { color:#CC0000; }
+pre em { font-style:normal; font-weight:bold; color:#006600; }
+
+body{ background:green;}
+
+.wrapper{ width:1000px; margin:0 auto;}
+
+
+.box{ width:600px; height:300px; line-height:300px; border:5px solid #ccc; margin:0 auto; font-size:100px; color:yellowgreen; text-align:center; text-shadow: 1px 2px 3px #000; cursor:pointer;}
+</style>
+
+<script src="js/jquery.js"></script>
+
+<!--taintestinfo 測試開始-->
+<script>
+$.extend({
+	tainTestInfo: function(options){
+		var defaults = {className:"info", amount:3, width:200, posH:"right", posV:"top"};
+		var settings = $.extend( defaults, options);
+		var sTestInfoHtml='';
+		sTestInfoHtml += '<div class="'+settings.className+'" style="width:'+settings.width+'px; height:auto; padding:10px; background-color:rgba(0, 0, 0, 0.5); position:fixed; '+settings.posH+':0px; '+settings.posV+':0px;  z-index:1000;">'
+		for(var i=0; i<settings.amount; i++){
+			sTestInfoHtml += '<div class="'+settings.className+'_'+i+'" style="border:1px solid #000; margin-bottom:5px; color:#fff;">--</div>';
+		};
+		sTestInfoHtml += '</div>'
+		$("body").append(sTestInfoHtml);
+	}
+});
+
+
+$(function(){
+	$.tainTestInfo({className:"info", amount:3, width:200, posH:"right", posV:"top"}); 
+	$(".info_0").html("--");
+});
+</script>
+<!--taintestinfo 測試結束-->
+
+<script>
+
+
+
+
+
+
+$(function(){
+	
+	var iBoxOffsetLeft;
+	var iBoxOffsetTop;
+	var iShadowX;
+	var iShadowY;
+	var iShadowBlur
+	
+	$(".box").on("mousemove", function(e){
+		iBoxOffsetLeft = $(this).offset().left;
+		iBoxOffsetTop = $(this).offset().top;
+		iBoxCenterX = e.pageX-iBoxOffsetLeft-300  // 容器中心座標 = 滑鼠位置 - 容器偏移 - 容器的一半
+		iBoxCenterY = e.pageY-iBoxOffsetTop-150
+		$(".info_0").html("容器中心x座標： "+ iBoxCenterX);
+		$(".info_1").html("容器中心y座標： "+ iBoxCenterY);
+		
+		//陰影距離，照比例
+		iShadowX = iBoxCenterX/10; 
+		iShadowY = iBoxCenterY/10;
+		
+		//模糊距離照水平與垂直的平均值(田亂算的)
+		iShadowBlur = (Math.abs(iShadowX)+Math.abs(iShadowY))/2;
+		
+		$(this).css({"text-shadow":"rgb(0, 0, 0) "+iShadowX+"px "+iShadowY+"px "+iShadowBlur+"px"});
+	});
+	
+
+});
+</script>
+
+</head>
+
+<body>
+<!--wrapper 開始-->
+<div class="wrapper">
+    <h1>滑鼠 陰影 跟隨</h1>
+    <p>本例： </p>
+    
+    
+    <div class="box">
+    	SHADOW
+    </div>
+    
+</div>
+<!--wrapper 結束--> 
+
+
+</body>
+</html>

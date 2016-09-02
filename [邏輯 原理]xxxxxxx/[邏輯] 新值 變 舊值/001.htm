@@ -1,0 +1,93 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>無標題文件</title>
+<style>
+*{ margin:0px; padding:0px; font-family: "微軟正黑體";}
+* { 
+-webkit-box-sizing: border-box;
+-moz-box-sizing: border-box;
+box-sizing: border-box;
+
+}
+
+/*清除 clearfix*/
+.clearfix:after { content: "."; display: block; height: 0; clear: both; visibility: hidden; }
+.clearfix {*zoom: 1; _zoom: 1; }
+
+/*控制pre*/
+pre { border:2px solid pink; padding:5px; font-size:12px; background:#fff; clear:both; font-size:12px; font-family:Verdana;}
+pre strong { color:#CC0000; }
+pre em { font-style:normal; font-weight:bold; color:#006600; }
+
+.wrapper{ border:10px dashed red; width:600px; height:2000px; margin:0 auto;}
+
+</style>
+
+<script src="js/jquery.js"></script>
+
+<!--taintestinfo 測試開始-->
+<script>
+$.extend({
+	tainTestInfo: function(options){
+		var defaults = {className:"info", amount:3, width:200, posH:"right", posV:"top"};
+		var settings = $.extend( defaults, options);
+		var sTestInfoHtml='';
+		sTestInfoHtml += '<div class="'+settings.className+'" style="width:'+settings.width+'px; height:auto; padding:10px; background-color:rgba(0, 0, 0, 0.5); position:fixed; '+settings.posH+':0px; '+settings.posV+':0px;  z-index:1000;">'
+		for(var i=0; i<settings.amount; i++){
+			sTestInfoHtml += '<div class="'+settings.className+'_'+i+'" style="border:1px solid #000; margin-bottom:5px; color:#fff;">--</div>';
+		};
+		sTestInfoHtml += '</div>'
+		$("body").append(sTestInfoHtml);
+	}
+});
+
+
+$(function(){
+	$.tainTestInfo({className:"info", amount:3, width:200, posH:"right", posV:"top"}); 
+	$(".info_0").html("--");
+});
+</script>
+<!--taintestinfo 測試結束-->
+<script>
+
+$(function(){
+	var iWinScrollNew;
+	var iWinScrollOld;
+	
+	$(window).on("scroll", function(){
+		iWinScrollNew = $(this).scrollTop();
+		$(".info_0").html("目前滾：" + iWinScrollNew );
+		
+		if( iWinScrollNew > iWinScrollOld ){
+			$(".info_1").append("北--");
+		}else{
+			$(".info_1").append("南--");
+		}
+		
+		iWinScrollOld = iWinScrollNew;
+	});
+	
+	
+});
+
+
+
+
+</script>
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="wrapper">
+	<h1>事件 滾動 往上 往下</h1>
+</div>
+
+</body>
+</html>

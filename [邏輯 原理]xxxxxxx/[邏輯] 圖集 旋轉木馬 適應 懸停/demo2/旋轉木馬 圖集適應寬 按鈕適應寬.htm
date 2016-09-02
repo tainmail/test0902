@@ -1,0 +1,181 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>旋轉木馬</title>
+
+<style>
+*{ margin:0px; padding:0px; font-family: "微軟正黑體";}
+* { 
+-webkit-box-sizing: border-box;
+-moz-box-sizing: border-box;
+box-sizing: border-box;
+
+}
+
+/*清除 clearfix*/
+.clearfix:after { content: "."; display: block; height: 0; clear: both; visibility: hidden; }
+.clearfix {*zoom: 1; _zoom: 1; }
+
+/*控制pre*/
+pre { border:2px solid pink; padding:5px; font-size:12px; background:#fff; clear:both; font-size:12px; font-family:Verdana;}
+pre strong { color:#CC0000; }
+pre em { font-style:normal; font-weight:bold; color:#006600; }
+
+.gallery{ width:100%; max-width:500px;  height:100px; margin:0 auto; position:relative; background:#333; overflow:hidden;}
+
+.gallery .run{ width:3000px;/*一開始給一個大一點的寬度，方便計算float後的寬度*/ height:50px; background:green; position:absolute; left:0px; top:0px; opacity:0.8; border:0px solid blue;}
+.gallery .run .inner{ width:auto; float:left;}
+.gallery .run .inner a{ display:block;   height:50px; float:left; background:gold; border:1px dotted orange; padding:5px;}
+.gallery .run .clone a{ background:orange; border:1px solid gold;}
+
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+<!--taintestinfo 測試開始-->
+<script>
+$.extend({
+	tainTestInfo: function(options){
+		var defaults = {className:"info", amount:3, width:200, posH:"right", posV:"top"};
+		var settings = $.extend( defaults, options);
+		var sTestInfoHtml='';
+		sTestInfoHtml += '<div class="'+settings.className+'" style="width:'+settings.width+'px; height:auto; padding:10px; background-color:rgba(0, 0, 0, 0.5); position:fixed; '+settings.posH+':0px; '+settings.posV+':0px;  z-index:1000;">'
+		for(var i=0; i<settings.amount; i++){
+			sTestInfoHtml += '<div class="'+settings.className+'_'+i+'" style="border:1px solid #000; margin-bottom:5px; color:#fff;">--</div>';
+		};
+		sTestInfoHtml += '</div>'
+		$("body").append(sTestInfoHtml);
+	}
+});
+
+
+$(function(){
+	$.tainTestInfo({className:"info", amount:3, width:200, posH:"right", posV:"top"}); 
+	$(".info_0").html("--");
+});
+</script>
+<!--taintestinfo 測試結束-->
+
+<script>
+$(function(){
+	
+	
+	var iGalleryW; //圖集寬
+	var iRunW; //滾動組的寬
+	var iInnerW; //按鈕群組的寬
+	var iOffCanvas; //滾出範圍的 left值
+	
+	
+	//產生結構
+	function fnInitialize(){
+		$(".gallery .run .inner").clone().addClass("clone").appendTo(".gallery .run");
+	};
+	
+	
+	//fn Resize
+	function fnResize(){
+		
+		//圖集寬
+		iGalleryW = $(".gallery").outerWidth(); 
+		
+		//按鈕群組的寬
+		iInnerW = $(".gallery .run .inner").outerWidth();
+		
+		//滾動組的寬 = 按鈕群組的寬 *2
+		iRunW = iInnerW * 2
+		
+		//更新 滾動組的寬
+		$(".gallery .run").outerWidth(iRunW);
+		
+		
+		//初始clone按鈕群組
+		if( iInnerW > iGalleryW ){
+			
+			$(".info_0").html("動");////
+			
+			$(".gallery .run .clone").show();
+			fnPlay();
+			
+			
+		}else{
+			$(".info_0").html("停");////
+			
+			fnPause();
+			$(".gallery .run").css({"left":"0"});
+			$(".gallery .run .clone").hide();
+			
+		};
+		
+	};
+	
+	//fn 播放
+	function fnPlay(){
+		iOffCanvas = parseInt( Math.abs($(".gallery .run").position().left) );
+		
+		if( iOffCanvas > iInnerW){
+			$(".gallery .run").css({"left":"0"});
+		}
+		$(".gallery .run").stop(true,false).animate({"left":"-=10"}, 100, "linear", fnPlay);
+	};
+	
+	//fn 暫停
+	function fnPause(){
+		$(".gallery .run").stop(true,false);
+	};
+	
+	
+	//懸停
+	$(".gallery").hover(
+		function(){
+			$(".info_2").html("停")/////
+			fnPause();
+		},
+		function(){
+			if( iInnerW > iGalleryW ){
+				$(".info_2").html("動")/////
+				fnPlay();
+			}else{
+				$(".info_2").html("停")/////
+				fnPause();
+			};
+			
+		}
+	);
+	
+	//Resize
+	$(window).on("resize", function(){
+		fnResize();
+	});
+	
+	//初始
+	fnInitialize();
+	fnResize();
+	
+	
+	
+});
+
+
+
+</script>
+
+</head>
+
+<body>
+<h1>旋轉木馬 圖集適應寬 按鈕適應寬</h1>
+<div class="gallery">
+	<div class="run">
+    	<div class="inner">
+        	<a href="#">按鈕00000</a>
+            <a href="#">按鈕111</a>
+            <a href="#">按鈕22</a>
+            <a href="#">按鈕3333</a>
+            <a href="#">按鈕444</a>
+        </div>
+    </div>
+</div>
+
+
+
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>拖拉</title>
+<script src='js/jquery.js'></script>
+<style>
+*{ margin:0px; padding:0px; font-family: "微軟正黑體";}
+* { 
+-webkit-box-sizing: border-box;
+-moz-box-sizing: border-box;
+box-sizing: border-box;
+
+}
+
+/*清除 clearfix*/
+.clearfix:after { content: "."; display: block; height: 0; clear: both; visibility: hidden; }
+.clearfix {*zoom: 1; _zoom: 1; }
+
+/*控制pre*/
+pre { border:2px solid pink; padding:5px; font-size:12px; background:#fff; clear:both; font-size:12px; font-family:Verdana;}
+pre strong { color:#CC0000; }
+pre em { font-style:normal; font-weight:bold; color:#006600; }
+
+
+.wrapper{ width:800px; height:800px; border:5px solid red; margin:0 auto; position:relative;}
+.box{ width:100px; height:50px; background:gold; border:5px solid red;}
+
+.box_2{ position:absolute; left:200px; top:100px;}
+</style>
+<script>
+
+$(function(){
+	$(".box").on("mousedown", function(event){
+		var $Box = $(this);
+		var lastOffset = $Box.data("lastTransform");
+		var lastOffsetX = lastOffset ? lastOffset.dx :0;
+		var lastOffsetY = lastOffset ? lastOffset.dy :0;
+		var startX  = event.pageX - lastOffsetX;
+		var startY  = event.pageY - lastOffsetY;
+		
+		$(document).on("mousemove", function(event){
+			var newDx = event.pageX - startX ;
+			var newDy = event.pageY - startY ;
+			$Box.css('transform','translate(' + newDx + 'px, ' + newDy + 'px)');
+			$Box.data('lastTransform', {dx: newDx, dy: newDy });
+		});
+	});
+	
+	$(document).on("mouseup",function(){
+		$(this).off("mousemove");
+	});	
+
+});
+
+
+</script>
+</head>
+<body>
+
+<div class="wrapper">
+
+
+	<div class="box box_1">111</div>
+    
+    <div class="box box_2">22222</div>
+
+</div>
+
+
+</body>
+</html>

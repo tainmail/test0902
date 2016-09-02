@@ -1,0 +1,73 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>無標題文件</title>
+<style>
+*{ margin:0px; padding:0px; font-family: "微軟正黑體";}
+* { 
+-webkit-box-sizing: border-box;
+-moz-box-sizing: border-box;
+box-sizing: border-box;
+
+}
+
+/*清除 clearfix*/
+.clearfix:after { content: "."; display: block; height: 0; clear: both; visibility: hidden; }
+.clearfix {*zoom: 1; _zoom: 1; }
+
+/*控制pre*/
+pre { border:2px solid pink; padding:5px; font-size:12px; background:#fff; clear:both; font-size:12px; font-family:Verdana;}
+pre strong { color:#CC0000; }
+pre em { font-style:normal; font-weight:bold; color:#006600; }
+
+.wrapper{ width:800px; height:1500px; border:5px dashed green; margin:0 auto;}
+
+
+.mylb{  width:100%;  position:fixed; left:0px; top:0px; display:none;}
+.mylb .overlap{ background:rgba(0,0,0,0.8); height:1500px;}
+.mylb .content{ width:700px; margin-left:-350px; background:#fff;  border:5px solid purple; position:absolute; top:100px; left: 50%;}
+.mylb .btn_close{ width:50px; height:50px; background:pink; position:absolute; right:20px; top:20px;}
+
+</style>
+
+</head>
+<script src="js/jquery.js"></script>
+<script>
+$(function(){
+	$(".lb_open").on("click", function(){
+		$(".mylb .content").html('<img src="'+$(this).data("src")+'"/>')
+		$(".mylb").show();
+	});
+	
+	$(".mylb .btn_close").on("click", function(){
+		$(".mylb").hide();
+	});
+	
+	$(".mylb .overlap").on("click", function(){
+		$(".mylb").hide();
+	});
+	
+});
+</script>
+<body>
+
+<div class="wrapper">
+
+撐高用
+<img class="lb_open" data-src="images/pic_1.jpg" src="images/pic_1s.jpg"/>
+<img class="lb_open" data-src="images/pic_2.jpg" src="images/pic_2s.jpg"/>
+<img class="lb_open" data-src="images/pic_3.jpg" src="images/pic_3s.jpg"/>
+<a class="lb_open" data-src="images/pic_4.jpg" href="#">圖4</a>
+</div>
+
+
+<div class="mylb">
+	<div class="overlap"></div>
+    <div class="content"></div>
+    <div class="btn_close">X</div>
+</div>
+
+
+</body>
+</html>

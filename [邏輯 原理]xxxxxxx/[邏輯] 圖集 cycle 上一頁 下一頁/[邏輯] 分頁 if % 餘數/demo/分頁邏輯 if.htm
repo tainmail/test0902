@@ -1,0 +1,71 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>分頁邏輯</title>
+<style>
+*{ margin:0px; padding:0px; font-family: "微軟正黑體";}
+* { 
+-webkit-box-sizing: border-box;
+-moz-box-sizing: border-box;
+box-sizing: border-box;
+
+}
+
+/*清除 clearfix*/
+.clearfix:after { content: "."; display: block; height: 0; clear: both; visibility: hidden; }
+.clearfix {*zoom: 1; _zoom: 1; }
+
+/*控制pre*/
+pre { border:2px solid pink; padding:5px; font-size:12px; background:#fff; clear:both; font-size:12px; font-family:Verdana;}
+pre strong { color:#CC0000; }
+pre em { font-style:normal; font-weight:bold; color:#006600; }
+ul{ list-style:none;}
+
+.nav li{ width:300px; height:300px; font-size:200px; line-height:300px; text-align:center; background:gold; border:5px solid orange;}
+</style>
+
+<script src="jquery.js"></script>
+<script>
+$(function(){
+	var iMax = $(".nav li").length-1;
+	var iCurrent = 0;
+	
+	$(".btn_next").click(function(){
+		iCurrent++;
+		if(iCurrent > iMax){iCurrent = 0};
+		fnGo(iCurrent);
+	});
+	
+	$(".btn_prev").click(function(){
+		iCurrent--;
+		if(iCurrent < 0){iCurrent = iMax};
+		fnGo(iCurrent);
+	});
+	
+	function fnGo(argNo){
+		$(".nav li").hide().eq(argNo).show();
+	};
+	
+	fnGo(iCurrent);
+	
+});
+</script>
+
+</head>
+
+<body>
+<h1>分頁邏輯</h1>
+<input class="btn_prev" type="button" value="prev"/>
+<input class="btn_next" type="button" value="next"/>
+<ul class="nav">
+    <li>0</li>
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+    <li>4</li>
+</ul>
+
+
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>bind 反例</title>
+
+<style>
+*{ margin:0px; padding:0px; font-family: "微軟正黑體";}
+* { 
+-webkit-box-sizing: border-box;
+-moz-box-sizing: border-box;
+box-sizing: border-box;
+
+}
+
+/*清除 clearfix*/
+.clearfix:after { content: "."; display: block; height: 0; clear: both; visibility: hidden; }
+.clearfix {*zoom: 1; _zoom: 1; }
+
+/*控制pre*/
+pre { border:2px solid pink; padding:5px; font-size:12px; background:#fff; clear:both; font-size:12px; font-family:Verdana;}
+pre strong { color:#CC0000; }
+pre em { font-style:normal; font-weight:bold; color:#006600; }
+
+.box{ width:300px; border:5px solid #333; }
+
+.btn_1{ width:100px; height:50px; margin-bottom:10px; line-height:50px; text-align:center; background:gold; border-radius:10px; cursor:pointer;}
+.btn_2{ width:100px; height:50px; line-height:50px; text-align:center; background:green; margin-bottom:10px; border-radius:10px; cursor:pointer;}
+
+</style>
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+
+<script>
+$(function(){
+	
+	$(".btn_1").bind("click", function(){
+		$(".box").append('<div class="btn_1">後來加的</div>')
+	});
+	
+});
+</script>
+
+</head>
+
+<body>
+
+
+<h1>bind 反例</h1><br>
+<p>本例： 後來append的按鈕，沒有綁定事件</p>
+<pre>$(&quot;.btn_1&quot;).bind(&quot;click&quot;, function(){<br>    $(&quot;.box&quot;).append('&lt;div class=&quot;btn_1&quot;&gt;後來加的&lt;/div&gt;')<br>});</pre>
+
+<div class="box">
+	<div class="btn_1">按鈕1</div>
+</div>
+
+</body>
+</html>

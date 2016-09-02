@@ -1,0 +1,470 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>參數整理</title>
+<style>
+*{  font-family: "微軟正黑體", Microsoft Yahei, Verdana, Geneva, sans-serif, "新細明體";}
+/*清除 clearfix*/
+.clearfix:after { content: "."; display: block; height: 0; clear: both; visibility: hidden; }
+.clearfix {*zoom: 1; _zoom: 1; }
+
+/*控制pre*/
+pre { border:2px solid pink; padding:5px; font-size:12px; background:#fff; clear:both; font-size:12px; font-family:Verdana;}
+pre strong { color:#CC0000; }
+pre em { font-style:normal; font-weight:bold; color:#006600; }
+</style>
+
+
+
+
+
+</head>
+
+<body>
+<table style="margin:0 auto;" width="1000" border="1" cellspacing="0" cellpadding="5">
+    <tr>
+    <td colspan="2" align="left" valign="top"><h1>參數整理</h1></td>
+  </tr>
+  <tr>
+    <td colspan="2" align="left" valign="top">官網：http : //bxslider.com/</td>
+  </tr>
+  <tr>
+    <td width="168" align="left" valign="top">載入</td>
+    <td width="706" align="left" valign="top"><pre>&lt;link href=&quot;<strong>jquery.bxslider.css</strong>&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;<br />&lt;script src=<strong>jquery.bxslider.js</strong>&quot;&gt;&lt;/script&gt;</pre></td>
+  </tr>
+  <tr>
+      <td align="left" valign="top">建議結構</td>
+      <td align="left" valign="top"><pre>&lt;!--圖集 開始--&gt;<br />&lt;div class=&quot;gallery_1&quot;&gt; <br />    &lt;!--滾動 開始--&gt;<br />    &lt;div class=&quot;run&quot;&gt;<br />        &lt;div class=&quot;inner&quot;&gt;<br />            &lt;div class=&quot;piece&quot;&gt;&lt;img src=&quot;images/pic_1.jpg&quot;/&gt;&lt;/div&gt;<br />            &lt;div class=&quot;piece&quot;&gt;&lt;img src=&quot;images/pic_2.jpg&quot;/&gt;&lt;/div&gt;<br />            &lt;div class=&quot;piece&quot;&gt;&lt;img src=&quot;images/pic_3.jpg&quot;/&gt;&lt;/div&gt;<br />            &lt;div class=&quot;piece&quot;&gt;&lt;img src=&quot;images/pic_4.jpg&quot;/&gt;&lt;/div&gt;<br />            &lt;div class=&quot;piece&quot;&gt;&lt;img src=&quot;images/pic_5.jpg&quot;/&gt;&lt;/div&gt;<br />        &lt;/div&gt;<br />    &lt;/div&gt;<br />    &lt;!--滾動 結束--&gt;<br />    <br />    &lt;!--分頁 開始--&gt;<br />    &lt;div class=&quot;pager&quot;&gt;<br />        &lt;!--自動寫入分頁 --&gt;<br />    &lt;/div&gt;<br />    &lt;!--分頁 結束--&gt; <br />&lt;/div&gt;<br />&lt;!--圖集 結束--&gt;</pre></td>
+  </tr>
+  <tr>
+      <td colspan="2" align="left" valign="top"><h2>初始類</h2></td>
+  </tr>
+  <tr>
+      <td align="left" valign="top">slideWidth</td>
+      <td align="left" valign="top"><p>設定最大寬度<br />
+          slideWidth : 0</p></td>
+  </tr>
+  <tr>
+      <td align="left" valign="top">adaptiveHeight</td>
+      <td align="left" valign="top"><p>自適應高<br />
+          adaptiveHeight : false<br />
+          Dynamically adjust slider height based on each slide&quot;s height</p></td>
+  </tr>
+  <tr>
+      <td align="left" valign="top">adaptiveHeightSpeed</td>
+      <td align="left" valign="top"><p>自適應高動畫速度<br />
+          adaptiveHeightSpeed : 500<br />
+          注意，需搭配 adaptiveHeight : true</p></td>
+  </tr>
+  <tr>
+      <td align="left" valign="top">slideMargin</td>
+      <td align="left" valign="top"><p>幻燈片間隔px<br />
+          slideMargin : 0<br />
+        </p></td>
+  </tr>
+  <tr>
+      <td align="left" valign="top">startSlide</td>
+      <td align="left" valign="top"><p>第幾張開始(0序)<br />
+          startSlide : 0</p></td>
+  </tr>
+  <tr>
+      <td align="left" valign="top">randomStart</td>
+      <td align="left" valign="top"><p>亂數張開始<br />
+          randomStart : false<br />
+      </p></td>
+  </tr>
+  <tr>
+      <td align="left" valign="top">captions</td>
+      <td align="left" valign="top">顯示標題<br />
+          captions : false,
+          <pre>&lt;img src=&quot;images/i01.jpg&quot; <strong>title=&quot;圖01&quot;</strong>/&gt;</pre></td>
+  </tr>
+  <tr>
+      <td align="left" valign="top">preloadImages</td>
+      <td align="left" valign="top"><p>預載圖片<br />
+          preloadImages : &quot;visible&quot; //只預載第一張圖片<br />
+          preloadImages : &quot;all&quot;           //開始播放前，預載所有圖片 <br />
+          <br />
+          注意：如果圖片尺寸都相同，可以使用visible</p></td>
+  </tr>
+  <tr>
+      <td align="left" valign="top">video</td>
+      <td align="left" valign="top"><p>等比縮放視頻<br />
+          video : false<br />
+          video : true //等比，需加載 jquery.fitvids.js 。<br />
+          官網說明：http : //fitvidsjs.com/ for more info<br />
+          中文翻譯：http://www.osmn00.com/translation/214.html<br />
+          <br />
+          需搭配 useCSS: false, 否則轉場後，影片播放不正常<br />
+          聲音會動疊 待解決 <br />
+          </p>
+          <pre>&lt;script src=&quot;jquery.js&quot;&gt;&lt;/script&gt;<br />&lt;script src=&quot;jquery.fitvids.js&quot;&gt;&lt;/script&gt;  //需置於 jquery.bxslider.js 之前<br />&lt;script src=&quot;jquery.bxslider.js&quot;&gt;&lt;/script&gt;<br /></pre></td>
+  </tr>
+  <tr>
+      <td align="left" valign="top">slideSelector</td>
+      <td align="left" valign="top"><p>指定幻燈片的選擇器。(不實用)<br />
+          slideSelector : &quot; &quot;<br />
+          Element to use as slides (ex. &quot;div.slide&quot;).<br />
+          Note : by default, bxSlider will use all immediate children of the slider element</p></td>
+  </tr>
+  <tr>
+      <td align="left" valign="top">&nbsp;</td>
+      <td align="left" valign="top">&nbsp;</td>
+  </tr>
+  <tr>
+      <td colspan="2" align="left" valign="top"><h2>轉場類</h2></td>
+  </tr>
+  <tr>
+      <td align="left" valign="top">mode</td>
+      <td align="left" valign="top">轉場類型<br />
+          mode : &quot;horizontal&quot;,<br />
+          <pre>&quot;horizontal&quot;, //水平    &quot;vertical&quot;, //垂直      &quot;fade&quot; //淡出</pre></td>
+  </tr>
+  <tr>
+      <td align="left" valign="top">speed</td>
+      <td align="left" valign="top">轉場速度 <br />
+          speed:500, <br /></td>
+  </tr>
+  <tr>
+      <td align="left" valign="top">useCSS</td>
+      <td align="left" valign="top"><p>css動畫方式 <br />
+          useCSS : true //css原生的transitions animations硬體加速<br />
+          useCSS : false         // 使用jQuery animate</p></td>
+  </tr>
+  <tr>
+      <td align="left" valign="top">easing</td>
+      <td align="left" valign="top"><p>緩衝<br />
+          easing : null<br />
+          需要 jquery.easing.1.3.js</p>
+          <p>&quot;linear&quot;, &quot;ease&quot;, &quot;ease-in&quot;, &quot;ease-out&quot;, &quot;ease-in-out&quot;, &quot;cubic-bezier(n,n,n,n)&quot;.<br />
+              <br />
+              不支援css原生的transitions animations硬體加速<br />
+        需搭配 useCSS : false         // 使用jQuery animate          </p></td>
+  </tr>
+  <tr>
+      <td colspan="2" align="left" valign="top"><h2>播放控制類</h2></td>
+  </tr>
+  <tr>
+      <td align="left" valign="top">auto</td>
+      <td align="left" valign="top"><p>輪播<br />
+          auto : false</p></td>
+  </tr>
+  <tr>
+      <td align="left" valign="top">pause</td>
+      <td align="left" valign="top"><p>單張停留時間<br />
+          pause : 4000</p></td>
+  </tr>
+  <tr>
+      <td align="left" valign="top">autoHover</td>
+      <td align="left" valign="top"><p>輪播懸停<br />
+          autoHover : false<br />
+        autoHover : true //懸停     </p></td>
+  </tr>
+  <tr>
+      <td align="left" valign="top">autoDelay</td>
+      <td align="left" valign="top"><p>初始後，幾毫秒開始輪播<br />
+          autoDelay : 0</p></td>
+  </tr>
+  <tr>
+      <td align="left" valign="top">autoStart</td>
+      <td align="left" valign="top"><p>初始後自動開始輪播<br />
+          autoStart : true<br />
+          <br />
+          autoStart : false //手動開始輪播<br />
+        需搭配播停按鈕 autoControls: true,      </p></td>
+  </tr>
+  <tr>
+      <td align="left" valign="top">autoDirection</td>
+      <td align="left" valign="top"><p>輪播順序<br />
+          autoDirection : &quot;next&quot; //正序輪播<br />
+          autoDirection : &quot;prev&quot;          //反序輪播<br />
+      </p></td>
+  </tr>
+  <tr>
+      <td align="left" valign="top">&nbsp;</td>
+      <td align="left" valign="top">&nbsp;</td>
+  </tr>
+  <tr>
+      <td colspan="2" align="left" valign="top"><h2>上下頁按鈕</h2></td>
+  </tr>
+  <tr>
+      <td align="left" valign="top">controls</td>
+      <td align="left" valign="top"><p>上下頁按鈕<br />
+          controls : true<br />
+          controls : false //隱藏</p></td>
+  </tr>
+  <tr>
+      <td align="left" valign="top">hideControlOnEnd</td>
+      <td align="left" valign="top"><p>始未隱藏上下頁按鈕<br />
+          hideControlOnEnd : false<br />
+          注意，需搭配 infiniteLoop : false</p></td>
+  </tr>
+  <tr>
+      <td align="left" valign="top">infiniteLoop</td>
+      <td align="left" valign="top"><p>循環輪播<br />
+          infiniteLoop : true</p></td>
+  </tr>
+  <tr>
+      <td align="left" valign="top">nextSelector<br />
+          prevSelector<br />
+          <br />
+          nextText<br />
+          prevText</td>
+      <td align="left" valign="top">自定上下頁選擇器<br />
+          nextSelector: &quot;.gallery_1 .operate .prev span&quot;,<br />
+          prevSelector: &quot;.gallery_1 .operate .next span&quot;, <br />
+          <br />
+          自定上下頁文字 <br />
+          nextText: &quot;下一頁&quot;,<br />
+          prevText: &quot;上一頁&quot;</td>
+  </tr>
+  <tr>
+      <td colspan="2" align="left" valign="top"><h2>播停按鈕</h2></td>
+    </tr>
+  <tr>
+      <td align="left" valign="top">autoControls</td>
+      <td align="left" valign="top"><p>顯示播放/暫停選單<br />
+          autoControls : false</p></td>
+  </tr>
+  <tr>
+      <td align="left" valign="top">autoControlsCombine</td>
+      <td align="left" valign="top"><p>播停按鈕toggle切換出現 <br />
+          autoControlsCombine : false //同時出現<br />
+          autoControlsCombine : true,         //切換出現<br />
+      </p></td>
+  </tr>
+  <tr>
+      <td align="left" valign="top">autoControlsSelector<br />
+          <br />
+          startText<br />
+          stopText</td>
+      <td align="left" valign="top">自訂播停鈕選擇器<br />
+          autoControlsSelector:&quot;.gallery_1 .operate .play_pause span&quot;, <br />
+          <br />
+          自訂播停鈕文字 <br />
+          startText : &quot;停&quot;<br />
+          stopText : &quot;播&quot; <br />
+          <br />
+          需搭配 auto:true, autoControls : true,<br /></td>
+  </tr>
+  <tr>
+      <td colspan="2" align="left" valign="top"><h2>分頁按鈕</h2></td>
+    </tr>
+  <tr>
+      <td align="left" valign="top">pager</td>
+      <td align="left" valign="top"><p>圓點分頁<br />
+          pager : true</p></td>
+  </tr>
+  <tr>
+      <td align="left" valign="top">pagerType</td>
+      <td align="left" valign="top"><p>幾分之幾的頁數<br />
+          pagerType : &quot;full&quot; //圓點<br />
+          pagerType : &quot;short&quot; //幾分之幾，例  1 / 5</p></td>
+  </tr>
+  <tr>
+      <td align="left" valign="top">pagerShortSeparator</td>
+      <td align="left" valign="top"><p>幾分之幾的頁數的分隔符號<br />
+          pagerShortSeparator : &quot; / &quot;<br />
+          pagerType : &quot;short&quot; <br />
+      </p></td>
+  </tr>
+  <tr>
+      <td align="left" valign="top">pagerSelector</td>
+      <td align="left" valign="top"><p>自動生成分頁結構(建議使用)(需要補充css樣式)<br />
+          agerSelector : &quot;.gallery_1 .pager&quot;<br />
+      </p>
+          <pre>agerSelector : &quot;.gallery_1 .pager&quot;<br /><br />&lt;!--分頁 開始--&gt;<br />    &lt;div class=&quot;pager&quot;&gt;<br />        &lt;!--自動寫入分頁 --&gt;<br />    &lt;/div&gt;<br />&lt;!--分頁 結束--&gt; <br /><br />會生成以下結構於指定的容器<br />&lt;div class=&quot;<strong>bx-pager</strong> bx-default-pager&quot;&gt;<br />    &lt;div class=&quot;<strong>bx-pager-item</strong>&quot;&gt;&lt;a class=&quot;<strong>bx-pager-link</strong>&quot; data-slide-index=&quot;0&quot; href=&quot;&quot;&gt;1&lt;/a&gt;&lt;/div&gt;<br />    &lt;div class=&quot;bx-pager-item&quot;&gt;&lt;a class=&quot;bx-pager-link&quot; data-slide-index=&quot;1&quot; href=&quot;&quot;&gt;2&lt;/a&gt;&lt;/div&gt;<br />    &lt;div class=&quot;bx-pager-item&quot;&gt;&lt;a class=&quot;bx-pager-link <strong>active</strong>&quot; data-slide-index=&quot;2&quot; href=&quot;&quot;&gt;3&lt;/a&gt;&lt;/div&gt;<br />&lt;/div&gt;</pre></td>
+  </tr>
+  <tr>
+      <td align="left" valign="top">pagerCustom</td>
+      <td align="left" valign="top"><p>自訂分頁(不建議)(需自已算個數)<br />
+          pagerCustom : null<br />
+      </p>
+          <pre>pagerCustom: &quot;.gallery_1 .pager&quot;<br /><br />&lt;!--分頁 開始--&gt;<br />&lt;div class=&quot;pager&quot;&gt;<br />    &lt;a <strong>data-slide-index=&quot;0&quot;</strong> href=&quot;#&quot;&gt;1&lt;/a&gt;<br />    &lt;a data-slide-index=&quot;1&quot; href=&quot;#&quot;&gt;2&lt;/a&gt;<br />    &lt;a data-slide-index=&quot;2&quot; href=&quot;#&quot;&gt;3&lt;/a&gt;<br />&lt;/div&gt;<br />&lt;!--分頁 結束--&gt;</pre></td>
+  </tr>
+  <tr>
+      <td align="left" valign="top">buildPager</td>
+      <td align="left" valign="top"><p>產生分頁結構(可套用成縮圖選單)<br />
+          buildPager : null<br />
+          buildPager :function(slideIndex){} </p>
+          <pre>buildPager: function(slideIndex){<br />    switch(slideIndex){<br />        case 0:<br />            return '&lt;img src=&quot;images/pic_1s.jpg&quot;/&gt;';<br />        case 1:<br />            return '&lt;img src=&quot;images/pic_2s.jpg&quot;/&gt;';<br />        case 2:<br />            return '&lt;img src=&quot;images/pic_3s.jpg&quot;/&gt;';<br />    };<br />}<br />程式會吐出以下結構<br />&lt;div class=&quot;bx-pager bx-custom-pager&quot;&gt;<br />    &lt;div class=&quot;bx-pager-item&quot;&gt;&lt;a class=&quot;bx-pager-link active&quot; data-slide-index=&quot;0&quot; href=&quot;&quot;&gt;<strong>&lt;img src=&quot;images/pic_1s.jpg&quot;&gt;</strong>&lt;/a&gt;&lt;/div&gt;<br />    &lt;div class=&quot;bx-pager-item&quot;&gt;&lt;a class=&quot;bx-pager-link&quot; data-slide-index=&quot;1&quot; href=&quot;&quot;&gt;<strong>&lt;img src=&quot;images/pic_2s.jpg&quot;&gt;</strong>&lt;/a&gt;&lt;/div&gt;<br />    &lt;div class=&quot;bx-pager-item&quot;&gt;&lt;a class=&quot;bx-pager-link&quot; data-slide-index=&quot;2&quot; href=&quot;&quot;&gt;<strong>&lt;img src=&quot;images/pic_3s.jpg&quot;&gt;</strong>&lt;/a&gt;&lt;/div&gt;<br />&lt;/div&gt;</pre></td>
+  </tr>
+  <tr>
+      <td colspan="2" align="left" valign="top"><h2>Carousel 旋轉木馬</h2></td>
+  </tr>
+  <tr>
+      <td align="left" valign="top">minSlides</td>
+      <td align="left" valign="top">響應式 最少張數<br />
+          minSlides : 1<br /></td>
+  </tr>
+  <tr>
+      <td align="left" valign="top">maxSlides</td>
+      <td align="left" valign="top"><p>響應式 最多張數<br />
+          maxSlides : 1<br />
+          <br />
+          minSlides        maxSlides 設一樣多，表示固定張數<br />
+      </p></td>
+  </tr>
+  <tr>
+      <td align="left" valign="top">moveSlides</td>
+      <td align="left" valign="top"><p>一次翻幾張(預設一次翻一整頁)<br />
+          moveSlides : 0</p></td>
+  </tr>
+  <tr>
+      <td align="left" valign="top">ticker</td>
+      <td align="left" valign="top"><p>跑馬燈模式<br />
+          ticker : false<br />
+          需搭配轉場速度建議 speed:6000, </p></td>
+  </tr>
+  <tr>
+      <td align="left" valign="top">tickerHover</td>
+      <td align="left" valign="top"><p>跑馬燈懸停<br />
+          tickerHover : false<br />
+          <br />
+          不支援css原生的transitions animations硬體加速<br />
+          需搭配 useCSS : false         // 使用jQuery animate</p></td>
+  </tr>
+  <tr>
+      <td align="left" valign="top">&nbsp;</td>
+      <td align="left" valign="top">&nbsp;</td>
+  </tr>
+  <tr>
+      <td colspan="2" align="left" valign="top"><h2>觸碰控制</h2></td>
+  </tr>
+  <tr>
+    <td align="left" valign="top">touchEnabled</td>
+    <td align="left" valign="top"><p>支援觸碰<br />
+        touchEnabled : true<br />
+    </p></td>
+  </tr>
+  <tr>
+    <td align="left" valign="top">swipeThreshold</td>
+    <td align="left" valign="top"><p>滑動距離<br />
+        swipeThreshold : 50<br />
+      需搭配 touchEnabled : true</p></td>
+  </tr>
+  <tr>
+    <td align="left" valign="top">oneToOneTouch</td>
+    <td align="left" valign="top"><p>圖片跟著手指滑動<br />
+        oneToOneTouch : true //滿足滑動距離後換圖、不足距離彈回<br />
+        oneToOneTouch : false //不隨著手指滑狀        <br />
+    </p></td>
+  </tr>
+  <tr>
+    <td align="left" valign="top">preventDefaultSwipeX</td>
+    <td align="left" valign="top"><p>鎖定水平滾動<br />
+        preventDefaultSwipeX : true //鎖定<br />
+    </p></td>
+  </tr>
+  <tr>
+    <td align="left" valign="top">preventDefaultSwipeY</td>
+    <td align="left" valign="top"><p>鎖定垂直滾動<br />
+        preventDefaultSwipeY : false //不鎖定<br />
+    </p></td>
+  </tr>
+  <tr>
+      <td align="left" valign="top">&nbsp;</td>
+      <td align="left" valign="top">&nbsp;</td>
+  </tr>
+  <tr>
+      <td colspan="2" align="left" valign="top"><h2>Callbacks 回呼</h2></td>
+  </tr>
+  <tr>
+    <td align="left" valign="top">onSliderLoad</td>
+    <td align="left" valign="top"><p>初始完成<br />
+        onSliderLoad :  function(currentIndex){...}<br />
+      currentIndex 目前序</p></td>
+  </tr>
+  <tr>
+    <td align="left" valign="top">onSlideBefore</td>
+    <td align="left" valign="top"><p>換圖前<br />
+        onSlideBefore : function($slideElement, oldIndex, newIndex){.... }<br />
+            $slideElement 目標元素<br />
+            oldIndex 換圖前的序            <br />
+            newIndex 換圖後的序            <br />
+    </p></td>
+  </tr>
+  <tr>
+    <td align="left" valign="top">onSlideAfter</td>
+    <td align="left" valign="top"><p>換圖完成<br />
+        onSlideAfter :  function($slideElement, oldIndex, newIndex){..... }<br />
+        $slideElement 目標元素<br />
+        oldIndex 換圖前的序<br />
+    newIndex 換圖後的序</p></td>
+  </tr>
+  <tr>
+    <td align="left" valign="top">onSlideNext</td>
+    <td align="left" valign="top"><p>下一張完成<br />
+        onSlideNext :  function($slideElement, oldIndex, newIndex){ .... }<br />
+        $slideElement 目標元素<br />
+oldIndex 換圖前的序<br />
+newIndex 換圖後的序</p></td>
+  </tr>
+  <tr>
+    <td align="left" valign="top">onSlidePrev</td>
+    <td align="left" valign="top"><p>上一張完成<br />
+        onSlidePrev :  function($slideElement, oldIndex, newIndex){ ..... }<br />
+        $slideElement 目標元素<br />
+oldIndex 換圖前的序<br />
+newIndex 換圖後的序</p></td>
+  </tr>
+  <tr>
+    <td colspan="2" align="left" valign="top"><h2>外部控制的方法 Public methods</h2></td>
+  </tr>
+  <tr>
+      <td colspan="2" align="left" valign="top"><pre>新增物件 <br />mySlider = $(&quot;.bxslider&quot;).bxSlider();</pre></td>
+  </tr>
+  <tr>
+    <td align="left" valign="top">goToSlide</td>
+    <td align="left" valign="top"><p>前往<br />
+        mySlider.goToSlide(3);</p></td>
+  </tr>
+  <tr>
+    <td align="left" valign="top">goToNextSlide</td>
+    <td align="left" valign="top"><p>下一張<br />
+        mySlider.goToNextSlide();</p></td>
+  </tr>
+  <tr>
+    <td align="left" valign="top">goToPrevSlide</td>
+    <td align="left" valign="top"><p>上一張<br />
+        mySlider.goToPrevSlide();</p></td>
+  </tr>
+  <tr>
+    <td align="left" valign="top">startAuto</td>
+    <td align="left" valign="top"><p>播<br />
+        mySlider.startAuto();</p></td>
+  </tr>
+  <tr>
+      <td align="left" valign="top">stopAuto</td>
+      <td align="left" valign="top"><p>停<br />
+          mySlider.stopAuto();</p></td>
+  </tr>
+  <tr>
+    <td align="left" valign="top">getCurrentSlide</td>
+    <td align="left" valign="top"><p>取得目前序<br />
+        var current = mySlider.getCurrentSlide();</p></td>
+  </tr>
+  <tr>
+    <td align="left" valign="top">getSlideCount</td>
+    <td align="left" valign="top"><p>取得總張數<br />
+        var slideQty = mySlider.getSlideCount();<br />
+      </p></td>
+  </tr>
+  <tr>
+    <td align="left" valign="top">reloadSlider</td>
+    <td align="left" valign="top"><p>刷新<br />
+        mySlider.reloadSlider();<br />
+      </p>
+      <pre>//刷新後更新參數<br />mySlider.reloadSlider({<br />   slideWidth:200,<br />   minSlides: 3,<br />   maxSlides:3<br />});</pre>
+      </td>
+  </tr>
+  <tr>
+    <td align="left" valign="top">destroySlider</td>
+    <td align="left" valign="top"><p>圖集失效<br />
+        mySlider.destroySlider();<br />
+      </p></td>
+  </tr>
+</table>
+</body>
+</html>

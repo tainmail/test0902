@@ -1,0 +1,129 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>無標題文件</title>
+<style>
+*{ margin:0px; padding:0px; font-family: "微軟正黑體";}
+* { 
+-webkit-box-sizing: border-box;
+-moz-box-sizing: border-box;
+box-sizing: border-box;
+
+}
+
+/*清除 clearfix*/
+.clearfix:after { content: "."; display: block; height: 0; clear: both; visibility: hidden; }
+.clearfix {*zoom: 1; _zoom: 1; }
+
+/*控制pre*/
+pre { border:2px solid pink; padding:5px; font-size:12px; background:#fff; clear:both; font-size:12px; font-family:Verdana;}
+pre strong { color:#CC0000; }
+pre em { font-style:normal; font-weight:bold; color:#006600; }
+</style>
+
+
+<script src="js/jquery.js"></script>
+
+<!--taintestinfo 測試開始-->
+<script>
+$.extend({
+	tainTestInfo: function(options){
+		var defaults = {className:"info", amount:3, width:200, posH:"right", posV:"top"};
+		var settings = $.extend( defaults, options);
+		var sTestInfoHtml='';
+		sTestInfoHtml += '<div class="'+settings.className+'" style="width:'+settings.width+'px; height:auto; padding:10px; background-color:rgba(0, 0, 0, 0.5); position:fixed; '+settings.posH+':0px; '+settings.posV+':0px;  z-index:1000;">'
+		for(var i=0; i<settings.amount; i++){
+			sTestInfoHtml += '<div class="'+settings.className+'_'+i+'" style="border:1px solid #000; margin-bottom:5px; color:#fff;">--</div>';
+		};
+		sTestInfoHtml += '</div>'
+		$("body").append(sTestInfoHtml);
+	}
+});
+
+
+$(function(){
+	$.tainTestInfo({className:"info", amount:3, width:200, posH:"right", posV:"top"}); 
+	$(".info_0").html("--");
+});
+</script>
+<!--taintestinfo 測試結束-->
+
+
+<script type="text/javascript">
+
+$(function(){
+	$(".btn_1").click(function(){
+		$(".info_0").html(  Math.random()  ); //假設 0.485.. 亂數無限循環小數
+	});
+	
+	
+	$(".btn_2").click(function(){
+		$(".info_0").html(  Math.random()*5  ); //假設 0.485 * 5 = 2.42 //5以下的小數
+	});
+	
+	
+	$(".btn_3").click(function(){
+		$(".info_0").html(  Math.round( Math.random()*5 )  );  //假設 0.485 * 5 = 2.42     //四捨五入輸出2    //5以下的整數
+	});
+	
+	
+	$(".btn_4").click(function(){
+		$(".info_0").html(  Math.round( Math.random()*(10-5) + 5 )  ); //假設 0.485 * (10-5) = 2.42 //10到5有5個數 //然後從5開始計
+	});
+	
+	
+	//寫成一個function
+	function fnRandom(argMin, argMax){
+		return Math.round(argMin + Math.random()*(argMax - argMin)); 
+	};
+	
+	$(".btn_5").click(function(){
+		$(".info_0").html(  fnRandom(5, 10)  );  
+	});
+	
+	
+	
+	
+});
+
+
+</script>
+
+</head>
+
+<body>
+
+<h1>亂數</h1>
+
+<input class="btn_1" type="button" value="01"/>
+<pre>Math.random()     //假設 0.485..    // 亂數無限循環小數<br>
+</pre>
+<br><br>
+
+
+
+<input class="btn_2" type="button" value="02"/>
+<pre>Math.random()*5   //假設 0.485 * 5 = 2.42      //5以下的小數</pre>
+<br><br>
+
+
+<input class="btn_3" type="button" value="03"/>
+<pre>Math.round( Math.random()*5 )    //假設 0.485 * 5 = 2.42     //四捨五入輸出2        //5以下的整數<br>	
+</pre>
+<br><br>
+
+
+<input class="btn_4" type="button" value="04"/>
+<pre>Math.round( Math.random()*(10-5) + 5 )     //假設 0.485 * (10-5) = 2.42     //10到5有五個數     //然後從5開始計<br>	
+</pre>
+<br><br>
+
+<input class="btn_5" type="button" value="05"/>
+<pre>//寫成一個function<br>function fnRandom(argMin, argMax){<br>    return Math.round(argMin + Math.random()*(argMax - argMin)); <br>};<br>	<br>fnRandom(5, 10)</pre>
+<br><br>
+<br><br>
+
+
+</body>
+</html>

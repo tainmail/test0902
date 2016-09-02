@@ -1,0 +1,155 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>全螢幕橫向滾動</title>
+<style>
+* { margin:0; padding:0px; }
+/*清除 clearfix*/
+.clearfix:after { content: "."; display: block; height: 0; clear: both; visibility: hidden; }
+.clearfix {*zoom: 1; _zoom: 1; }
+
+/*控制pre*/
+.my_code { border:1px solid orange; padding:5px; }
+.my_code pre { border:2px solid pink; padding:5px; font-size:12px; background:#fff; clear:both; font-size:12px; }
+.my_code pre strong { color:#CC0000; }
+.my_code pre em { font-style:normal; font-weight:bold; color:#006600; }
+body { position:relative; overflow:hidden; }
+
+/*分頁組*/
+.pager { width:800px; height:50px; background:#999; margin:0 auto; }
+
+/*滾動組*/
+.run { width:100%;/*寬js控制*/ height:100%;  position: fixed; /*fixed適應高*/}
+
+/*容器(100%)*/
+.run .box { width:100%;/*寬js控制*/ height:100%; float:left; }
+/*內容物自訂高*/
+.run .box .inside { width:800px; height:300px; background:#CC9966; margin:auto; }
+
+/*容器色*/
+.box_1 { background:#FF9999; }
+.box_2 { background: #9CC; }
+.box_3 { background: #6C9; }
+.box_3 { background: #99C; }
+.box_4 { background: #996; }
+</style>
+<script src="js/jquery.js"></script>
+<script src="js/jquery.scrollto-min.js"></script>
+<script>
+$(function(){
+	
+	//取得滾動組容器數量
+	var iAmount = $(".run .box").length
+	
+	//初始的css
+	$(".run").css({  //滾動組3個為300%
+		"width":(100*iAmount)+"%" 
+	});
+	$(".run .box").css({ //容器3個為 33.3%
+		"width":(100/iAmount)+"%"
+	});
+	
+	/*分頁*/
+	$(".pager .btn").click(function(){
+		var iNo=$(".pager .btn").index(this);
+		var iMargin
+		if(iNo==0){
+			iMargin = "0%"
+		}else{
+			iMargin = (iNo*100 * -1)+"%";
+		}
+		$(".run").animate({"margin-left": iMargin});
+	});
+	
+	/*到最前*/
+	$(".pager .btn_start").click(function(){
+		$(".run").animate({"margin-left":"0%"});
+	});
+	
+	/*到最後*/
+	$(".pager .btn_end").click(function(){
+		var iMargin = iMargin = ((iAmount-1) * 100 * -1) + "%";
+		$(".run").animate({"margin-left": iMargin});
+	});
+	
+	
+	/*最前和最後容器，隱藏 prev 和 next*/
+	$(".run .box:first").find(".btn_prev").hide();
+	$(".run .box:last").find(".btn_next").hide();
+	
+	
+	/*上一頁*/
+	$(".btn_prev").click(function(){
+		var iCurrent= $(".box").index( $(this).parents(".box") )
+		if(iCurrent > 0 ){ //第0個不用作上一頁
+			iMargin = ((iCurrent-1)*100 * -1)+"%";
+			$(".run").animate({"margin-left": iMargin});
+		}
+	});
+	
+	/*下一頁*/
+	$(".btn_next").click(function(){
+		var iCurrent= $(".box").index( $(this).parents(".box") )
+		if(iCurrent < iAmount ){ //最後個不用作下一頁
+			iMargin = ((iCurrent+1)*100 * -1)+"%";
+			$(".run").animate({"margin-left": iMargin});
+		}
+	});
+	
+	
+		
+});
+</script>
+</head>
+
+<body>
+<!--導航組 開始-->
+<div class="pager">
+    <input type="button" class="btn_start" value="最前" />
+    <input type="button" class="btn" value="1" />
+    <input type="button" class="btn" value="2" />
+    <input type="button" class="btn" value="3" />
+    <input type="button" class="btn" value="4" />
+    <input type="button" class="btn_end" value="最後" />
+    css定位法 </div>
+<!--導航組 結束-->
+    
+<!--滾動組 開始-->
+<div class="run clearfix">
+    <!--組 開始-->
+    <div class="box box_1">
+        <div class="inside">11111
+            <input type="button" class="btn_prev" value="prev" />
+            <input type="button" class="btn_next" value="next" />
+        </div>
+    </div>
+    <!--組 結束-->
+    <!--組 開始-->
+    <div class="box box_2">
+        <div class="inside">22222
+            <input type="button" class="btn_prev" value="prev" />
+            <input type="button" class="btn_next" value="next" />
+        </div>
+    </div>
+    <!--組 結束-->
+    <!--組 開始-->
+    <div class="box box_3">
+        <div class="inside">3333
+            <input type="button" class="btn_prev" value="prev" />
+            <input type="button" class="btn_next" value="next" />
+        </div>
+    </div>
+    <!--組 結束-->
+    <!--組 開始-->
+    <div class="box box_4">
+        <div class="inside">4444
+            <input type="button" class="btn_prev" value="prev" />
+            <input type="button" class="btn_next" value="next" />
+        </div>
+    </div>
+    <!--組 結束-->
+</div>
+<!--滾動組 結束-->
+</body>
+</html>

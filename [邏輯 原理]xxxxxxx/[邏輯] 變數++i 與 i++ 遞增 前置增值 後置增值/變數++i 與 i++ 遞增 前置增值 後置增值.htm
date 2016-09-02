@@ -1,0 +1,112 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>變數++i 與 i++ 遞增 前置增值 後置增值</title>
+<style>
+*{ margin:0px; padding:0px; font-family: "微軟正黑體", Microsoft Yahei, Verdana, Geneva, sans-serif, "新細明體";}
+/*清除 clearfix*/
+.clearfix:after { content: "."; display: block; height: 0; clear: both; visibility: hidden; }
+.clearfix {*zoom: 1; _zoom: 1; }
+
+/*控制pre*/
+pre { border:2px solid pink; padding:5px; font-size:12px; background:#fff; clear:both; font-size:12px; font-family:Verdana;}
+pre strong { color:#CC0000; }
+pre em { font-style:normal; font-weight:bold; color:#006600; }
+.info_1{ background:gold;}
+.info_2{ background:yellowgreen;}
+
+</style>
+
+<script src="js/jquery.js"></script>
+<script>
+
+$(function(){
+	
+	//===============================
+	var iNoA = 0
+	$(".btn_11").on("click", function(){
+		$(".info_1").append("<h3>遞增"+ (++iNoA) +"</h3>");
+	});
+	
+	$(".btn_12").on("click", function(){
+		$(".info_1").append("<h3>遞減"+ (--iNoA) +"</h3>");
+	});
+	
+	//===============================
+	var iNoB = 0
+	$(".btn_21").on("click", function(){
+		$(".info_2").append("<h3>遞增"+ (iNoB++) +"</h3>");
+	});
+	
+	$(".btn_22").on("click", function(){
+		$(".info_2").append("<h3>遞減"+ (iNoB--) +"</h3>");
+	});
+	
+	
+	
+	
+	
+	
+});
+</script>
+
+
+</head>
+
+<body>
+
+ 
+<table style="margin:0 auto;" width="800" border="1" cellspacing="0" cellpadding="5">
+    <tr>
+        <td colspan="2" align="left" valign="top"><h1>變數++i 與 i++ 遞增 前置增值 後置增值</h1></td>
+    </tr>
+    <tr>
+        <td align="left" valign="top">速記</td>
+        <td align="left" valign="top"><pre>a++    //後置增值    a先回傳，再+1<br />a--    //後置減值    a先回傳，再-1<br /><br />++a    //前置增值    a先+1，再回傳<br />--a    //前置減值    a先-1，再回傳 
+        </pre></td>
+    </tr>
+    <tr>
+        <td width="258" align="left" valign="top">原理</td>
+        <td width="516" align="left" valign="top"><pre>
+//後加加==================
+var a;  
+i=6;  
+
+a=i++;   <strong>//將 a=i  所以 a=6</strong>    <em> //最後 i+1  所以 i=7</em>  
+
+document.write(i);  //輸出 7
+document.write(a);//輸出 6<br /><br />
+
+//前加加=====================
+var a;  
+var i=6;    
+
+a=++i;   <strong>// i+1 所以 i=7</strong>  <em> //將a=i  所以a=7</em>  
+
+document.write(i);   //輸出 7
+document.write(a);  //輸出 7 
+
+</pre></td>
+    </tr>
+    <tr>
+        <td align="left" valign="top"><input class="btn_11" type="button" value=".btn_11 遞增"/>
+            <br />
+        <input class="btn_12" type="button" value=".btn_12 遞減"/>
+        <br />
+        <div class="info_1">info_1</div></td>
+        <td align="left" valign="top"><pre>var iNoA = 0<br />	$(&quot;.btn_11&quot;).on(&quot;click&quot;, function(){<br />		$(&quot;.info_1&quot;).append(&quot;&lt;h3&gt;遞增&quot;+ (++iNoA) +&quot;&lt;/h3&gt;&quot;);<br />	});<br />	<br />	$(&quot;.btn_12&quot;).on(&quot;click&quot;, function(){<br />		$(&quot;.info_1&quot;).append(&quot;&lt;h3&gt;遞減&quot;+ (--iNoA) +&quot;&lt;/h3&gt;&quot;);<br />	});</pre></td>
+    </tr>
+    <tr>
+        <td align="left" valign="top"><input class="btn_21" type="button" value=".btn_21 遞增"/>
+            <br />
+            <input class="btn_22" type="button" value=".btn_22 遞減"/>
+            <br />
+            <div class="info_2">info_2</div></td>
+        <td align="left" valign="top"><pre>var iNoB = 0<br />	$(&quot;.btn_21&quot;).on(&quot;click&quot;, function(){<br />		$(&quot;.info_1&quot;).append(&quot;&lt;h3&gt;遞增&quot;+ (iNoB++) +&quot;&lt;/h3&gt;&quot;);<br />	});<br />	<br />	$(&quot;.btn_22&quot;).on(&quot;click&quot;, function(){<br />		$(&quot;.info_1&quot;).append(&quot;&lt;h3&gt;遞減&quot;+ (iNoB--) +&quot;&lt;/h3&gt;&quot;);<br />	});</pre></td>
+    </tr>
+</table>
+
+
+</body>
+</html>

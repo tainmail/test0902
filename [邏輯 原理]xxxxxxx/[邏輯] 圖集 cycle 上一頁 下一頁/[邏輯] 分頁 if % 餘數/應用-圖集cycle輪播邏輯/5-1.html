@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html class="no-js" lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>Chapter 05-01 &#xB7; jQuery 最高の教科書</title>
+<link rel="stylesheet" href="files/normalize.css">
+<style type="text/css">
+.slideshow { overflow: hidden; position: relative; min-width: 960px; height: 465px; }
+.slideshow img { display: none; position: absolute; left: 50%; margin-left: -800px; }
+
+/* JavsScript 無効時 */
+.no-js .slideshow img:first-child { display: inline; }
+</style>
+<script src="files/modernizr.custom.min.js"></script>
+<script src="files/jquery-1.10.2.min.js"></script>
+<script>
+$(function () {
+
+    /*
+     * Slideshow
+     */
+    // slideshow クラスを持った要素ごとに処理を実行
+    $('.slideshow').each(function () {
+
+        var $slides = $(this).find('img'), // すべてのスライド
+            slideCount = $slides.length,   // スライドの点数
+            currentIndex = 0;              // 現在のスライドを示すインデックス
+
+        // 1 番目のスライドをフェードインで表示
+        $slides.eq(currentIndex).fadeIn();
+
+        // 7500 ミリ秒ごとに showNextSlide 関数を実行
+        setInterval(showNextSlide, 1000);
+
+        // 次のスライドを表示する関数
+        function showNextSlide () {
+
+            // 次に表示するスライドのインデックス
+            // (もし最後のスライドなら最初に戻る)
+			//下一張序 = 目前序+1  % 總張數
+            var nextIndex = (currentIndex + 1) % slideCount;
+
+            // 現在のスライドをフェードアウト
+            $slides.eq(currentIndex).fadeOut();
+
+            // 次のスライドをフェードイン
+            $slides.eq(nextIndex).fadeIn();
+
+            // 現在のスライドのインデックスを更新
+            currentIndex = nextIndex;
+        }
+
+    });
+
+});
+
+</script>
+
+
+</head>
+<body>
+
+<header class="hero-header">
+    <div class="inner">
+        <div class="slideshow">
+            <img src="files/slide-1.jpg" width="1600" height="465">
+            <img src="files/slide-2.jpg" width="1600" height="465">
+            <img src="files/slide-3.jpg" width="1600" height="465">
+            <img src="files/slide-4.jpg" width="1600" height="465">
+        </div>
+    </div>
+</header>
+
+</body>
+</html>

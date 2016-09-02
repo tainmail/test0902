@@ -1,0 +1,119 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="zh-TW" itemtype="http://schema.org/Blog" itemscope="">
+<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+<meta property="og:url" content="http://liaosankai.pixnet.net/blog/post/19382531">
+<meta property="og:type" content="article">
+<meta property="og:title" content="亂數 javascript Math.random() @ ::SANKAI::  :: 痞客邦 PIXNET ::">
+<meta property="og:description" content="Make JavaScript Math.random() useful這篇文章是由Andrew Penry所寫，他將Javascript中的亂數函式Math.random()使用方式做了詳細說明。下">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="twitter:card" content="summary">
+<meta name="description" content="Make JavaScript Math.random() useful這篇文章是由Andrew Penry所寫，他將Javascript中的亂數函式Math.random()使用方式做了詳細說明。下">
+<meta name="twitter:description" content="Make JavaScript Math.random() useful這篇文章是由Andrew Penry所寫，他將Javascript中的亂數函式Math.random()使用方式做了詳細說明。下">
+<meta name="twitter:site" content="@pixnet">
+<meta name="author" content="低溫烘培 (liaosankai)">
+<meta name="author-avatar-20" content="http://s7.pimg.tw/avatar/liaosankai/0/0/zoomcrop/20x20.png?v=1264516923">
+<meta name="static-version" content="b0730e80215815509ab1be5926ceaa8a">
+<meta name="generator" content="PChoc">
+<meta name="google-site-verification" content="kEOTFzm0_OuXZIqZPjjomgrOteUKYLuW4P5sbVUcdu0">
+<meta name="keywords" content="sankai,低溫烘焙,PHP,數位生活,JS筆記,亂數 javascript Math.random()">
+<link rel="canonical" href="http://liaosankai.pixnet.net/blog/post/19382531-%e4%ba%82%e6%95%b8-javascript-math.random%28%29">
+<meta name="twitter:url" content="http://liaosankai.pixnet.net/blog/post/19382531">
+<meta name="cover_image" content="">
+<meta name="twitter:image" content="">
+<link rel="prev" href="http://liaosankai.pixnet.net/blog/post/19272850">
+<link rel="next" href="http://liaosankai.pixnet.net/blog/post/19471662">
+<link rel="alternate" type="application/json+oembed" href="http://api.pixnet.cc/oembed?url=http%3A%2F%2Fliaosankai.pixnet.net%2Fblog%2Fpost%2F19382531&amp;format=json" title="PIXNET oEmbed Profile">
+<link rel="alternate" type="text/xml+oembed" href="http://api.pixnet.cc/oembed?url=http%3A%2F%2Fliaosankai.pixnet.net%2Fblog%2Fpost%2F19382531&amp;format=xml" title="PIXNET oEmbed Profile">
+<link rel="search" type="application/opensearchdescription+xml" href="http://liaosankai.pixnet.net/blog/opensearch" title="::SANKAI:: ">
+<title>亂數 javascript Math.random() @ ::SANKAI::  :: 痞客邦 PIXNET ::</title>
+<meta name="twitter:title" content="亂數 javascript Math.random() @ ::SANKAI::  :: 痞客邦 PIXNET ::">
+
+
+
+
+
+
+
+
+
+
+
+<link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="http://feed.pixnet.net/blog/posts/rss/liaosankai">
+<link rel="alternate" type="application/atom+xml" title="Atom 1.0" href="http://feed.pixnet.net/blog/posts/atom/liaosankai">
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://api.pixnet.cc/blog/xmlrpc?rsd=liaosankai">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://api.pixnet.cc/static/blog/wlwmanifest.xml">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<meta itemprop="name" content="亂數 javascript Math.random() @ ::SANKAI::  :: 痞客邦 PIXNET ::">
+<meta itemprop="description" content="Make JavaScript Math.random() useful這篇文章是由Andrew Penry所寫，他將Javascript中的亂數函式Math.random()使用方式做了詳細說明。下">
+
+
+
+
+<!-- Head Modified: 1445565011 -->
+<!-- async script -->
+
+
+<!-- load sync script -->
+
+<!-- execute sync addon -->
+
+    
+
+
+<link href="chrome://translator/skin/floatingPanel.css" type="text/css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="index.css" media="all">
+</head>
+<body id="article-main" data-showing-advertisement="yep" data-adsense-state="" data-blog-site-category-id="7" data-dfp-slot-id="" data-mobile-mode="none" data-article-id="19382531" class="category_1083449 article_19382531 folder_1340737">
+<div id="body-div">
+<div id="container">
+<div id="container2">
+<div id="container3">
+<!--DOCUMENT_FRAGMENT-->
+<div id="main">
+            <div id="content">
+				<div id="article-area">
+    <div id="article-box">
+    		<div class="article">
+	    <ul class="article-head">
+		<li class="publish"><span class="month">Jul </span><span class="date">02 </span><span class="day">Wed </span><span class="year">2008 </span><span class="time">07:33</span></li>
+		<li class="title" id="article-19382531" data-hot-link="//www.pixnet.net/blog/articles/category/0" data-site-category="數位生活" data-site-category-id="24" data-article-link="http://liaosankai.pixnet.net/blog/post/19382531"><h2><a href="http://liaosankai.pixnet.net/blog/post/19382531">亂數 javascript Math.random()</a></h2></li>
+	    </ul>
+	    <div class="article-body">
+	    		<div class="article-content">
+		    
+		    <div class="article-content-inner">
+		    <p>
+<a href="http://www.shawnolson.net/a/789/make-javascript-mathrandom-useful.html" target="_top">Make JavaScript Math.random() useful</a>這篇文章是由Andrew Penry所寫，他將Javascript中的亂數函式Math.random()使用方式做了詳細說明。下列將原文的例子重新列表一次</p>
+
+<!-- more -->
+
+<div class="syntaxhighlighter " id="highlighter_570340"><div class="bar                  "><div class="toolbar"><a class="item viewSource" style="width: 16px; height: 16px;" title="view source" href="http://liaosankai.pixnet.net/blog/post/19382531#viewSource">view source</a><div class="item copyToClipboard"><embed id="highlighter_570340_clipboard" type="application/x-shockwave-flash" title="copy to clipboard" allowscriptaccess="always" wmode="transparent" flashvars="highlighterId=highlighter_570340" menu="false" src="clipboard.swf" height="16" width="16"></div><a class="item printSource" style="width: 16px; height: 16px;" title="print" href="http://liaosankai.pixnet.net/blog/post/19382531#printSource">print</a><a class="item about" style="width: 16px; height: 16px;" title="?" href="http://liaosankai.pixnet.net/blog/post/19382531#about">?</a></div></div><div class="lines no-wrap"><div class="line alt1"><code class="number">01.</code><span class="content"><span class="block" style="margin-left: 0px ! important;"><code class="comments">/*</code></span></span></div><div class="line alt2"><code class="number">02.</code><span class="content"><span class="block" style="margin-left: 0px ! important;"><code class="comments">【原始】</code></span></span></div><div class="line alt1"><code class="number">03.</code><span class="content"><span class="block" style="margin-left: 0px ! important;"><code class="comments">　範例：Math.random()</code></span></span></div><div class="line alt2"><code class="number">04.</code><span class="content"><span class="block" style="margin-left: 0px ! important;"><code class="comments">值範圍：0 ~ 0.9999999(無窮小數)</code></span></span></div><div class="line alt1"><code class="number">05.</code><span class="content"><span class="block" style="margin-left: 0px ! important;">&nbsp;</span></span></div><div class="line alt2"><code class="number">06.</code><span class="content"><span class="block" style="margin-left: 0px ! important;"><code class="comments">【最大值】</code></span></span></div><div class="line alt1"><code class="number">07.</code><span class="content"><span class="block" style="margin-left: 0px ! important;"><code class="comments">　範例：Math.random() * 3</code></span></span></div><div class="line alt2"><code class="number">08.</code><span class="content"><span class="block" style="margin-left: 0px ! important;"><code class="comments">值範圍：0 ~ 2.9999999(無窮小數)</code></span></span></div><div class="line alt1"><code class="number">09.</code><span class="content"><span class="block" style="margin-left: 0px ! important;">&nbsp;</span></span></div><div class="line alt2"><code class="number">10.</code><span class="content"><span class="block" style="margin-left: 0px ! important;"><code class="comments">【有最小值】</code></span></span></div><div class="line alt1"><code class="number">11.</code><span class="content"><span class="block" style="margin-left: 0px ! important;"><code class="comments">　範例：Math.random() * 2 + 1</code></span></span></div><div class="line alt2"><code class="number">12.</code><span class="content"><span class="block" style="margin-left: 0px ! important;"><code class="comments">值範圍：1 ~ 1.9999999(無窮小數)</code></span></span></div><div class="line alt1"><code class="number">13.</code><span class="content"><span class="block" style="margin-left: 0px ! important;">&nbsp;</span></span></div><div class="line alt2"><code class="number">14.</code><span class="content"><span class="block" style="margin-left: 0px ! important;"><code class="comments">【四捨五入】</code></span></span></div><div class="line alt1"><code class="number">15.</code><span class="content"><span class="block" style="margin-left: 0px ! important;"><code class="comments">　範例：Math.round(Math.random*2+1)</code></span></span></div><div class="line alt2"><code class="number">16.</code><span class="content"><span class="block" style="margin-left: 0px ! important;"><code class="comments">值範圍：(1) - (1.5) - (2) - (2.5) - (3)</code></span></span></div><div class="line alt1"><code class="number">17.</code><span class="content"><span class="block" style="margin-left: 0px ! important;">&nbsp;</span></span></div><div class="line alt2"><code class="number">18.</code><span class="content"><span class="block" style="margin-left: 0px ! important;"><code class="comments">【取得大於指定數的最小整數值】</code></span></span></div><div class="line alt1"><code class="number">19.</code><span class="content"><span class="block" style="margin-left: 0px ! important;"><code class="comments">　範例：Math.ceil(Math.random()*2)</code></span></span></div><div class="line alt2"><code class="number">20.</code><span class="content"><span class="block" style="margin-left: 0px ! important;"><code class="comments">值範圍：(0) - (0.5) - (1) - (1.5) - (2)</code></span></span></div><div class="line alt1"><code class="number">21.</code><span class="content"><span class="block" style="margin-left: 0px ! important;"><code class="comments">　注意：在Javascript中，Math.ceil(0) 等於 0</code></span></span></div><div class="line alt2"><code class="number">22.</code><span class="content"><span class="block" style="margin-left: 0px ! important;">&nbsp;</span></span></div><div class="line alt1"><code class="number">23.</code><span class="content"><span class="block" style="margin-left: 0px ! important;"><code class="comments">【取得小於指定數的最大整數值】</code></span></span></div><div class="line alt2"><code class="number">24.</code><span class="content"><span class="block" style="margin-left: 0px ! important;"><code class="comments">　範例：Math.floor(Math.random()*2+1)</code></span></span></div><div class="line alt1"><code class="number">25.</code><span class="content"><span class="block" style="margin-left: 0px ! important;"><code class="comments">值範圍：(1) - (1.5) - (2) - (2.5) - (3)</code></span></span></div><div class="line alt2"><code class="number">26.</code><span class="content"><span class="block" style="margin-left: 0px ! important;"><code class="comments">*/</code></span></span></div><div class="line alt1"><code class="number">27.</code><span class="content"><span class="block" style="margin-left: 0px ! important;">&nbsp;</span></span></div><div class="line alt2"><code class="number">28.</code><span class="content"><span class="block" style="margin-left: 0px ! important;"><code class="comments">//下列為自訂範圍值的亂數函式(最小值,最大值)</code></span></span></div><div class="line alt1"><code class="number">29.</code><span class="content"><span class="block" style="margin-left: 0px ! important;"><code class="keyword">function</code> <code class="plain">usefloor(min,max) {</code></span></span></div><div class="line alt2"><code class="number">30.</code><span class="content"><code class="spaces">&nbsp;&nbsp;</code><span class="block" style="margin-left: 14px ! important;"><code class="keyword">return</code> <code class="plain">Math.floor(Math.random()*(max-min+1)+min);</code></span></span></div><div class="line alt1"><code class="number">31.</code><span class="content"><span class="block" style="margin-left: 0px ! important;"><code class="plain">}</code></span></span></div><div class="line alt2"><code class="number">32.</code><span class="content"><span class="block" style="margin-left: 0px ! important;"><code class="keyword">function</code> <code class="plain">useceil(min,max) {</code></span></span></div><div class="line alt1"><code class="number">33.</code><span class="content"><code class="spaces">&nbsp;&nbsp;</code><span class="block" style="margin-left: 14px ! important;"><code class="keyword">return</code> <code class="plain">Math.ceil(Math.random()*(max-min+1)+min-1);</code></span></span></div><div class="line alt2"><code class="number">34.</code><span class="content"><span class="block" style="margin-left: 0px ! important;"><code class="plain">}</code></span></span></div><div class="line alt1"><code class="number">35.</code><span class="content"><span class="block" style="margin-left: 0px ! important;"><code class="keyword">function</code> <code class="plain">useround(min,max) {</code></span></span></div><div class="line alt2"><code class="number">36.</code><span class="content"><code class="spaces">&nbsp;&nbsp;</code><span class="block" style="margin-left: 14px ! important;"><code class="keyword">return</code> <code class="plain">Math.round(Math.random()*(max-min)+min);</code></span></span></div><div class="line alt1"><code class="number">37.</code><span class="content"><span class="block" style="margin-left: 0px ! important;"><code class="plain">}</code></span></span></div></div></div>
+
+<p>根據Andrew Penry的<cite><a href="http://thepenry.net/jsrandom.php" target="_top">測試結果</a></cite>，使用floor的方法，各數出現的機率比較平均，所以floor會較好的選擇</p></div></div></div></div></div></div></div></div>
+<!--/DOCUMENT_FRAGMENT-->
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>

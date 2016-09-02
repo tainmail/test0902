@@ -1,0 +1,581 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
+    <title>jbgallery 3.0 demo</title>
+    <meta name="author" content="Massimiliano Balestrieri" />
+    <link href="jbgallery-3.0.css" rel="stylesheet" media="screen" />
+    <script src="libs/jquery-1.4.4.min.js" type="text/javascript"></script>
+    <script src="jbgallery-3.0.min.js" type="text/javascript"></script>
+    <script type="text/javascript"><!--
+    jQuery(document).ready(function(){
+        jQuery("#fullscreen").jbgallery({
+            menu  : 'simple',
+            style : 'zoom',
+            randomize : 2,
+            slideshow:true
+        });
+        jQuery(".example").jbgallery({fullscreen : false,randomize : 1, slideshow:true, fade: false});
+    });
+    --></script>
+    <!-- DOCS -->
+    <style type="text/css"> 
+    /**/
+    body{font-family:FreeSans,Arial,Helvetica,sans-serif;color:#fff;line-height:17px;letter-spacing:1px;}
+    .toolbar a, .toolbar a:visited, .toolbar a:focus,
+    .cnt a, .cnt a:visited, .cnt a:focus{color:#fff;border:0;outline: none;}
+	.toolbar a:hover,.toolbar a:focus,
+    .cnt a:hover,.cnt a:focus{border-bottom:2px solid #69C;}
+    .cnt a, .cnt a:visited, .cnt a:focus{text-decoration:underline;}
+    
+    .cnt h2,.cnt h3,.cnt h4{color:#69C;text-transform:uppercase;}
+    .cnt .strike{text-decoration:overline;}
+    #toggle-docs, #docs .cnt, #jbg-menu{background:url('img/opacity.png') repeat;}
+    #docs{width:600px;right:100px;top:10%;margin-bottom:50px;position:absolute;z-index:1000;}
+    #docs .wrapper{padding:10px;margin:10px;}
+    #docs .cnt{margin-top:30px;padding-top:20px;padding-bottom:20px;}
+    
+    #credits, #nav{z-index:1001;position:fixed;bottom:0;text-decoration:none;font-size:11px; background:#000;padding:5px;margin:0px;}
+    #credits{left:0;z-index:1002;}
+    #nav{width:100%;}
+    
+	.toolbar ul {display:block;list-style-type:none;margin:6px;padding:0;}
+    .toolbar ul li {float:right;margin-right:auto;margin-left:auto;}
+    .toolbar ul li a, .toolbar ul li a:visited {text-decoration:none;display:block;border-bottom:4px solid transparent;margin-right:10px;}
+	.toolbar ul li a:hover,.toolbar ul li a:focus{border-bottom:4px solid #69C;}
+    
+    #fullscreen .jbg-caption{bottom:26px;left:0px;right:auto;top:auto;border:0px;}
+    #docs .jbgallery a{border-bottom:0px;}
+
+    </style>
+    <link href="libs/docs/dp.SyntaxHighlighter/Styles/SyntaxHighlighter.css" type="text/css" rel="stylesheet"></link>
+    <link href="libs/docs/contactable/contactable.css" type="text/css" rel="stylesheet"></link>
+    <script src="libs/docs/dp.SyntaxHighlighter/Scripts/shCore.js" type="text/javascript"></script>
+    <script src="libs/docs/dp.SyntaxHighlighter/Scripts/shBrushJScript.js" type="text/javascript"></script>
+    <script src="libs/docs/dp.SyntaxHighlighter/Scripts/shBrushCss.js" type="text/javascript"></script>
+    <script src="libs/docs/dp.SyntaxHighlighter/Scripts/shBrushXml.js" type="text/javascript"></script>
+    <script src="libs/docs/jquery.scrollTo-1.4.2-min.js" type="text/javascript"></script>
+	<script src="libs/docs/jquery.form.js" type="text/javascript"></script>
+	<script src="libs/docs/contactable/jquery.validate.pack.js" type="text/javascript"></script>
+    <script src="libs/docs/contactable/jquery.contactable.js" type="text/javascript"></script>
+    <script type="text/javascript"><!--
+    //ONLY FOR DEMO
+        
+    jQuery(document).ready(function(){
+        //jQuery("#docs-opacity").height(jQuery("#docs").height()).css("opacity","0.7");
+        jQuery('a.blank').each(function(){
+            this.target = "_blank";
+        });
+       jQuery('#nav > ul > li > a').click(function(){
+            var _scrollto = this.href.split("#")[1];
+            jQuery("#jbg-content").scrollTo(jQuery("#" +_scrollto), 700);
+            return false;
+        });
+        
+        jQuery("pre").attr("name","code");
+        dp.SyntaxHighlighter.HighlightAll('code');
+		jQuery('#feedback').contactable({
+			action : '/blog/wp-comments-post.php',
+			postid : 646
+        });
+    });
+    --></script>
+    <!-- /DOCS -->
+</head>    
+<body>
+<div id="feedback"><h3>Leave a comment on my 
+<a href="/blog/2010/12/19/jbgallery-3-0/#comments" class="blank">blog</a></h3>
+<p>Your email address will not be published. Required fields are marked <span class="red">*</span></p>
+</div>
+<div id="jbg-content">
+
+<!-- PUT HERE CONTENT -->
+<div id="credits" class="toolbar"><ul><li><a href="/blog/" class="blank">massimiliano balestrieri &copy; 2010</a></li></ul></div>
+<div id="nav" class="toolbar">
+<ul>
+    <li><a href="#contact">CONTACT</a></li>
+    <li><a href="#notes" title="">NOTES</a></li>
+    <li><a href="#api" title="">API</a></li>
+    <li><a href="#options" title="">OPTIONS</a></li>
+    <li><a href="#usage" title="">USAGE</a></li>
+    <li><a href="#installation" title="">INSTALLATION</a></li>
+    <li><a href="#d" title="">DOCS</a></li>     
+</ul>
+</div>
+
+<div id="docs">
+
+    <div class="cnt" id="d">
+    <div class="wrapper">
+        <h1>JBGALLERY 3.0 BETA </h1>
+        <h3>$Revision: 54 $</h3>
+        
+        <h2>WHAT'S NEW</h2>
+        <ul>
+            <li><a href="docs/jbox/test_jbox.html" class="blank">New option! - fullscreen : false</a><br /><strong>(resize box &amp; refresh to test. use menu on bottom.)</strong></li>
+            <li><a href="docs/jbox/test_jbox_multi.html" class="blank">Many gallery</a></li>
+            <li><a href="docs/options/randomize_slideshow.html" class="blank">Randomize your galleries</a></li>
+            <li><a href="docs/advanced/api.html" class="blank">Try new API to push/pop, shift/unshift images from outside</a> (mandatory one image in markup)</li>
+            <li><a href="docs/advanced/push.html" class="blank">See a basic push example</a></li>
+            <li><a href="docs/advanced/push_hundreds_from_picasa_menuslider.html" class="blank">See how push hundreds images from outside</a> (my picasa feed)</li>
+            <li><a href="docs/adapters/picasa_api.html" class="blank">See an example of adapter that use new API</a></li>
+            <li><a href="docs/debug/test.html" class="blank">Test zoom, centered and original style option</a></li>
+            <li><a href="docs/caption/caption.html" class="blank">Caption simplified and improved</a> (see html markup)</li>
+        </ul>
+        <h3>NEW fullscreen:false OPTION</h3>        
+        <div class="gallery-container" style="height:400px;">
+        <div class="jbgallery example">
+            <ul>
+                        
+                <li><a title="nara" href="http://lh3.ggpht.com/_JJJpzXdPAI4/SpzvrjvU83I/AAAAAAAABAU/8tbAipa9wgk/s560/P1020533.jpg"><img src="http://lh3.ggpht.com/_JJJpzXdPAI4/SpzvrjvU83I/AAAAAAAABAU/8tbAipa9wgk/s100/P1020533.jpg" alt="" /></a></li>
+                <li><a title="gundam1" href="http://lh3.ggpht.com/_JJJpzXdPAI4/SpzuamwkzII/AAAAAAAABOM/j3HnzPk5VnU/s560/100_2768.jpg"><img src="http://lh3.ggpht.com/_JJJpzXdPAI4/SpzuamwkzII/AAAAAAAABOM/j3HnzPk5VnU/s100/100_2768.jpg" alt="" /></a></li>
+                <li><a title="tokyo" href="http://lh5.ggpht.com/_JJJpzXdPAI4/SpzuSpC-0zI/AAAAAAAAA48/M2GPV81K4Ak/s560/100_2090.jpg"><img src="http://lh5.ggpht.com/_JJJpzXdPAI4/SpzuSpC-0zI/AAAAAAAAA48/M2GPV81K4Ak/s100/100_2090.jpg" alt="" /></a></li>
+                <li><a title="shibuya" href="http://lh4.ggpht.com/_JJJpzXdPAI4/SpzuWQEufiI/AAAAAAAAA5Y/icGZTrIp1eE/s560/100_2115.jpg"><img src="http://lh4.ggpht.com/_JJJpzXdPAI4/SpzuWQEufiI/AAAAAAAAA5Y/icGZTrIp1eE/s100/100_2115.jpg" alt="" /></a></li>
+                <li><a title="shibuya crossing" href="http://lh6.ggpht.com/_JJJpzXdPAI4/SpzuXGNNqrI/AAAAAAAAA5c/zBCyqXjlofc/s560/100_2122.jpg"><img src="http://lh6.ggpht.com/_JJJpzXdPAI4/SpzuXGNNqrI/AAAAAAAAA5c/zBCyqXjlofc/s100/100_2122.jpg" alt="" /></a></li>
+                <li><a title="ginza" href="http://lh3.ggpht.com/_JJJpzXdPAI4/SpzuQ1g3S7I/AAAAAAAAA4w/eO2gBSkV2XM/s560/100_2077.jpg"><img src="http://lh3.ggpht.com/_JJJpzXdPAI4/SpzuQ1g3S7I/AAAAAAAAA4w/eO2gBSkV2XM/s100/100_2077.jpg" alt="" /></a></li>
+                <li><a title="hiroshima" href="http://lh5.ggpht.com/_JJJpzXdPAI4/SpzvjOmg5-I/AAAAAAAAA_g/S8wow3zLays/s560/P1020744.jpg"><img src="http://lh5.ggpht.com/_JJJpzXdPAI4/SpzvjOmg5-I/AAAAAAAAA_g/S8wow3zLays/s100/P1020744.jpg" alt="" /></a></li>
+                <li><a title="minowa" href="http://lh3.ggpht.com/_JJJpzXdPAI4/SpzuPgD8hZI/AAAAAAAAA4k/fQ9a-r7mb40/s560/100_2024.jpg"><img src="http://lh3.ggpht.com/_JJJpzXdPAI4/SpzuPgD8hZI/AAAAAAAAA4k/fQ9a-r7mb40/s100/100_2024.jpg" alt="" /></a></li>
+                <li><a title="godzilla" href="http://lh6.ggpht.com/_JJJpzXdPAI4/SpzuRvGTl5I/AAAAAAAAA44/N4D2_Jversc/s560/100_2082.jpg"><img src="http://lh6.ggpht.com/_JJJpzXdPAI4/SpzuRvGTl5I/AAAAAAAAA44/N4D2_Jversc/s100/100_2082.jpg" alt="" /></a></li>
+                <li><a title="gundam2" href="http://lh4.ggpht.com/_JJJpzXdPAI4/SpzubRTa5QI/AAAAAAAAA58/XwW9WAlfzkk/s560/100_2770.jpg"><img src="http://lh4.ggpht.com/_JJJpzXdPAI4/SpzubRTa5QI/AAAAAAAAA58/XwW9WAlfzkk/s100/100_2770.jpg" alt="" /></a></li>
+                <li><a title="odaiba" href="http://lh5.ggpht.com/_JJJpzXdPAI4/SpzubyiFG-I/AAAAAAAAA6A/RoxUut3atZU/s560/100_2773.jpg"><img src="http://lh5.ggpht.com/_JJJpzXdPAI4/SpzubyiFG-I/AAAAAAAAA6A/RoxUut3atZU/s100/100_2773.jpg" alt="" /></a></li>
+                <li><a title="odaiba" href="http://lh6.ggpht.com/_JJJpzXdPAI4/SpzunPI5qJI/AAAAAAAAA7A/jx6GqZwwAgg/s560/P1020828.jpg"><img src="http://lh6.ggpht.com/_JJJpzXdPAI4/SpzunPI5qJI/AAAAAAAAA7A/jx6GqZwwAgg/s100/P1020828.jpg" alt="" /></a></li>
+                <li><a title="asakusa" href="http://lh4.ggpht.com/_JJJpzXdPAI4/SpzucSZqm2I/AAAAAAAAA6E/4d1LDeMgU1A/s560/P1010491.jpg"><img src="http://lh4.ggpht.com/_JJJpzXdPAI4/SpzucSZqm2I/AAAAAAAAA6E/4d1LDeMgU1A/s100/P1010491.jpg" alt="" /></a></li>
+                <li><a title="market" href="http://lh4.ggpht.com/_JJJpzXdPAI4/SpzufohFyEI/AAAAAAAAA6Y/V3lUC-m1v54/s560/P1010552.jpg"><img src="http://lh4.ggpht.com/_JJJpzXdPAI4/SpzufohFyEI/AAAAAAAAA6Y/V3lUC-m1v54/s100/P1010552.jpg" alt="" /></a></li>
+                <li><a title="sony building" href="http://lh4.ggpht.com/_JJJpzXdPAI4/Spzuh9WohMI/AAAAAAAAA6k/28TfGKwJUKE/s560/P1010572.jpg"><img src="http://lh4.ggpht.com/_JJJpzXdPAI4/Spzuh9WohMI/AAAAAAAAA6k/28TfGKwJUKE/s100/P1010572.jpg" alt="" /></a></li>
+                <li><a title="ginza2" href="http://lh3.ggpht.com/_JJJpzXdPAI4/SpzujJKy3WI/AAAAAAAAA6s/K4KiXwGzm4k/s560/P1010576.jpg"><img src="http://lh3.ggpht.com/_JJJpzXdPAI4/SpzujJKy3WI/AAAAAAAAA6s/K4KiXwGzm4k/s100/P1010576.jpg" alt="" /></a></li>
+                <li><a href="http://lh5.ggpht.com/_JJJpzXdPAI4/SpzujlAuYyI/AAAAAAAAA6w/znLTpwDyITE/s560/P1010613.jpg"><img src="http://lh5.ggpht.com/_JJJpzXdPAI4/SpzujlAuYyI/AAAAAAAAA6w/znLTpwDyITE/s100/P1010613.jpg" alt="" /></a></li>
+                <li><a title="ginza notte" href="http://lh4.ggpht.com/_JJJpzXdPAI4/Spzup7DkT5I/AAAAAAAAA7Q/eiq3mBIcStg/s560/P1030025.jpg"><img src="http://lh4.ggpht.com/_JJJpzXdPAI4/Spzup7DkT5I/AAAAAAAAA7Q/eiq3mBIcStg/s100/P1030025.jpg" alt="" /></a></li>
+                <li><a title="shinkanzen" href="http://lh5.ggpht.com/_JJJpzXdPAI4/SpzvMFFAgKI/AAAAAAAAA9U/ZG1ChpZ2ylY/s560/P1020139.jpg"><img src="http://lh5.ggpht.com/_JJJpzXdPAI4/SpzvMFFAgKI/AAAAAAAAA9U/ZG1ChpZ2ylY/s100/P1020139.jpg" alt="" /></a></li>
+                <li><a title="sushi shinkanzen" href="http://lh5.ggpht.com/_JJJpzXdPAI4/Spzv4pIaTMI/AAAAAAAABBk/JGc6pzLRUr0/s560/P1020365.jpg"><img src="http://lh5.ggpht.com/_JJJpzXdPAI4/Spzv4pIaTMI/AAAAAAAABBk/JGc6pzLRUr0/s100/P1020365.jpg" alt="" /></a></li>
+                <li><a title="manga" href="http://lh4.ggpht.com/_JJJpzXdPAI4/SpzwapudpJI/AAAAAAAABE8/Efw8IirE8Ts/s560/P1020073.jpg"><img src="http://lh4.ggpht.com/_JJJpzXdPAI4/SpzwapudpJI/AAAAAAAABE8/Efw8IirE8Ts/s100/P1020073.jpg" alt="" /></a></li>
+                <li><a title="oldboy" href="http://lh4.ggpht.com/_JJJpzXdPAI4/SpzwlwxsTlI/AAAAAAAABGA/RxKVZKChlik/s560/P1020779.jpg"><img src="http://lh4.ggpht.com/_JJJpzXdPAI4/SpzwlwxsTlI/AAAAAAAABGA/RxKVZKChlik/s100/P1020779.jpg" alt="" /></a></li>
+                <li><a title="zen" href="http://lh3.ggpht.com/_JJJpzXdPAI4/SpzwLe1RCcI/AAAAAAAABDM/cy-i-d6jSJI/s560/P1010952.jpg"><img src="http://lh3.ggpht.com/_JJJpzXdPAI4/SpzwLe1RCcI/AAAAAAAABDM/cy-i-d6jSJI/s100/P1010952.jpg" alt="" /></a></li>
+                <li><a title="magome" href="http://lh5.ggpht.com/_JJJpzXdPAI4/SpzvbyPhCHI/AAAAAAAAA-w/rf8dATWiOK8/s560/100_2274.jpg"><img src="http://lh5.ggpht.com/_JJJpzXdPAI4/SpzvbyPhCHI/AAAAAAAAA-w/rf8dATWiOK8/s100/100_2274.jpg" alt="" /></a></li>
+                <li><a title="kyoto" href="http://lh6.ggpht.com/_JJJpzXdPAI4/SpzwKoWX0fI/AAAAAAAABDI/1MgoC14jVbA/s560/P1010930.jpg"><img src="http://lh6.ggpht.com/_JJJpzXdPAI4/SpzwKoWX0fI/AAAAAAAABDI/1MgoC14jVbA/s100/P1010930.jpg" alt="" /></a></li>
+                <li><a title="shibuya crossing" href="http://lh6.ggpht.com/_JJJpzXdPAI4/SpzurK_N9PI/AAAAAAAAA7c/jcOZEyYmR0w/s560/P1010631.jpg"><img src="http://lh6.ggpht.com/_JJJpzXdPAI4/SpzurK_N9PI/AAAAAAAAA7c/jcOZEyYmR0w/s100/P1010631.jpg" alt="" /></a></li>
+                <li><a title="koyasan" href="http://lh3.ggpht.com/_JJJpzXdPAI4/SpzvR10H1cI/AAAAAAAAA94/n4OjsO0TYH8/s560/P1020543.jpg"><img src="http://lh3.ggpht.com/_JJJpzXdPAI4/SpzvR10H1cI/AAAAAAAAA94/n4OjsO0TYH8/s100/P1020543.jpg" alt="" /></a></li>
+                
+            </ul>
+        </div>
+        </div>  
+    <p>
+    jbgallery is a UI widget webpage written in javascript on top of the jQuery library.<br />
+    Its function is to show a single big image, multiple images, multiple galleries, slideshows, as a site's background, in a "dialog" mode or as a common pop-up.<br />
+    jbgallery has two basic menus: the first one has music player buttons while the other one links  directly to single images.<br />
+    I added a "complex" menu on the 2.0 version, which in inspired by the <a href="http://www.flickr.com/search/show/?q=assisi" class="blank">flickr</a> slider-equipped slideshow that allows to scroll the thumbnail previews.<br />
+    jbgallery provides a pubblic API to remote control the component, so it would be easier to bind also with a more complex menu.<br />
+    <br />
+    Examples: 
+    </p>
+    <ul>
+    <li>Option "fullscreen" - default true (jQuery UI resizable only for test): 
+        <ul>
+          <li><a href="docs/jbox/test_jbox.html" class="blank">box gallery</a> <strong>(NEW option! fullscreen : false)</strong></li>
+          <li><a href="docs/jbox/test_jbox_multi.html" class="blank">multi box gallery</a> <strong>(NEW option! fullscreen : false)</strong></li>
+        </ul>   
+    </li>
+    <li>Option "style" - default "centered": 
+        <ul>
+          <li><a href="docs/background/centered.html" class="blank">centered</a> <strong>(default)</strong></li>
+          <li><a href="docs/background/zoom.html" class="blank">zoom</a></li>
+          <li><a href="docs/background/original.html" class="blank">original</a></li>
+        </ul>   
+    </li>
+    <li>Option "menu" - default "simple":
+        <ul>
+          <li><a href="docs/menusimple/simple.html" class="blank">simple</a> <strong>(default)</strong></li>
+          <li><a href="docs/menuslider/menuslider.html" class="blank">slider</a></li>
+          <li><a href="docs/menunumbers/centered.html" class="blank">numbers</a></li>
+          <li><a href="docs/background/slideshow.html" class="blank">nothing</a> (slideshow true, use arrows)</li>
+        </ul>   
+    </li>
+    <li>Option "caption" - default true:
+        <ul>
+           <li><a href="docs/caption/caption.html" class="blank">caption</a> (see html markup)</li>
+           <li><a href="docs/caption/caption.html" class="blank">no caption</a> (caption disabled)</li>
+        </ul>
+    </li>
+    <li>Option "timers":
+        <ul>
+           <li><a href="docs/options/interval.html" class="blank">interval</a></li>
+           <li><a href="docs/options/nofade.html" class="blank">No fade effect</a> (menu simple)</li>
+           <li><a href="docs/options/nofade2.html" class="blank">No fade effect</a> (menu slider)</li>
+        </ul>
+    </li>
+    <li>Option "autohide" - default false:
+        <ul>
+           <li><a href="docs/options/autohide_ms.html" class="blank">autohide</a> (menu slider)</li>
+           <li><a href="docs/options/autohide_mn.html" class="blank">autohide</a> (menu numbers)</li>
+        </ul>
+    </li>
+    <li>Option "randomize" - default 0:
+        <ul>
+            <li><a href="docs/options/randomize.html" class="blank">randomize first image</a> - randomize : 1</li>
+            <li><a href="docs/options/randomize_slideshow.html" class="blank">randomize slideshow</a> - randomize : 2</li>
+        </ul>
+    </li>
+    <li><a href="docs/options/labels.html" class="blank">custom labels</a></li>
+    <li><a href="docs/options/clickable.html" class="blank">clickable</a> - option clickable (default : false)</li>
+    <li><a href="docs/debug/test.html" class="blank">Debug style</a> (debug style)</li>
+    <li>Option "popup" - default 0:
+        <ul>
+            <li><a href="docs/multi/multi.html" class="blank">multiple gallery same page</a></li>
+            <li><a href="docs/multi/popup_launcher.html" class="blank">"overlay" vs window.open</a> (see "permalink")</li>
+        </ul>
+    </li>
+    <li>"Old Hack" - deprecated (use caption):
+        <ul>
+            <li><a href="docs/advanced/links.html" class="blank">links over image</a></li>
+        </ul>
+    </li>
+    <li>API &amp; Advanced options for developers/designers:
+        <ul>
+            <li><a href="docs/advanced/callback.html" class="blank">callback</a> (basic callback)</li>
+            <li><a href="docs/advanced/api.html" class="blank">api</a> (menu slider)</li>
+            <li><a href="docs/advanced/api_menunumbers.html" class="blank">api</a> (menu numbers)</li>
+            <li><a href="docs/advanced/api_menusimple.html" class="blank">api</a> (menu simple)</li>
+            <li><a href="docs/advanced/api_callback.html" class="blank">callback on push/pop/unshift/shift</a></li>
+        </ul>
+    </li>
+    <li>API demo (hundreds images push via yql &amp; picasa):
+        <ul>
+            <li><a href="docs/advanced/push_hundreds_from_picasa_menuslider.html" class="blank">slider</a></li>
+            <li><a href="docs/advanced/push_hundreds_from_picasa_menusimple.html" class="blank">simple</a></li>
+            <li><a href="docs/advanced/push_hundreds_from_picasa_menunumbers.html" class="blank">numbers</a> - note the limitations of this menu</li>
+            <li><a href="docs/advanced/push.html" class="blank">basic example of push</a></li>
+            <li><a href="docs/advanced/bostonpic.html" class="blank">push via yql from</a>  
+            <a href="http://www.boston.com/bigpicture/2010/07/stormy_skies.html" class="blank">Boston.com The Big Picture</a></li>
+            <li><a href="docs/advanced/flickr.html" class="blank">push via yql from flickr</li>
+        </ul>
+    </li>
+    <li>ADAPTERS (picasa):
+        <ul>
+            <li><a href="docs/adapters/picasa_api.html" class="blank">all album</a> - new version with api</li>
+            <li><a href="docs/adapters/picasa_album_api.html" class="blank">filter by album</a> - new version with api</li>
+            <li><a href="docs/adapters/picasa.html" class="blank">all album</a> - old version</li>
+            <li><a href="docs/adapters/picasa-album.html" class="blank">filter by album</a> - old version</li>
+        </ul>
+    </li>
+    </ul>
+    </div>
+    </div>
+    
+    <div class="cnt" id="installation">
+    <div class="wrapper">   
+    <h2>Installation</h2>
+    <h3>Download and extract</h3>
+    <p><a href="jbgallery-3.0.beta.zip">jbgallery-3.0.beta.zip</a></p>
+    <p>Download single files : </p>
+    <ul>
+        <li>jbgallery-3.0.js : <a href="jbgallery-3.0.js" class="blank">source</a> | <a href="jbgallery-3.0.min.js" class="blank">min</a></li>
+        <li><a href="jbgallery-3.0.css" class="blank">jbgallery-3.0.css</a></li>
+        <li><a href="img/ajax-loader.gif" class="blank">ajax-loader.gif</a></li>
+        <li><a href="img/sprite.png" class="blank">sprite.png</a></li>
+        <li><a href="img/opacity.png" class="blank">opacity.png</a></li>
+        <li><a href="jquery-1.4.4.min.js" class="blank">jquery-1.4.4.min.js</a></li>
+    </ul>
+    <p>Extra files : </p>
+    <ul>
+        <li>jbpicasa.js : <a href="adapters/jbpicasa-3.0.js" class="blank">source</a> - new version.</li>
+        <li>jbpicasa.js : <a href="adapters/jbpicasa.js" class="blank">source</a> - test adapter that you can use building an html structure, getting data from an external rss feed.</li>
+    </ul>
+    </div>
+    </div>
+    
+    <div class="cnt" id="usage">
+    <div class="wrapper">   
+    <h2>Usage</h2>
+    <h3>js and css (include in head tag)</h3>
+    <pre class="html">
+&lt;link href=&quot;jbgallery-3.0.css&quot; rel=&quot;stylesheet&quot; media=&quot;screen&quot; /&gt;        
+&lt;script type=&quot;text/javascript&quot; src=&quot;jquery.1.4.2.min.js&quot;&gt;&lt;/script&gt;
+&lt;script type=&quot;text/javascript&quot; src=&quot;jbgallery-3.0.js&quot;&gt;&lt;/script&gt;
+</pre>
+    <h3>HTML structure (minimal menu)</h3>
+    <pre class="html">
+&lt;div class=&quot;jbgallery&quot;&gt;
+ &lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;1.jpg&quot; &gt;1&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;2.jpg&quot; &gt;2&lt;/a&gt;&lt;/li&gt;
+  &lt;!-- etc --&gt;
+ &lt;/ul&gt;
+&lt;/div&gt;
+</pre>
+    <h3>HTML structure (thumbnails - menu with slider)</h3>
+    <pre class="html">
+&lt;div class=&quot;jbgallery&quot;&gt;
+ &lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;big1.jpg&quot;&gt;&lt;img src=&quot;small1.jpg&quot; alt=&quot;&quot; /&gt;&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;big2.jpg&quot;&gt;&lt;img src=&quot;small2.jpg&quot; alt=&quot;&quot; /&gt;&lt;/a&gt;&lt;/li&gt;
+  &lt;!-- etc --&gt;
+ &lt;/ul&gt;
+&lt;/div&gt;
+</pre>
+    <h3>HTML structure (caption)</h3>
+    <pre class="html">
+&lt;div class=&quot;jbgallery&quot;&gt;
+ &lt;ul&gt;
+  &lt;li&gt;
+   &lt;a href=&quot;big.jpg&quot; title=&quot;Caption title&quot; rel=&quot;Caption title link&quot;&gt;&lt;img src=&quot;small.jpg&quot; alt=&quot;&quot; /&gt;&lt;/a&gt;
+   &lt;div class=&quot;caption&quot;&gt;Long long long text&lt;/div&gt;
+  &lt;/li&gt;
+  &lt;!-- etc --&gt;
+ &lt;/ul&gt;
+&lt;/div&gt;
+</pre>
+
+    <h3>JS</h3>
+    <pre class="js">
+&lt;script type=&quot;text/javascript&quot;&gt;
+jQuery(document).ready(function(){
+  jQuery(&quot;.jbgallery&quot;).jbgallery();
+});
+&lt;/script&gt;
+</pre>
+    </div>
+    </div>
+    
+    <div class="cnt" id="options">
+    <div class="wrapper">   
+    <h2>OPTIONS &amp; DEFAULTS</h2>
+    <p>Write options HERE : </p>
+<div class="code"><pre>
+    jQuery(&quot;.jbgallery&quot;).jbgallery({HERE});
+</pre></div>
+    <pre class="js">
+{
+  //option   : default value     //see docs/demo for usage - PLEASE FIX MY ENGLISH IF YOU CAN &amp; SEND ME  :)
+    style    : "centered",       //"centered"|"zoom"|"original" - image style
+    menu     : "slider",         //false|"numbers"|"simple"|"slider" - menu type
+    shortcuts: [37, 39],         //[prev,next] - keyboard code shortcuts
+    slideshow: false,            //true|false - autostart slideshow
+    fade     : true,             //true|false - disable all fade effects
+    popup    : false,            //true|false - modal box &amp; traditional popup hack to display multiple gallery (3.0 : fullscreen:false)
+    randomize: 0,                //0|1|2 - randomize first image (1) or randomize "slideshow" (2) - blackout: http://www.grayhats.org
+    caption  : true,             //true|false - show/disable internal caption system
+    autohide : false,            //true|false - auto hide menu &amp; caption
+    clickable: false,            //true|false - "image click &amp; go"
+    current  : 1,                //number     - set initial photo (modal "hack" - see demo. don't use "hash". jbgallery use "location.hash" only in popup mode)
+    webkit   : (navigator.userAgent.toLowerCase().search(/webkit/) != -1),  //boolean - used for specific browser hack. if you want, you can force disable this flag &amp; try to find crossbrowser solution
+    ie6      : (/MSIE 6/i.test(navigator.userAgent)), //boolean - IDEM
+    ie7      : (/MSIE 7/i.test(navigator.userAgent)), //boolean - IDEM
+    labels   : {                 //labels of internal menu
+        play : "play",
+        next : "next",
+        prev : "prev",
+        stop : "stop",
+        close: "close",
+        info : "info"
+    },
+    timers   : {                 //timers 
+        fade    : 400,           //fade duration
+        interval: 7000,          //slideshow interval
+        autohide: 7000           //autohide timeout
+    },
+    delays: {                    //delays (timers) to improve usability and reduce events
+        mousemove: 200,          //used by autohide. cancel autohide timeout every XXXms. 
+        resize   : 500,          //used by ie6 to reduce events handled by window.resize
+        mouseover: 800           //used by tooltip. show tooltip only if the mouse STAY over thumb for XXXms
+    },
+    close    : function(){},     //callback handled by menu's button close. see demo. example : close : function(){window.close()}
+    before   : function(){},     //callback handled BEFORE image gallery loaded
+    after    : function(ev){},   //callback(ev) handled AFTER image gallery loaded. receive the native load event.
+    load     : function(ev){},   //callback(ev) handled AFTER native image load event. receive the native load event.
+    ready    : function(el){},   //callback(el) handled AFTER jbgallery render. receive the HTML element.
+    //WHAT'S NEW - 3.0
+    fullscreen: true,            //true|false : the most important feature of jbgallery 3.0. now jbgallery can "stay in a box" and have multiple istance in one page.
+    push      : function(o){},   //callback handled by push public method (JBGALLERY API). receive the object/string/array of objects/array of strings passed from external. useful for external menu system
+    unshift   : function(o){},   //callback handled by unshift public method (JBGALLERY API). receive the object/string/array of objects/array of strings passed from external.
+    shift     : function(){},    //callback handled by shift public method 
+    pop       : function(){},    //callback handled by pop public method 
+    empty     : function(){}     //callback handled by empty public method 
+}
+</pre>
+
+    </div>
+    </div>
+    
+    <div class="cnt" id="api">
+    <div class="wrapper">   
+    <h2>API (developers/designers)</h2>
+<pre class="js">
+var obj = jQuery("#jbg").jbgallery({menu : "slider"}, true);//GET API
+obj.left();
+obj.right();
+obj.go(3);
+obj.current();
+obj.play(4000);
+obj.stop();
+obj.push(single);//single = 'http://url'
+obj.push(aobj);//aobj is array of object
+obj.unshift(obj);//obj is a single object
+obj.unshift(arr);//arr is an array of string (url)
+obj.shift();
+obj.pop();
+obj.empty();
+obj.destroy();
+</pre>
+<h3>EXAMPLE</h3>
+<pre class="js">
+var images = {
+    single : 'http://lh5.ggpht.com/_JJJpzXdPAI4/SpzvbyPhCHI/AAAAAAAAA-w/rf8dATWiOK8/100_2274.jpg',
+    arr : ['http://lh3.ggpht.com/_JJJpzXdPAI4/SpzvrjvU83I/AAAAAAAABAU/8tbAipa9wgk/P1020533.jpg','http://lh5.ggpht.com/_JJJpzXdPAI4/SpzuSpC-0zI/AAAAAAAAA48/M2GPV81K4Ak/100_2090.jpg'],
+    obj : {
+        href : 'http://lh5.ggpht.com/_JJJpzXdPAI4/SpzvjOmg5-I/AAAAAAAAA_g/S8wow3zLays/P1020744.jpg',
+        title: 'Hiroshima',
+        rel  : 'http://en.wikipedia.org/wiki/Hiroshima',
+        caption : 'Hiroshima (広島市, Hiroshima-shi?) (About this sound listen (help·info)) is the capital of Hiroshima Prefecture, and the largest city in the Chūgoku region of western Honshū',
+        caption_css : 'custom'
+    },
+    aobj : [{
+        href : 'http://lh5.ggpht.com/_JJJpzXdPAI4/SpzvjOmg5-I/AAAAAAAAA_g/S8wow3zLays/P1020744.jpg',
+        thumb: 'http://lh5.ggpht.com/_JJJpzXdPAI4/SpzvjOmg5-I/AAAAAAAAA_g/S8wow3zLays/s288/P1020744.jpg',
+        title: 'Hiroshima',
+        rel  : 'http://en.wikipedia.org/wiki/Hiroshima',
+        caption : 'Hiroshima (広島市, Hiroshima-shi?) (About this sound listen (help·info)) is the capital of Hiroshima Prefecture, and the largest city in the Chūgoku region of western Honshū',
+        caption_css : 'custom'
+    },{
+        href : 'http://lh5.ggpht.com/_JJJpzXdPAI4/SpzvbyPhCHI/AAAAAAAAA-w/rf8dATWiOK8/100_2274.jpg',
+        title: 'Magome-juku'
+    }]
+};
+obj = jQuery("#jbgallery-api").jbgallery({menu : "slider"}, true);//GET API
+jQuery("#mm-empty").click(function(){
+    obj.empty();
+}); 
+jQuery("#mm-push").click(function(){
+    obj.push(images.single);
+});
+jQuery("#mm-pushmany").click(function(){
+    obj.push(images.aobj);
+});
+jQuery("#mm-shift").click(function(){
+    obj.shift();
+});
+jQuery("#mm-pop").click(function(){
+    obj.pop();
+});
+jQuery("#mm-unshift").click(function(){
+    obj.unshift(images.obj);
+});
+jQuery("#mm-unshiftmany").click(function(){
+    obj.unshift(images.arr);
+});
+</pre>
+    </div>
+    </div>
+    
+    <div class="cnt" id="notes">
+    <div class="wrapper">   
+    <h2>NOTES</h2>
+    <h3>BROWSERS TESTED</h3>
+    <p>Please send me bugs.</p><!--todo -->
+    <ul>
+    <li>Firefox 3.6 (winxp/linux)</li>
+    <li>Safari 5 (winxp)</li-->
+    <li>Chrome 8/9</li>
+    <li>Opera 11</li>
+    <li>Internet Explorer 6/7/8 (winxp)</li-->
+    </ul>
+
+    <h3>DESIGN</h3>
+    <p>
+    This component is published with two graphic layout.<br />
+    You are free to customize css and to ask me any change to add classes to the menus edited by me.<br />
+    If you use API or design more complex menus, or if you write plugins <span class="strike">populating html lists</span> <strong>pushing images</strong> 
+    (see <a href="adapters/jbpicasa-3.0.js" class="blank">picasa 3.0 adapter</a>) via ajax by flickr 
+    or similar services, please share with me for the next version of this plugin.<br />
+    </p>
+
+
+    <h3>CREDITS</h3>
+    <p>
+        This work is inspired by <a href="http://www.ringvemedia.com/" class="blank">http://www.ringvemedia.com/</a> and <a href="http://www.chicchicken.cc/" class="blank">Chicca</a><br />
+        The slider is inspired by <a href="http://www.flickr.com/search/show/?q=assisi" class="blank">http://www.flickr.com/search/show/</a>
+        <br />
+        Depends on jQuery (1.4.4) by <a href="http://ejohn.org/" class="blank">John Resig</a>.
+        <br />
+        Thanks to Carlo Denaro, Simone Parato, Aaron Hutten, Alain Bourgeoa, Steffen Wenzel, Alfredo
+    </p>
+    </div>
+    </div>
+    
+	
+    <div class="cnt" id="contact">
+    <div class="wrapper">   
+    <h2>CONTACTS</h2>
+    <p>
+    Post a comment on my blog. <br />
+    <a href="http://maxb.net/blog/2010/12/19/jbgallery-3-0/" class="blank">http://maxb.net/blog/</a>
+    </p>
+    <h3>LICENSE</h3>
+    <p>
+    Copyright (c) 2010 Massimiliano Balestrieri<br />
+    Licensed GPL licenses:<br />
+    <a href="http://www.gnu.org/licenses/gpl.html" class="blank">http://www.gnu.org/licenses/gpl.html</a><br />
+    </p>
+    </div>
+    </div>
+    
+</div>
+
+
+
+<!-- /PUT HERE CONTENT -->
+</div>
+
+<div class="jbgallery" id="fullscreen">
+    <ul>
+                
+        <li><a title="Gundam (ガンダム)" rel="http://it.wikipedia.org/wiki/Gundam" href="http://lh3.ggpht.com/_JJJpzXdPAI4/SpzuamwkzII/AAAAAAAABOM/j3HnzPk5VnU/100_2768.jpg"><img src="http://lh3.ggpht.com/_JJJpzXdPAI4/SpzuamwkzII/AAAAAAAABOM/j3HnzPk5VnU/s288/100_2768.jpg" alt="" /></a>
+        <div class="caption">
+        As part of the 30th Anniversary of the Gundam series, the company officially announced a project on March 11, 2009 called Real-G to build a 1:1 real-size, 
+        scaled Gundam statue in Japan.
+        The project was finished in early June 2009 and opened to the public on July 11, 2009. 
+        It was located in Shiokaze Park on Odaiba island in Tokyo, Japan, and attracted over 4 million visitors. The statue was then taken down in September. 
+        It was re-erected in the city of Shizuoka in July 2010, this time with a beam saber.
+        </div></li>
+        <li><a title="nara" href="http://lh3.ggpht.com/_JJJpzXdPAI4/SpzvrjvU83I/AAAAAAAABAU/8tbAipa9wgk/P1020533.jpg"><img src="http://lh3.ggpht.com/_JJJpzXdPAI4/SpzvrjvU83I/AAAAAAAABAU/8tbAipa9wgk/s288/P1020533.jpg" alt="" /></a></li>
+        <li><a title="tokyo" href="http://lh5.ggpht.com/_JJJpzXdPAI4/SpzuSpC-0zI/AAAAAAAAA48/M2GPV81K4Ak/100_2090.jpg"><img src="http://lh5.ggpht.com/_JJJpzXdPAI4/SpzuSpC-0zI/AAAAAAAAA48/M2GPV81K4Ak/s288/100_2090.jpg" alt="" /></a></li>
+        <li><a title="shibuya" href="http://lh4.ggpht.com/_JJJpzXdPAI4/SpzuWQEufiI/AAAAAAAAA5Y/icGZTrIp1eE/100_2115.jpg"><img src="http://lh4.ggpht.com/_JJJpzXdPAI4/SpzuWQEufiI/AAAAAAAAA5Y/icGZTrIp1eE/s288/100_2115.jpg" alt="" /></a></li>
+        <li><a title="shibuya crossing" href="http://lh6.ggpht.com/_JJJpzXdPAI4/SpzuXGNNqrI/AAAAAAAAA5c/zBCyqXjlofc/100_2122.jpg"><img src="http://lh6.ggpht.com/_JJJpzXdPAI4/SpzuXGNNqrI/AAAAAAAAA5c/zBCyqXjlofc/s288/100_2122.jpg" alt="" /></a></li>
+        <li><a title="ginza" href="http://lh3.ggpht.com/_JJJpzXdPAI4/SpzuQ1g3S7I/AAAAAAAAA4w/eO2gBSkV2XM/100_2077.jpg"><img src="http://lh3.ggpht.com/_JJJpzXdPAI4/SpzuQ1g3S7I/AAAAAAAAA4w/eO2gBSkV2XM/s288/100_2077.jpg" alt="" /></a></li>
+        <li><a title="hiroshima" href="http://lh5.ggpht.com/_JJJpzXdPAI4/SpzvjOmg5-I/AAAAAAAAA_g/S8wow3zLays/P1020744.jpg"><img src="http://lh5.ggpht.com/_JJJpzXdPAI4/SpzvjOmg5-I/AAAAAAAAA_g/S8wow3zLays/s288/P1020744.jpg" alt="" /></a></li>
+        <li><a title="minowa" href="http://lh3.ggpht.com/_JJJpzXdPAI4/SpzuPgD8hZI/AAAAAAAAA4k/fQ9a-r7mb40/100_2024.jpg"><img src="http://lh3.ggpht.com/_JJJpzXdPAI4/SpzuPgD8hZI/AAAAAAAAA4k/fQ9a-r7mb40/s288/100_2024.jpg" alt="" /></a></li>
+        <li><a title="godzilla" href="http://lh6.ggpht.com/_JJJpzXdPAI4/SpzuRvGTl5I/AAAAAAAAA44/N4D2_Jversc/100_2082.jpg"><img src="http://lh6.ggpht.com/_JJJpzXdPAI4/SpzuRvGTl5I/AAAAAAAAA44/N4D2_Jversc/s288/100_2082.jpg" alt="" /></a></li>
+        <li><a title="gundam2" href="http://lh4.ggpht.com/_JJJpzXdPAI4/SpzubRTa5QI/AAAAAAAAA58/XwW9WAlfzkk/100_2770.jpg"><img src="http://lh4.ggpht.com/_JJJpzXdPAI4/SpzubRTa5QI/AAAAAAAAA58/XwW9WAlfzkk/s288/100_2770.jpg" alt="" /></a></li>
+        <li><a title="odaiba" href="http://lh5.ggpht.com/_JJJpzXdPAI4/SpzubyiFG-I/AAAAAAAAA6A/RoxUut3atZU/100_2773.jpg"><img src="http://lh5.ggpht.com/_JJJpzXdPAI4/SpzubyiFG-I/AAAAAAAAA6A/RoxUut3atZU/s288/100_2773.jpg" alt="" /></a></li>
+        <li><a title="odaiba" href="http://lh6.ggpht.com/_JJJpzXdPAI4/SpzunPI5qJI/AAAAAAAAA7A/jx6GqZwwAgg/P1020828.jpg"><img src="http://lh6.ggpht.com/_JJJpzXdPAI4/SpzunPI5qJI/AAAAAAAAA7A/jx6GqZwwAgg/s288/P1020828.jpg" alt="" /></a></li>
+        <li><a title="asakusa" href="http://lh4.ggpht.com/_JJJpzXdPAI4/SpzucSZqm2I/AAAAAAAAA6E/4d1LDeMgU1A/P1010491.jpg"><img src="http://lh4.ggpht.com/_JJJpzXdPAI4/SpzucSZqm2I/AAAAAAAAA6E/4d1LDeMgU1A/s288/P1010491.jpg" alt="" /></a></li>
+        <li><a title="market" href="http://lh4.ggpht.com/_JJJpzXdPAI4/SpzufohFyEI/AAAAAAAAA6Y/V3lUC-m1v54/P1010552.jpg"><img src="http://lh4.ggpht.com/_JJJpzXdPAI4/SpzufohFyEI/AAAAAAAAA6Y/V3lUC-m1v54/s288/P1010552.jpg" alt="" /></a></li>
+        <li><a title="sony building" href="http://lh4.ggpht.com/_JJJpzXdPAI4/Spzuh9WohMI/AAAAAAAAA6k/28TfGKwJUKE/P1010572.jpg"><img src="http://lh4.ggpht.com/_JJJpzXdPAI4/Spzuh9WohMI/AAAAAAAAA6k/28TfGKwJUKE/s288/P1010572.jpg" alt="" /></a></li>
+        <li><a title="ginza2" href="http://lh3.ggpht.com/_JJJpzXdPAI4/SpzujJKy3WI/AAAAAAAAA6s/K4KiXwGzm4k/P1010576.jpg"><img src="http://lh3.ggpht.com/_JJJpzXdPAI4/SpzujJKy3WI/AAAAAAAAA6s/K4KiXwGzm4k/s288/P1010576.jpg" alt="" /></a></li>
+        <li><a href="http://lh5.ggpht.com/_JJJpzXdPAI4/SpzujlAuYyI/AAAAAAAAA6w/znLTpwDyITE/P1010613.jpg"><img src="http://lh5.ggpht.com/_JJJpzXdPAI4/SpzujlAuYyI/AAAAAAAAA6w/znLTpwDyITE/s288/P1010613.jpg" alt="" /></a></li>
+        <li><a title="ginza notte" href="http://lh4.ggpht.com/_JJJpzXdPAI4/Spzup7DkT5I/AAAAAAAAA7Q/eiq3mBIcStg/P1030025.jpg"><img src="http://lh4.ggpht.com/_JJJpzXdPAI4/Spzup7DkT5I/AAAAAAAAA7Q/eiq3mBIcStg/s288/P1030025.jpg" alt="" /></a></li>
+        <li><a title="shinkanzen" href="http://lh5.ggpht.com/_JJJpzXdPAI4/SpzvMFFAgKI/AAAAAAAAA9U/ZG1ChpZ2ylY/P1020139.jpg"><img src="http://lh5.ggpht.com/_JJJpzXdPAI4/SpzvMFFAgKI/AAAAAAAAA9U/ZG1ChpZ2ylY/s288/P1020139.jpg" alt="" /></a></li>
+        <li><a title="sushi shinkanzen" href="http://lh5.ggpht.com/_JJJpzXdPAI4/Spzv4pIaTMI/AAAAAAAABBk/JGc6pzLRUr0/P1020365.jpg"><img src="http://lh5.ggpht.com/_JJJpzXdPAI4/Spzv4pIaTMI/AAAAAAAABBk/JGc6pzLRUr0/s288/P1020365.jpg" alt="" /></a></li>
+        <li><a title="manga" href="http://lh4.ggpht.com/_JJJpzXdPAI4/SpzwapudpJI/AAAAAAAABE8/Efw8IirE8Ts/P1020073.jpg"><img src="http://lh4.ggpht.com/_JJJpzXdPAI4/SpzwapudpJI/AAAAAAAABE8/Efw8IirE8Ts/s288/P1020073.jpg" alt="" /></a></li>
+        <li><a title="oldboy" href="http://lh4.ggpht.com/_JJJpzXdPAI4/SpzwlwxsTlI/AAAAAAAABGA/RxKVZKChlik/P1020779.jpg"><img src="http://lh4.ggpht.com/_JJJpzXdPAI4/SpzwlwxsTlI/AAAAAAAABGA/RxKVZKChlik/s288/P1020779.jpg" alt="" /></a></li>
+        <li><a title="zen" href="http://lh3.ggpht.com/_JJJpzXdPAI4/SpzwLe1RCcI/AAAAAAAABDM/cy-i-d6jSJI/P1010952.jpg"><img src="http://lh3.ggpht.com/_JJJpzXdPAI4/SpzwLe1RCcI/AAAAAAAABDM/cy-i-d6jSJI/s288/P1010952.jpg" alt="" /></a></li>
+        <li><a title="magome" href="http://lh5.ggpht.com/_JJJpzXdPAI4/SpzvbyPhCHI/AAAAAAAAA-w/rf8dATWiOK8/100_2274.jpg"><img src="http://lh5.ggpht.com/_JJJpzXdPAI4/SpzvbyPhCHI/AAAAAAAAA-w/rf8dATWiOK8/s288/100_2274.jpg" alt="" /></a></li>
+        <li><a title="kyoto" href="http://lh6.ggpht.com/_JJJpzXdPAI4/SpzwKoWX0fI/AAAAAAAABDI/1MgoC14jVbA/P1010930.jpg"><img src="http://lh6.ggpht.com/_JJJpzXdPAI4/SpzwKoWX0fI/AAAAAAAABDI/1MgoC14jVbA/s288/P1010930.jpg" alt="" /></a></li>
+        <li><a title="shibuya crossing" href="http://lh6.ggpht.com/_JJJpzXdPAI4/SpzurK_N9PI/AAAAAAAAA7c/jcOZEyYmR0w/P1010631.jpg"><img src="http://lh6.ggpht.com/_JJJpzXdPAI4/SpzurK_N9PI/AAAAAAAAA7c/jcOZEyYmR0w/s288/P1010631.jpg" alt="" /></a></li>
+        <li><a title="koyasan" href="http://lh3.ggpht.com/_JJJpzXdPAI4/SpzvR10H1cI/AAAAAAAAA94/n4OjsO0TYH8/P1020543.jpg"><img src="http://lh3.ggpht.com/_JJJpzXdPAI4/SpzvR10H1cI/AAAAAAAAA94/n4OjsO0TYH8/s288/P1020543.jpg" alt="" /></a></li>
+        
+    </ul>
+</div>
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-258871-1']);
+  _gaq.push(['_setDomainName','.maxb.net']); 
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+</body>
+</html>

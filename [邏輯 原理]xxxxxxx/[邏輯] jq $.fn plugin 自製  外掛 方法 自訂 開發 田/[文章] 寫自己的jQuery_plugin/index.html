@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html xmlns:expr="http://www.google.com/2005/gml/expr" xmlns:data="http://www.google.com/2005/gml/data" xmlns:b="http://www.google.com/2005/gml/b" xmlns="http://www.w3.org/1999/xhtml" dir="ltr" class="v2" b:version="2" style="height: 100%;">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta content="IE=EmulateIE7" http-equiv="X-UA-Compatible">
+<meta content="width=1100" name="viewport">
+
+
+<meta content="blogger" name="generator">
+<link href="favicon.ico" rel="icon" type="image/x-icon">
+<link href="http://yiyingloveart.blogspot.com/2012/10/notejquery-plugin.html" rel="canonical">
+<link rel="alternate" type="application/atom+xml" title="Win.心得小筆記 - Atom" href="http://yiyingloveart.blogspot.com/feeds/posts/default">
+<link rel="alternate" type="application/rss+xml" title="Win.心得小筆記 - RSS" href="http://yiyingloveart.blogspot.com/feeds/posts/default?alt=rss">
+<link rel="service.post" type="application/atom+xml" title="Win.心得小筆記 - Atom" href="http://www.blogger.com/feeds/6966960206198868165/posts/default">
+
+<link rel="alternate" type="application/atom+xml" title="Win.心得小筆記 - Atom" href="http://yiyingloveart.blogspot.com/feeds/7716685370041316821/comments/default">
+<!--[if IE]><script type="text/javascript" src="//www.blogger.com/static/v1/jsbin/1373684996-ieretrofit.js"></script>
+<![endif]-->
+<link rel="image_src" href="http://1.bp.blogspot.com/-IEf0HXkJL_I/UG2YSxlf1RI/AAAAAAAAB4w/SrTmxgxmTYI/s72-c/%E6%9C%AA%E5%91%BD%E5%90%8D.png">
+<!--[if IE]> <script> (function() { var html5 = ("abbr,article,aside,audio,canvas,datalist,details," + "figure,footer,header,hgroup,mark,menu,meter,nav,output," + "progress,section,time,video").split(','); for (var i = 0; i < html5.length; i++) { document.createElement(html5[i]); } try { document.execCommand('BackgroundImageCache', false, true); } catch(e) {} })(); </script> <![endif]-->
+<title>Win.心得小筆記: Note:寫自己的jQuery plugin</title>
+
+
+
+
+
+
+
+
+<!-- add brushes here -->
+
+
+
+
+
+
+
+
+
+
+<link href="chrome://translator/skin/floatingPanel.css" type="text/css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="index.css" media="all">
+</head>
+<body style="position: relative; min-height: 100%; top: 40px;" class="">
+<div class="content">
+<div class="content-outer">
+<div class="fauxborder-left content-fauxborder-left">
+<div class="content-inner">
+<div class="main-outer">
+<div class="fauxborder-left main-fauxborder-left">
+<div class="region-inner main-inner">
+<div class="columns fauxcolumns">
+<div class="columns-inner">
+<div class="column-center-outer">
+<div class="column-center-inner">
+<div class="main section" id="main">
+<div class="widget Blog" id="Blog1">
+<div class="blog-posts hfeed">
+<div class="date-outer">
+<div class="date-posts">
+<div class="post-outer">
+<div class="post hentry" itemscope="itemscope" itemtype="http://schema.org/BlogPosting">
+<!--DOCUMENT_FRAGMENT-->
+<h3 class="post-title entry-title" itemprop="name">寫自己的jQuery plugin
+</h3>
+<div class="post-header">
+<div class="post-header-line-1"><span class="reaction-buttons">
+</span>
+</div>
+</div>
+<div class="post-body entry-content" id="post-body-7716685370041316821" itemprop="articleBody">
+<div dir="ltr" style="text-align: left;" trbidi="on">
+<div dir="ltr" style="text-align: left;" trbidi="on">
+重複的功能一直重複寫也不是辦法。jQuery的外掛功能提供你將自己的程式碼打包起來，成為jquery的外掛，降低程式碼的重複性。<br>
+對了，下面說明文字:plugin =插件 = 外掛=jquery的外掛程式。<br>
+<br>
+擴展jQuery的plugin跟method是非常強大的，可以減省很多開發時間。<br>
+一個網站如果小小的可能沒差，但是管理大站的jQuery可以好好考慮往plugin的方向學習。我看了官方的文件寫了下面的筆記，可以說是翻譯過來，建議可以看官方文件就看官方文件，網址: http://docs.jquery.com/Plugins/Authoring<br>
+說實在的可能要真的用到才會懂吧&gt;&lt;，而且要寫的機率很低...，所以想說寫之前，先看看別人怎麼寫。<br>
+在尋找jquery的範例時就馬上吃了閉門羹，<a href="http://plugins.jquery.com/" target="_top">http://plugins.jquery.com/</a>&nbsp;，這個網頁還在開發中，好吧，沒關係，像fancybox就是一種jquery的外掛。<br>
+<br>
+<b><span style="font-size: large;">外掛程式的命名<br></span></b><br>
+(這段可以參考:jQuery網頁設計範例教學/德瑞工作室 松崗出版)，因為官方網站沒看到這段，但書裡有介紹到，如果想多了解就看書。<br>
+<br>
+有用過jquery的外掛應該可以想像下載下來就是一個壓縮檔之類的，然後打開之後有css,有js,有html檔，其js除了有jquery的檔案之外，還有外掛程式的.js檔。有用過fancybox嗎?<br>
+它的外掛檔如圖:<br><br>
+<div class="separator" style="clear: both; text-align: left;">
+<img src="@e6@9c@aa@e5@91@bd@e5@90@8d.png" border="0" height="30" width="640"></div>
+通常寫plugin會將plugin額外取出另存成一個.js檔，再將js引入到頁面中。<br>
+外掛程式的命名如下 :<br>
+1) 使用"jquery"作為前置詞，後面接一個"."`，再接你的外掛名稱，在接"."，然後加上附檔名，<br>
+&nbsp; &nbsp; &nbsp;如 jquery.你的外掛名稱.js &nbsp;(ex: jquery.winwingo.js)<br>
+2) 附檔名會是js<br>
+3) 可以選擇要不要加入版本名稱。如 : jquery.winwingo-1.0.js<br>
+<br>
+<br>
+<b><span style="font-size: large;">開始寫一個jQuery的plugin</span></b><br>
+<br>
+jQuery的plugin會先接著一個新的function，另外你也要先想好你的plugin的名稱，範例如下:<br>
+<div style="background: none repeat scroll 0% 0% rgb(230, 238, 213);">
+<span style="font-family: Trebuchet MS,sans-serif;"><b>jQuery.fn.<span style="color: red;">myPlugin</span> =&nbsp;function(){</b></span><br>
+<span style="font-family: Trebuchet MS,sans-serif;"><b>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: rgb(102, 102, 102);">//Do your awesome stuff here&nbsp;</span></b></span><br>
+<span style="font-family: Trebuchet MS,sans-serif;"><b>}:</b></span></div>
+<div>
+<br>
+myPlugin是你的plugin命名，隨意取名(恩…也不是很隨意，就是也要符合命名的規則啦)，像是:photoHover,showBackground..等等<br>
+//Do your awesome stuff here ，簡單來說這個fn要做的事情都寫在這裡面。<br>
+像這樣:<br>
+<div style="background: none repeat scroll 0% 0% rgb(230, 238, 213);">
+<span style="font-family: Trebuchet MS,sans-serif;"><b>jQuery.fn.<span style="color: red;">sayhello</span> = function(){</b></span><br>
+<span style="font-family: Trebuchet MS,sans-serif;"><b>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: rgb(102, 102, 102);">//Do your awesome stuff here</span></b></span><br>
+<span style="font-family: Trebuchet MS,sans-serif;"><b>&nbsp;};
+</b></span></div>
+<br>
+<br>
+但是，還記得jQuery可以用$替換嗎?<br>
+所以剛剛的範例可以改成這樣 :<br>
+<br>
+<div style="background: none repeat scroll 0% 0% rgb(230, 238, 213);">
+<strike><span style="font-family: Trebuchet MS,sans-serif;">jQuery.fn.myPlugin = function(){&nbsp;</span></strike><br>
+<span style="font-family: Trebuchet MS,sans-serif;">$.fn.<span style="color: red;">myPlugin</span> = function(){</span><br>
+<span style="font-family: Trebuchet MS,sans-serif;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span style="color: rgb(102, 102, 102);">//Do your awesome stuff here</span></span><br>
+<span style="font-family: Trebuchet MS,sans-serif;">};
+</span></div>
+<br>
+<br>
+為了確保你的plugin 不會與其他library有碰撞的情況(函數衝突)，建議你把你的plugin打包起來。(簡單來說就是把你的程式碼包起來，以防與其他code有相衝或汙染的情況=&gt;官方比較建議您使用這種做法)<br>
+因此，我們可以這樣寫:<br>
+<br>
+<div style="background: none repeat scroll 0% 0% rgb(230, 238, 213);">
+<span style="font-family: Trebuchet MS,sans-serif;">(function($){
+ $.fn.<span style="color: red;">myPlugin</span> = function(){</span><br>
+<span style="font-family: Trebuchet MS,sans-serif;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span style="color: rgb(102, 102, 102);">//Do your awesome stuff here
+ };</span></span><br>
+<span style="font-family: Trebuchet MS,sans-serif;">})(jQuery)</span>;
+
+</div>
+<div>
+<br>
+<br>
+<b><span style="font-size: large;">寫在Plugin的this跟你想得不一樣….&nbsp;</span></b><br>
+<b><span style="font-size: large;"><br></span></b>
+前面講得是，怎麼產出一個plugin的方法，但裡面要做些什麼呢?.....官方文件先從包在plugin裡面的this講起….<br>
+我第一次看官方文件的時候，實在搞不懂這邊再講什麼，先看一下官方網站所列出來的例子:<br>
+這個範例是建立一個myPlugin的plugin，這個plugin會指向一個function()，會使該物件執行fadeIn的事件，這個範例還不夠具體，但只是要表達在$.fn.plugin的function()內的this已經是DOM了。<br>
+在這個myPlugin裡面呢，jQuery會接收一個callback(回傳)，而這個callback本身就指到DOM，所以直接使用this等於$(this)。<br>
+<br>
+<div style="background: none repeat scroll 0% 0% rgb(230, 238, 213);">
+<span style="font-family: Trebuchet MS,sans-serif;"><b>(function(  $ ){</b></span><br>
+<span style="font-family: Trebuchet MS,sans-serif;"><b>$.fn.<span style="color: red;">myPlugin</span>  = function() {</b></span><br>
+<span style="font-family: Trebuchet MS,sans-serif;"><b>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span style="color: rgb(153, 153, 153);">//在這裡，不需要再用$(this)，因為”this”已經是jQuery的物件了 </span></b></span><br>
+<span style="color: rgb(153, 153, 153); font-family: Trebuchet MS,sans-serif;"><b>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;// there's no need to do $(this) because</b></span><br>
+<span style="color: rgb(153, 153, 153); font-family: Trebuchet MS,sans-serif;"><b>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;//  "this" is already a jquery object</b></span><br>
+<span style="color: rgb(153, 153, 153); font-family: Trebuchet MS,sans-serif;"><b>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;// $(this) would be the same as  $($('#element'));</b></span><br>
+<span style="font-family: Trebuchet MS,sans-serif;"><b>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; this.fadeIn('normal', function(){ </b></span><br>
+<span style="font-family: Trebuchet MS,sans-serif;"><b>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span style="color: rgb(153, 153, 153);">//這裡的this是一個HTML元素</span></b></span><br>
+<span style="font-family: Trebuchet MS,sans-serif;"><b>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;});</b></span><br>
+<span style="font-family: Trebuchet MS,sans-serif;"><b>};</b></span><br>
+<span style="font-family: Trebuchet MS,sans-serif;"><b>})( jQuery );</b></span></div>
+<div>
+<br></div>
+而使用這個myPlugin時這樣寫:<br>
+<div style="background: none repeat scroll 0% 0% rgb(230, 238, 213);">
+<span style="font-family: Trebuchet MS,sans-serif;">$('#emelent').myPlugin();</span></div>
+<br>
+比方說我選取一個div，執行myPlugin的plugin，可以這樣寫:<br>
+$(‘div’).myplugin();<br>
+<br>
+<br>
+<div>
+<div>
+<span style="font-size: large;"><b>讓我們寫一個plugin來真正做些事情!</b></span></div>
+<div>
+<span style="font-size: large;"><b><br></b></span></div>
+<div>
+這是ㄧ個簡單的plugin，利用.height() 回傳頁面中最高的div的高度值。</div>
+</div>
+<div style="background: none repeat scroll 0% 0% rgb(230, 238, 213);">
+<span style="font-family: Trebuchet MS,sans-serif;">&lt;!DOCTYPE html&gt;</span><br>
+<span style="font-family: Trebuchet MS,sans-serif;">&lt;html xmlns="http://www.w3.org/1999/xhtml"&gt;</span><br>
+<span style="font-family: Trebuchet MS,sans-serif;">&lt;head&gt;</span><br>
+<span style="font-family: Trebuchet MS,sans-serif;">&lt;meta http-equiv="Content-Type" content="text/html; charset=utf-8" /&gt;</span><br>
+<span style="font-family: Trebuchet MS,sans-serif;">&lt;title&gt;The Basic&lt;/title&gt;</span><br>
+<span style="font-family: Trebuchet MS,sans-serif;">&lt;style type="text/css"&gt;</span><br>
+<span style="font-family: Trebuchet MS,sans-serif;">div{border:1px solid #CCC}</span><br>
+<span style="font-family: Trebuchet MS,sans-serif;">&lt;/style&gt;</span><br>
+<span style="font-family: Trebuchet MS,sans-serif;">&lt;/head&gt;</span><br>
+<span style="font-family: Trebuchet MS,sans-serif;">&lt;body&gt;</span><br>
+<span style="font-family: Trebuchet MS,sans-serif;">&lt;div style="height:100px"&gt;1&lt;/div&gt;</span><br>
+<span style="font-family: Trebuchet MS,sans-serif;">&lt;div style="height:50px"&gt;2&lt;/div&gt;</span><br>
+<span style="font-family: Trebuchet MS,sans-serif;">&lt;div style="height:80px"&gt;3&lt;/div&gt;</span><br>
+<span style="font-family: Trebuchet MS,sans-serif;">&lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;</span><br>
+<div style="background: none repeat scroll 0% 0% rgb(223, 216, 232);">
+<span style="font-family: Trebuchet MS,sans-serif;">&lt;script type="text/javascript"&gt;</span><br>
+<span style="font-family: Trebuchet MS,sans-serif;">(function($){</span><br>
+<span style="font-family: Trebuchet MS,sans-serif;">&nbsp; &nbsp;<b> $.fn<span style="color: red;">.maxHeight</span> = function(){</b></span><br>
+<span style="font-family: Trebuchet MS,sans-serif;"><b>&nbsp; &nbsp; &nbsp; <span style="color: rgb(102, 0, 0);">var</span> max = 0;</b></span><br>
+<span style="font-family: Trebuchet MS,sans-serif;"><b>&nbsp; &nbsp; &nbsp; <span style="color: rgb(102, 0, 0);">this</span>.each(function(){</b></span><br>
+<span style="font-family: Trebuchet MS,sans-serif;">&nbsp; &nbsp; &nbsp;<span style="color: rgb(102, 102, 102);"> //這裡不用$(this) 因為這裡的this已經是$('this')</span></span><br>
+<span style="color: rgb(102, 102, 102); font-family: Trebuchet MS,sans-serif;">&nbsp; &nbsp; &nbsp; //利用each跑遍要被執行的元素</span><br>
+<span style="font-family: Trebuchet MS,sans-serif;">&nbsp; &nbsp; &nbsp; &nbsp; <b>max = Math.max(max,$(this).height());</b></span><br>
+<span style="font-family: Trebuchet MS,sans-serif;">&nbsp; &nbsp;<b> &nbsp; });</b></span><br>
+<span style="font-family: Trebuchet MS,sans-serif;"><b>&nbsp; &nbsp; &nbsp; return max;</b></span><br>
+<span style="font-family: Trebuchet MS,sans-serif;"><b>&nbsp; &nbsp; &nbsp; console.log(max);</b></span><br>
+<span style="font-family: Trebuchet MS,sans-serif;"><b>&nbsp; &nbsp; };</b></span><br>
+<span style="font-family: Trebuchet MS,sans-serif;"><b>&nbsp; })(jQuery);</b></span><br>
+<span style="font-family: Trebuchet MS,sans-serif;"><br></span>
+<span style="font-family: Trebuchet MS,sans-serif;">&nbsp; var tallest = $('div').maxHeight();</span><br>
+<span style="font-family: Trebuchet MS,sans-serif;">&nbsp;<span style="color: rgb(102, 102, 102);"> //變數tallest 的值為$(‘div’).maxHeight</span></span><br>
+<span style="color: rgb(102, 102, 102); font-family: Trebuchet MS,sans-serif;">&nbsp; //maxHeight是我們自己寫出來的Plugin</span><br>
+<span style="font-family: Trebuchet MS,sans-serif;">&nbsp; console.log(tallest);</span><br>
+<span style="font-family: Trebuchet MS,sans-serif;">&nbsp; <span style="color: rgb(102, 102, 102);">//log出頁面最高的div高度</span></span><br>
+<span style="color: rgb(102, 102, 102); font-family: Trebuchet MS,sans-serif;">&nbsp; //如果不會用console.log可以改用 alert (把註解拿掉)</span><br>
+<span style="color: rgb(102, 102, 102); font-family: Trebuchet MS,sans-serif;">&nbsp; //alert(tallest);</span><br>
+<span style="font-family: Trebuchet MS,sans-serif;">&lt;/script&gt;</span></div>
+<span style="font-family: Trebuchet MS,sans-serif;">&lt;/body&gt;</span></div>
+</div>
+</div>
+</div>
+<br>
+<br>
+<br>
+<strike>Maintaining Chainability</strike><br>
+<strike>(這大標我不知道怎麼用中文講)</strike><br>
+<strike>在前面的例子，我們回傳了一個整數的值，該值是頁面中最高的div的高度值，但某些時候，一個plugin以某種方式簡單的修改該集合的元素，和傳遞鏈(chain)給下一個method，這就是jQuery的設計之美，也是jQuery受歡迎的原因之一。</strike><br>
+<strike>因此要保持一個plugin的鏈(chain)，你必須return this。</strike><br>
+<div>
+<br></div>
+<div>
+<br></div>
+<div>
+<div>
+<b><span style="font-size: large;">參數的傳遞，Default預設值跟option可選值</span></b></div>
+<div>
+<br></div>
+<div>
+對於更複雜以及提供很多選項的plugin來說，使用$.extend來延伸一些默認的參數是很好用的。<br>
+利用$.extend()將許多物件合併成一個物件。<br>
+<br></div>
+</div>
+<div style="background: none repeat scroll 0% 0% rgb(230, 238, 213);">
+<span style="font-family: 'Trebuchet MS',sans-serif;"><b>&lt;script
+type="text/javascript"&gt;</b></span><br>
+<div class="MsoNormal">
+<span style="font-family: Trebuchet MS,sans-serif;" lang="EN-US"><b>&nbsp;
+(function($){<o:p></o:p></b></span></div>
+<div class="MsoNormal">
+<span style="font-family: Trebuchet MS,sans-serif;" lang="EN-US"><b>&nbsp;
+$.fn.<span style="color: red;">tooltip</span> = function(options){<o:p></o:p></b></span></div>
+<div class="MsoNormal">
+<span style="font-family: Trebuchet MS,sans-serif;"><b><span lang="EN-US">&nbsp; <span style="color: grey;">//</span></span><span style="color: grey;">建立一些預設值</span><span style="color: grey;" lang="EN-US"><o:p></o:p></span></b></span></div>
+<div class="MsoNormal">
+<span style="font-family: Trebuchet MS,sans-serif;" lang="EN-US"><b>&nbsp; <span style="color: rgb(192, 0, 0);">var</span> settings = $.extend({<o:p></o:p></b></span></div>
+<div class="MsoNormal" style="margin-left: 84pt;">
+<span style="font-family: Trebuchet MS,sans-serif;" lang="EN-US"><b>&nbsp;&nbsp;&nbsp; 'location'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : 'top',<o:p></o:p></b></span></div>
+<div class="MsoNormal" style="margin-left: 84pt;">
+<span style="font-family: Trebuchet MS,sans-serif;" lang="EN-US"><b>&nbsp;&nbsp;&nbsp; 'background-color': 'blue',<o:p></o:p></b></span></div>
+<div class="MsoNormal" style="margin-left: 96pt;">
+<span style="font-family: Trebuchet MS,sans-serif;" lang="EN-US"><b>&nbsp; },options);<o:p></o:p></b></span></div>
+<div class="MsoNormal">
+<span style="font-family: Trebuchet MS,sans-serif;" lang="EN-US"><b>&nbsp;
+return this.each(function(){<o:p></o:p></b></span></div>
+<div class="MsoNormal">
+<span style="font-family: Trebuchet MS,sans-serif;" lang="EN-US"><b>&nbsp;&nbsp; <span style="color: grey;">&nbsp;&nbsp;//Tooltop plugin code here</span><o:p></o:p></b></span></div>
+<div class="MsoNormal">
+<span style="font-family: Trebuchet MS,sans-serif;" lang="EN-US"><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+});<o:p></o:p></b></span></div>
+<div class="MsoNormal">
+<span style="font-family: Trebuchet MS,sans-serif;" lang="EN-US"><b>&nbsp; }<o:p></o:p></b></span></div>
+<div class="MsoNormal">
+<span style="font-family: Trebuchet MS,sans-serif;" lang="EN-US"><b>&nbsp;
+})(jQuery);<o:p></o:p></b></span></div>
+<div class="MsoNormal">
+<span style="font-family: Trebuchet MS,sans-serif;" lang="EN-US"><b>&nbsp; <o:p></o:p></b></span></div>
+<div class="MsoNormal">
+<span style="font-family: Trebuchet MS,sans-serif;" lang="EN-US"><b>&nbsp; <span style="color: red;">$('div').tooltip({'location':'left'});<o:p></o:p></span></b></span></div>
+<div class="MsoNormal">
+<span style="font-family: Trebuchet MS,sans-serif;"><b><br></b></span></div>
+<span style="font-family: Trebuchet MS,sans-serif; font-size: 12pt;" lang="EN-US"><b>&lt;/script&gt;</b></span></div>
+<div>
+<br></div>
+在上面的範例中，當我們呼叫tooltip時附帶著我們自選的選項(‘location’:’left’)，則預設的location將會被覆蓋為left，然而背景色(background-color)因為沒有特別的指定，因此維持預設值(default)一樣是藍色，所以這個物件最後的設定會長這樣:<br>
+{<br>
+<span class="Apple-tab-span" style="white-space: pre;"> </span>‘location’ &nbsp;:’left’,<br>
+&nbsp; &nbsp; &nbsp; &nbsp; ‘background’ : ‘blue’,<br>
+}<br>
+這是ㄧ個可任意配置選項的plugin，不需要開發人員自己去定義所有的選項。<br>
+<div>
+<br></div>
+<div>
+<br></div>
+<div>
+<div>
+<b><span style="font-size: large;">Namespcing 命名空間</span></b></div>
+<div>
+<br></div>
+<div>
+正確的使用命名空間是開發plugin很重要的一部分，正確的命名，可以降低你的plugin在同一個頁面中被其他plugin或是程式碼覆蓋。</div>
+</div>
+<div>
+<strike>This is a discouraged because it clutters up the $.fn namespace. To remedy this, you should collect all of your plugin's methods in an object literal and call them by passing the string name of the method to the plugin. (-難翻..)</strike></div>
+<br>
+這裡有一個範例:<br>
+<div style="background: none repeat scroll 0% 0% rgb(230, 238, 213);">
+<span style="font-family: 'Trebuchet MS',sans-serif;"><b>(function( $ ){</b></span><br>
+<div class="MsoNormal">
+<span style="font-family: Trebuchet MS,sans-serif;"><b><br></b></span></div>
+<div class="MsoNormal">
+<span style="font-family: Trebuchet MS,sans-serif;" lang="EN-US"><b>&nbsp;
+$.fn.tooltip = function( options ) { <o:p></o:p></b></span></div>
+<div class="MsoNormal">
+<span style="font-family: Trebuchet MS,sans-serif;" lang="EN-US"><b>&nbsp;&nbsp;&nbsp;
+// THIS<o:p></o:p></b></span></div>
+<div class="MsoNormal">
+<span style="font-family: Trebuchet MS,sans-serif;" lang="EN-US"><b>&nbsp; };<o:p></o:p></b></span></div>
+<div class="MsoNormal">
+<span style="font-family: Trebuchet MS,sans-serif;" lang="EN-US"><b>&nbsp;
+$.fn.tooltipShow = function( ) {<o:p></o:p></b></span></div>
+<div class="MsoNormal">
+<span style="font-family: Trebuchet MS,sans-serif;" lang="EN-US"><b>&nbsp;&nbsp;&nbsp;
+// IS<o:p></o:p></b></span></div>
+<div class="MsoNormal">
+<span style="font-family: Trebuchet MS,sans-serif;" lang="EN-US"><b>&nbsp; };<o:p></o:p></b></span></div>
+<div class="MsoNormal">
+<span style="font-family: Trebuchet MS,sans-serif;" lang="EN-US"><b>&nbsp;
+$.fn.tooltipHide = function( ) { <o:p></o:p></b></span></div>
+<div class="MsoNormal">
+<span style="font-family: Trebuchet MS,sans-serif;" lang="EN-US"><b>&nbsp;&nbsp;&nbsp;
+// BAD<o:p></o:p></b></span></div>
+<div class="MsoNormal">
+<span style="font-family: Trebuchet MS,sans-serif;" lang="EN-US"><b>&nbsp; };<o:p></o:p></b></span></div>
+<div class="MsoNormal">
+<span style="font-family: Trebuchet MS,sans-serif;" lang="EN-US"><b>&nbsp;
+$.fn.tooltipUpdate = function( content ) { <o:p></o:p></b></span></div>
+<div class="MsoNormal">
+<span style="font-family: Trebuchet MS,sans-serif;" lang="EN-US"><b>&nbsp;&nbsp;&nbsp;
+// !!!&nbsp; <o:p></o:p></b></span></div>
+<div class="MsoNormal">
+<span style="font-family: Trebuchet MS,sans-serif;" lang="EN-US"><b>&nbsp; };<o:p></o:p></b></span></div>
+<div class="MsoNormal">
+<span style="font-family: Trebuchet MS,sans-serif;"><b><br></b></span></div>
+<span style="font-family: Trebuchet MS,sans-serif; font-size: 12pt;" lang="EN-US"><b>})(
+jQuery );</b></span></div>
+<br>
+以上的範例是比較洩氣的方式，(我的解讀是…)因為以上的程式碼是將所有的明明是很類似的功能都個別分出一個Plugin。為了糾正這個寫法，你可以看看糾正後的樣子:<br>
+<br>
+<div style="background: none repeat scroll 0% 0% rgb(230, 238, 213);">
+<br>
+<div class="MsoNormal" style="vertical-align: baseline;">
+<span lang="EN-US"><span style="font-family: Trebuchet MS,sans-serif;">(function( $ ){<b><o:p></o:p></b></span></span></div>
+<div class="MsoNormal" style="vertical-align: baseline;">
+<br></div>
+<div class="MsoNormal" style="vertical-align: baseline;">
+<span lang="EN-US"><span style="font-family: Trebuchet MS,sans-serif;">&nbsp; var<span style="color: red;">
+methods</span> = {<b><o:p></o:p></b></span></span></div>
+<div class="MsoNormal" style="vertical-align: baseline;">
+<span lang="EN-US"><span style="font-family: Trebuchet MS,sans-serif;">&nbsp;&nbsp;&nbsp;<span style="color: rgb(102, 0, 0);">
+init&nbsp;</span>: function( options ) { <b><o:p></o:p></b></span></span></div>
+<div class="MsoNormal" style="vertical-align: baseline;">
+<span lang="EN-US"><span style="font-family: Trebuchet MS,sans-serif;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: rgb(102, 102, 102);">
+// THIS </span><b><o:p></o:p></b></span></span></div>
+<div class="MsoNormal" style="vertical-align: baseline;">
+<span lang="EN-US"><span style="font-family: Trebuchet MS,sans-serif;">&nbsp;&nbsp;&nbsp; },<b><o:p></o:p></b></span></span></div>
+<div class="MsoNormal" style="vertical-align: baseline;">
+<span lang="EN-US"><span style="font-family: Trebuchet MS,sans-serif;">&nbsp;&nbsp;&nbsp;<span style="color: rgb(102, 0, 0);">
+show</span>&nbsp;: function( ) {<b><o:p></o:p></b></span></span></div>
+<div class="MsoNormal" style="vertical-align: baseline;">
+<span lang="EN-US"><span style="font-family: Trebuchet MS,sans-serif;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<span style="color: rgb(102, 102, 102);">// IS</span><b><o:p></o:p></b></span></span></div>
+<div class="MsoNormal" style="vertical-align: baseline;">
+<span lang="EN-US"><span style="font-family: Trebuchet MS,sans-serif;">&nbsp;&nbsp;&nbsp; },<b><o:p></o:p></b></span></span></div>
+<div class="MsoNormal" style="vertical-align: baseline;">
+<span lang="EN-US"><span style="font-family: Trebuchet MS,sans-serif;">&nbsp;&nbsp;<span style="color: rgb(102, 0, 0);">&nbsp;
+hide</span>&nbsp;: function( ) { <b><o:p></o:p></b></span></span></div>
+<div class="MsoNormal" style="vertical-align: baseline;">
+<span lang="EN-US"><span style="font-family: Trebuchet MS,sans-serif;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: rgb(102, 102, 102);">
+// GOOD</span><b><o:p></o:p></b></span></span></div>
+<div class="MsoNormal" style="vertical-align: baseline;">
+<span lang="EN-US"><span style="font-family: Trebuchet MS,sans-serif;">&nbsp;&nbsp;&nbsp; },<b><o:p></o:p></b></span></span></div>
+<div class="MsoNormal" style="vertical-align: baseline;">
+<span lang="EN-US"><span style="font-family: Trebuchet MS,sans-serif;">&nbsp;&nbsp;&nbsp;
+<span style="color: rgb(102, 0, 0);">update</span>&nbsp;: function( content ) { <b><o:p></o:p></b></span></span></div>
+<div class="MsoNormal" style="vertical-align: baseline;">
+<span lang="EN-US"><span style="font-family: Trebuchet MS,sans-serif;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<span style="color: rgb(102, 102, 102);">//&nbsp;!!! </span><b><o:p></o:p></b></span></span></div>
+<div class="MsoNormal" style="vertical-align: baseline;">
+<span lang="EN-US"><span style="font-family: Trebuchet MS,sans-serif;">&nbsp;&nbsp;&nbsp; }<b><o:p></o:p></b></span></span></div>
+<div class="MsoNormal" style="vertical-align: baseline;">
+<span lang="EN-US"><span style="font-family: Trebuchet MS,sans-serif;">&nbsp; };<b><o:p></o:p></b></span></span></div>
+<div class="MsoNormal" style="vertical-align: baseline;">
+<br></div>
+<div class="MsoNormal" style="vertical-align: baseline;">
+<span lang="EN-US"><span style="font-family: Trebuchet MS,sans-serif;">&nbsp;
+$.fn<span style="color: red;">.tooltip</span> = function( method ) {<b><o:p></o:p></b></span></span></div>
+<div class="MsoNormal" style="vertical-align: baseline;">
+<span lang="EN-US"><span style="font-family: Trebuchet MS,sans-serif;">&nbsp;&nbsp;&nbsp; <b><o:p></o:p></b></span></span></div>
+<div class="MsoNormal" style="vertical-align: baseline;">
+<span lang="EN-US"><span style="font-family: Trebuchet MS,sans-serif;">&nbsp;&nbsp;&nbsp;<span style="color: rgb(102, 102, 102);"> //
+Method calling logic</span><b><o:p></o:p></b></span></span></div>
+<div class="MsoNormal" style="vertical-align: baseline;">
+<span lang="EN-US"><span style="font-family: Trebuchet MS,sans-serif;">&nbsp;&nbsp;&nbsp; if
+( methods[method] ) {<b><o:p></o:p></b></span></span></div>
+<div class="MsoNormal" style="vertical-align: baseline;">
+<span lang="EN-US"><span style="font-family: Trebuchet MS,sans-serif;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+return methods[ method ].apply( this, Array.prototype.slice.call(
+arguments, 1 ));<b><o:p></o:p></b></span></span></div>
+<div class="MsoNormal" style="vertical-align: baseline;">
+<span lang="EN-US"><span style="font-family: Trebuchet MS,sans-serif;">&nbsp;&nbsp;&nbsp; }
+else if ( typeof method === 'object' ||&nbsp;! method ) {<b><o:p></o:p></b></span></span></div>
+<div class="MsoNormal" style="vertical-align: baseline;">
+<span lang="EN-US"><span style="font-family: Trebuchet MS,sans-serif;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return
+methods.init.apply( this, arguments );<b><o:p></o:p></b></span></span></div>
+<div class="MsoNormal" style="vertical-align: baseline;">
+<span lang="EN-US"><span style="font-family: Trebuchet MS,sans-serif;">&nbsp;&nbsp;&nbsp; }
+else {<b><o:p></o:p></b></span></span></div>
+<div class="MsoNormal" style="vertical-align: baseline;">
+<span lang="EN-US"><span style="font-family: Trebuchet MS,sans-serif;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+$.error( 'Method ' +&nbsp; method + '
+does not exist on jQuery.tooltip' );<b><o:p></o:p></b></span></span></div>
+<div class="MsoNormal" style="vertical-align: baseline;">
+<span lang="EN-US"><span style="font-family: Trebuchet MS,sans-serif;">&nbsp;&nbsp;&nbsp;
+}&nbsp;&nbsp;&nbsp; <b><o:p></o:p></b></span></span></div>
+<div class="MsoNormal" style="vertical-align: baseline;">
+<span lang="EN-US"><span style="font-family: Trebuchet MS,sans-serif;">&nbsp; <b><o:p></o:p></b></span></span></div>
+<div class="MsoNormal" style="vertical-align: baseline;">
+<span lang="EN-US"><span style="font-family: Trebuchet MS,sans-serif;">&nbsp; };<b><o:p></o:p></b></span></span></div>
+<div class="MsoNormal" style="vertical-align: baseline;">
+<br></div>
+<div class="MsoNormal" style="vertical-align: baseline;">
+<span lang="EN-US"><span style="font-family: Trebuchet MS,sans-serif;">})( jQuery );<b><o:p></o:p></b></span></span></div>
+<div class="MsoNormal" style="vertical-align: baseline;">
+<br></div>
+<div class="MsoNormal" style="vertical-align: baseline;">
+<span lang="EN-US"><span style="font-family: Trebuchet MS,sans-serif;"><span style="color: rgb(102, 102, 102);">// calls the init method</span><b><o:p></o:p></b></span></span></div>
+<div class="MsoNormal" style="vertical-align: baseline;">
+<span lang="EN-US"><span style="font-family: Trebuchet MS,sans-serif;">$('div').tooltip(); <b><o:p></o:p></b></span></span></div>
+<div class="MsoNormal" style="vertical-align: baseline;">
+<br></div>
+<div class="MsoNormal" style="vertical-align: baseline;">
+<span lang="EN-US"><span style="font-family: Trebuchet MS,sans-serif;"><span style="color: rgb(102, 102, 102);">// calls the init method</span><b><o:p></o:p></b></span></span></div>
+<div class="MsoNormal" style="vertical-align: baseline;">
+<span lang="EN-US"><span style="font-family: Trebuchet MS,sans-serif;">$('div').tooltip({<b><o:p></o:p></b></span></span></div>
+<div class="MsoNormal" style="vertical-align: baseline;">
+<span lang="EN-US"><span style="font-family: Trebuchet MS,sans-serif;">&nbsp;
+foo&nbsp;: 'bar'<b><o:p></o:p></b></span></span></div>
+<div class="MsoNormal" style="vertical-align: baseline;">
+<span lang="EN-US"><span style="font-family: Trebuchet MS,sans-serif;">});</span><b><o:p></o:p></b></span></div>
+</div>
+<br>
+<br>
+這種封裝方法跟結構在jquery的plugin中是很標準的寫法，適用於無數的Plugin，包含jQueryUI也是。<br>
+<br>
+<br>
+Continue…………….<br>
+<div>
+</div></div></div>
+<!--/DOCUMENT_FRAGMENT-->
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>無標題文件</title>
+</head>
+
+<body>
+<h1>JavaScript 傳址與傳值參考 的差別</h1>
+<p>http://www.slideshare.net/YiTaiLin/java-script-63031051</p>
+<script type="text/javascript">
+//傳值
+var a="dog";
+function run(x){
+	x = "cat";
+}
+run(a);
+alert(a);  //返回 dog  //值未改變
+
+
+//傳址
+var b = {"name":"dog"}
+function run2(y){
+	y.name = "cat";
+}
+run2(b);
+alert(b.name); //返回 cat   //值改變了
+
+</script>
+</body>
+</html>

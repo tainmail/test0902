@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>禮物挑選、創意生日禮物、禮品就到 - 禮尚網 GiftU</title>
+<meta http-equiv="content-language" content="zh-tw" />
+<link rel="stylesheet" type="text/css" href="style.css--" />
+
+<style>
+*{ margin:0px; padding:0px; font-family: "微軟正黑體";}
+* { 
+-webkit-box-sizing: border-box;
+-moz-box-sizing: border-box;
+box-sizing: border-box;
+
+}
+
+/*清除 clearfix*/
+.clearfix:after { content: "."; display: block; height: 0; clear: both; visibility: hidden; }
+.clearfix {*zoom: 1; _zoom: 1; }
+
+/*控制pre*/
+pre { border:2px solid pink; padding:5px; font-size:12px; background:#fff; clear:both; font-size:12px; font-family:Verdana;}
+pre strong { color:#CC0000; }
+pre em { font-style:normal; font-weight:bold; color:#006600; }
+
+
+/* Slider
+---------------------------------------------------------*/
+.mainAd { overflow: hidden; margin-bottom: 492px; }
+#wrapper { background-color: #fff; width: 100%; height: 480px; overflow: hidden; position: absolute; left: 3px; border-top: 4px solid #ffffff; border-bottom: 4px solid #ffffff; }
+#carousel a { display: block; float: left; }
+#carousel a img { display: block; float: left; }
+.Pager { margin-left: 353px; position: absolute; left: 50%; bottom: 20px; display: block; }
+#prev,
+#next { width: 31px; height: 60px; display: block; top: 0; position: absolute; }
+#prev { left: -810px; top: -270px; background: url(prev.png); }
+#next { right: -100px; top: -270px; background: url(next.png); }
+#pager { margin-left: 353px; position: absolute; left: 50%; bottom: 20px; }
+#pager a { background-color: #b2b2b2; border-radius: 10px; display: inline-block; width: 12px; height: 12px; margin: 0 10px 0 0; }
+#pager a:hover { background-color: #ea5350; }
+#pager a span { display: none; }
+#pager a.selected { background-color: #ea5350; }
+.slider-wrapper { background: #ffffff; height: auto; width: 100%; padding: 6px 0; }
+#slides-4 { position: relative; }
+.slider-wrapper #slides-4 img { width: 100%; display: block; }
+
+
+</style>
+
+
+<script src="jquery-1.8.2.min.js"></script>
+<script src="jquery.carouFredSel-6.0.4-packed.js"></script>
+<script>
+$(function () {
+	$('#carousel').carouFredSel({
+		width: '100%',
+		items: {
+			visible: 3,
+			start: -1
+		},
+		scroll: {
+			items: 1,
+			duration: 1000,
+			timeoutDuration: 4000
+		},
+		prev: '#prev',
+		next: '#next',
+		pagination: {
+			container: '#pager',
+			deviation: 1
+		}
+	});
+});
+</script>
+
+</head>
+<body>
+<div id="wrapper">
+    <div id="carousel">
+        <a href="#"><img src="20141001180804602.jpg" width="959" height="480" /></a> 
+        <a href="#"><img src="20140327165958307.jpg" width="959" height="480" /></a> 
+        <a href="#"><img src="20140910232710131.jpg" width="959" height="480" /></a> 
+        <a href="#"><img src="20140801000732629.jpg" width="959" height="480" /></a> 
+        <a href="#"><img src="20131211170522185.jpg" width="959" height="480" /></a> 
+        <a href="#"><img src="20131227184841225.jpg" width="959" height="480" /></a> 
+        <a href="#"><img src="20140910233000669.jpg" width="959" height="480" /></a> 
+        <a href="#"><img src="20140225180344227.jpg" width="959" height="480" /></a> 
+    </div>
+    <div class="Pager"> 
+        <a href="#" id="prev" title="Show previous"></a> 
+        <a href="#" id="next" title="Show next"></a> 
+    </div>
+    <div id="pager"></div>
+</div>
+</body>
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+
+<head>
+<title>.scroll()應用-滾到某處，浮水印出現</title>
+<meta charset="utf-8">
+<!--hight light語法區 開始-->
+<link rel="stylesheet" title="Default" href="js/highlight/default.css">
+<link rel="alternate stylesheet" title="Visual Studio" href="js/highlight/vs.css">
+<style>
+* { font-family:Verdana, Arial, Helvetica, sans-serif; font-size:12px; line-height:18px; }
+.myborder1 { border:3px solid #000; margin:5px; }
+.myborder2 { border:3px solid red; margin:5px; }
+strong { color:#090; }
+em { font-weight:bold; font-style:normal; color:#C30; }
+tr.hightlight td { background: #EBEBEB; }
+</style>
+<script src="js/highlight/highlight.js" ></script>
+<script src="js/highlight/html-xml.js"></script>
+<script src="js/highlight/css.js"></script>
+<script src="js/highlight/javascript.js"></script>
+<script src="js/highlight/highlight-tain-set.js"></script>
+<!--hight light語法區 結束-->
+
+<script src="js/jquery.js"></script>
+<script>
+$(function(){
+	
+	//初始值
+	var iScrollTop= $(window).scrollTop();
+	$('.my_scroll_top span').html( iScrollTop );
+	
+	//取浮水印座標
+	var nameR = ".float1";//目標物
+	var nameL = ".float2";//目標物
+	
+	//初始隱藏
+	$(nameR).hide();
+	
+	//滾動
+	$(window).scroll(function () {
+		var iScrollTop= $(window).scrollTop();
+		$('.my_scroll_top span').html( iScrollTop );
+		
+		//滾到某處，浮水印出現
+		if(iScrollTop>200){
+			$(nameR).show();
+			$(nameL).show();
+		}else{
+			$(nameR).hide();
+			$(nameL).hide();
+		}
+	});
+});
+</script>
+
+
+<style>
+.wrapper{ width:980px;/*1000*/ padding:10px; height:1000px; background:#CCCCCC; margin:0 auto; position:relative;}
+.wrapper .header{ background: #FC3; height:200px;}
+
+.wrapper .float1{width:100px; height:100px; background:#096; position: fixed; right:50%; top:100px; margin-right:-600px;}
+.wrapper .float2{width:100px; height:100px; background:#0e6; position: fixed; left:50%; top:100px; margin-left:-600px;}
+
+
+</style>
+
+<body>
+
+
+
+<div class="wrapper">
+	<div class="header">
+    header 200px 超過200後浮水印才出現
+    </div>
+	
+    <!--這是浮水印1-->
+    <div class="float1">
+    	這是浮水印
+    </div>
+    <!--這是浮水印1-->
+    <!--這是浮水印2-->
+    <div class="float2">
+    	這是浮水印2
+    </div>
+    <!--這是浮水印2-->
+    
+    
+    <div class="my_scroll_top"> 滾動高：<span></span> </div>
+</div>
+
+<div id="styleswitcher">樣式切換</div>
+<table width="1019" border="1" align="center" cellpadding="10">
+    <tr>
+        <td colspan="3" align="left" valign="top"><h1>.scroll() 滾動</h1></td>
+    </tr>
+    <tr>
+        <td colspan="3" align="left" valign="top"></td>
+    </tr>
+    <tr>
+        <th width="121" align="left" valign="top">&nbsp;</th>
+        <td width="215" align="left" valign="top">&nbsp;</td>
+        <td width="607" align="left" valign="top">&nbsp;</td>
+    </tr>
+    <tr>
+        <th height="1000" align="left" valign="top">&nbsp;</th>
+        <td align="left" valign="top">&nbsp;</td>
+        <td align="left" valign="top">&nbsp;</td>
+    </tr>
+</table>
+<br>

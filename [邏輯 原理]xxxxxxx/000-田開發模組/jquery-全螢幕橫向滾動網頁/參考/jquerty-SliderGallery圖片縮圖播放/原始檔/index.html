@@ -1,0 +1,197 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta content="all" name="minwt" />
+<meta name="author" content="男丁格爾&梅干扣肉" />
+<meta name="Copyright" content="www.minwt.com版權所有" />
+<meta name="keywords" content="梅問題,教學網,photoshop教學,flex教學,javascript教學,css教學,網頁教學,架站教學,wordperss教學">
+<meta name="description" content="透過javascript呼叫Flex中的function，並且把路徑傳給flex進行播放，此本版修正了，1.滑入即時出現色塊 2.加入loading圖示 3.移除影片播放所殘留下的影像 4.提高整個的順暢度" />
+<title>梅問題‧教學網-範例展示【jQuery-Slider Gallery滑動式相本】</title>
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.pack.js"></script>
+<style type="text/css">
+	body{font-family:Arial, Helvetica, sans-serif;}	
+	ul ,li{	margin:0; padding:0; list-style-type: none; float:left;}	
+	
+	#showbox{width:360px; border:solid 1px #eee;}
+	#showImg , #showImg table{width:360px; height:300px;}
+	
+	#imgList{margin-top:10px; margin-left:3px; padding-bottom:10px; overflow:auto;}
+	#imgList span{float:left; display:block; width:22px;  margin:2px; line-height:50px;}
+	
+	#list{position:relative; float:left; width:350px; height:60px;}	
+	#list img{width:40px; height:40px;}
+	#list{width:300px; float:left; margin:0 2px; overflow:hidden;}
+	#list ul{ position:absolute; left:0; top:0; white-space: nowrap;/* 不斷行 */}
+	#list ul li{
+		display: inline; /* 水平排列 */
+		margin:0 4px;
+		padding:5px; 
+		border:solid 1px #eee;
+	}
+	#list ul li.on{border:solid 2px #ccc;}	
+	#list ul li img {display: inline-block;	/* 水平內顯示為區塊 */}
+	
+	/* 秀大圖 */
+	#imgB{border:solid 7px #fff;}
+	/* 滑入顯示圖片區塊 */
+	#overImg{position:absolute; top:-99999; left:-99999; display:none; z-index:100; border:solid 5px #666; padding:5px; background:#fff;}
+	
+</style>
+<script>
+$(function(){
+	$("#prv img").css({
+		display:'none'
+	});
+	//設定縮圖的長度
+	var total=$("#list ul li").length;
+	//設定ul的寬度
+	var ulWidth=total*61;
+	$("#list ul").css("width",ulWidth);	
+	
+	//計算頁數
+	var page=0;
+	var maxpage=Math.floor(ulWidth/360);	
+	$("#pagenum").html(page+"/"+maxpage);
+	
+	$("#imgB").css("opacity", 0);
+	$("#imgB").fadeTo(1000, 1.0);
+	
+	var ImgObj=$("#list ul li img");
+	ImgObj.click(function(){
+		$("#imgB").css("opacity", 0);
+		var img=this.src.replace("img/s","img/b");
+		$("#imgB").attr("src",img);
+
+		$("#imgB").stop();
+		$("#imgB").fadeTo(1000, 1.0);
+		//移除li上的on Class
+		ImgObj.parents("li").removeClass("on");
+		//將目前點到的加入on Class
+		$(this).parents("li").addClass("on");	
+		
+		//關閉滑入縮圖
+		ImgObj.mouseout();	
+	});
+
+	ImgObj.mouseover(function(e){		
+		//取得滑鼠位置
+		var mousex=e.pageX;		
+
+		//取出居中的數值
+		$("#overImg #Img").attr("src",img);
+		var _padding = parseInt($("#overImg").css("padding-left"))
+						+ parseInt($("#overImg").css("padding-right"));
+		var _border = parseInt($("#overImg").css("border-left-width"))
+							+ parseInt($("#overImg").css("border-right-width"));
+		var _l = $(this).offset().left - ($("#overImg").width()-_padding-_border) / 2;		
+		
+		//將圖片換成滑入的小圖
+		var img=this.src.replace("img/s","img/o");
+		
+		//overImg滑入圖片居中		
+		$("#overImg").css({
+			top:220,
+			left:_l,
+			display:'block'
+		});				
+		$("#overImg #Img").attr("src",img);		
+		$("#overImg").css("opacity", 0);
+		$("#overImg").stop();
+		$("#overImg").fadeTo(300, 1.0);	
+	});
+	
+	ImgObj.mouseout(function(){
+		$("#overImg").css({
+			top:-999999,
+			left:-999999,
+			display:'none'
+		});		
+	});
+	
+	//下一頁
+	$("#next img").click(function(){
+		if(page!=maxpage){
+			page++;
+			$("#prv img").css({
+				display:'block'
+			});
+		}
+		if(page == maxpage){
+			$("#next").css({
+				display:'none'
+			});
+		}
+		//滾動縮圖
+		$("#list ul").animate({left:-300*page},1000);
+		$("#pagenum").html(page+"/"+maxpage);
+	});
+	
+	//上一頁
+	$("#prv img").click(function(){
+		if(page >0){
+			page--;
+			$("#next").css({
+				display:'block'
+			});
+		}	
+		if(page ==0){
+			$("#prv img").css({
+				display:'none'
+			});
+		}
+		//滾動縮圖
+		$("#list ul").animate({left:-300*page},1000);
+		$("#pagenum").html(page+"/"+maxpage);
+	});
+	
+	//取消連結虛線框
+	$("a").focus(function(){
+		$(this).blur();
+	});
+});
+</script>
+
+</head>
+
+<body>
+<div id="pagenum"></div>
+<div id="overImg">
+	<img src="img/o/img01.jpg" id="Img"/><br />
+    <div align="center"><img src="img/arrow.gif" /></div>
+</div>
+<div id="showbox">
+	<div id="showImg">
+   	  <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td align="center" valign="middle" bgcolor="#eeeeee">
+       	    	<img src="img/b/img01.jpg" id="imgB"/></td>
+          </tr>
+        </table>
+    </div>
+    <div id="imgList">    	
+        <span id="prv"><a href="#"><img src="img/left_arrow.gif" border="0"/></a></span>           
+           <div id="list">
+             <ul>
+               <li class="on"><img src="img/s/img01.jpg" /></li>
+               <li><img src="img/s/img02.jpg" /></li>
+               <li><img src="img/s/img03.jpg" /></li>
+               <li><img src="img/s/img04.jpg" /></li>
+               <li><img src="img/s/img05.jpg" /></li>
+               <li><img src="img/s/img06.jpg" /></li>
+               <li><img src="img/s/img07.jpg" /></li>
+               <li><img src="img/s/img08.jpg" /></li>
+               <li><img src="img/s/img09.jpg" /></li>
+               <li><img src="img/s/img10.jpg" /></li>
+               <li><img src="img/s/img11.jpg" /></li>
+               <li><img src="img/s/img12.jpg" /></li>
+               <li><img src="img/s/img13.jpg" /></li>
+               <li><img src="img/s/img14.jpg" /></li>
+               <li><img src="img/s/img15.jpg" /></li>
+             </ul>
+           </div>
+      <span id="next"><a href="#"><img src="img/right_arrow.gif" border="0"/></a></span>    
+    </div>
+</div>
+</body>
+</html>

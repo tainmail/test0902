@@ -1,0 +1,162 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>旋轉木馬</title>
+
+<style>
+*{ margin:0; padding:0;}
+/*控制pre*/
+pre { border:2px solid pink; padding:5px; font-size:12px; background:#fff; clear:both; font-size:12px; font-family:Verdana; white-space: pre-wrap;
+word-wrap: break-word;}
+pre strong { color:#CC0000; }
+pre em { font-style:normal; font-weight:bold; color:#006600; }
+
+.wrapper{ border:2px solid #000; width:500px; height:500px; margin:0 auto;}
+
+.gallery_1 .mask{ width:100px; /**/ min-height:130px;/**/ background:#960;/**/ position:relative; overflow:hidden; }
+.gallery_1 .mask .run{ width:300px;/**/ height:120px;/**/ background:#666666;/**/ position:absolute; left:0px; top:0px;}
+.gallery_1 .mask .run .piece{ float:left; min-width:100px;/**/}
+
+.gallery_1 .operate{ height:50px;}
+.gallery_1 .operate .prev{width:50px; height:50px; display:block; float:left; background: #C99; margin-right:5px;}
+.gallery_1 .operate .next{width:50px; height:50px; display:block; float:left; background: #FCF; margin-right:5px;}
+
+.gallery_1 .pager{ height:50px;}
+.gallery_1 .pager a{ width:50px; height:50px; display:block; float:left; background:#FC9; margin-right:5px;}
+</style>
+
+<script src="js/jquery.js"></script>
+<script src="js/jquery.transit.min.js"></script>
+<script src="js/jquery.timers-1.1.2.js"></script>
+
+<script>
+$(function(){
+	//alert("jq OK")
+	var $gallery = $(".gallery_1");
+	var $mask = $gallery.find(".mask");
+	var $run = $mask.find(".run");
+	var $piece = $run.find(".piece");
+	
+	var $btnNext =  $gallery.find(".operate .next");
+	var $btnPrev =  $gallery.find(".operate .prev");
+	var $pagerBtn = $gallery.find(".pager a");
+	
+	var iAmount = $piece.length;
+	var iPieceW = $piece.eq(0).innerWidth();
+	
+	var iCurrent = 0;
+	var iPos;
+	
+	//重設寬
+	$run.css({width: iPieceW * (iAmount+1)});
+	
+	//產生虛擬序
+	$piece.eq(0).clone().appendTo($run);
+	
+	/*上一張*/
+	$btnPrev.on("click", function(){
+		if(iCurrent <= 0){ //到達 0 序
+			iPos = -(iPieceW * iAmount)
+			$run.stop(true).css({x:iPos}); //css到虛擬序
+			iPos = -(iPieceW * (iAmount-1) )
+			$run.stop(true).transition({x:iPos}); //animate到最末序
+			iCurrent = iAmount-1;
+		}else{
+			iCurrent--
+			iPos = - (iPieceW * iCurrent) ;
+			$run.stop(true).transition({x:iPos});
+		};
+	});
+	
+	/*下一張*/
+	$btnNext.on("click", function(){
+		if(iCurrent == iAmount-1){  //到達最末序
+			iPos = -(iPieceW * iAmount); 
+			$run.stop(true).transition({x:iPos},function(){ //animate到虛擬序
+				$run.css({x:0}); //css到第0序
+				iCurrent = 0;
+			})
+		}else{
+			iCurrent++
+			iPos = - (iPieceW * iCurrent) ;
+			$run.stop(true).transition({x:iPos});
+		};
+	});
+	
+	
+	/*數字跳頁*/
+	$pagerBtn.on("click", function(){
+		if(iCurrent != $(this).index()){
+			iCurrent = $(this).index();
+			iPos = - (iPieceW * iCurrent) ;
+			$run.stop(true).transition({x:iPos});
+		}
+	});
+	
+	/*自動播*/
+	$gallery.everyTime(2000, "timerAutoPlay", function(){
+		$btnNext.trigger("click");
+	});
+	
+	/*懸停*/
+	$piece.add($pagerBtn).add($btnPrev).add($btnNext).hover(
+		function(){
+			$gallery.stopTime("timerAutoPlay");
+		},
+		function(){
+			$gallery.everyTime(2000, "timerAutoPlay", function(){
+				$btnNext.trigger("click");
+			});
+		}
+	);
+	
+	
+});
+</script>
+
+</head>
+
+<body>
+
+<div class="wrapper">
+
+<h1>自動播+懸停jquery.timers-1.1.2.js</h1>
+
+<!--基本滾動模組 開始-->
+    <div class="gallery_1">
+        <!--分頁 開始-->
+        <div class="pager">
+            <a href="javascript:void(0)">1</a>
+            <a href="javascript:void(0)">2</a>
+            <a href="javascript:void(0)">3</a>
+            <a href="javascript:void(0)">4</a>
+        </div>
+        <!--分頁 結束-->
+    
+    
+        <!--操作 開始-->
+        <div class="operate">
+                <a class="prev" href="javascript:void(0)"><span>上一張</span></a> 
+                <a class="next" href="javascript:void(0)"><span>下一張</span></a>
+        </div>
+        <!--操作 結束-->
+        
+        <!--滾動 開始-->
+        <div class="mask">
+            <div class="run">
+                <div class="piece"><img src="images/pic_1s.jpg"/></div>
+                <div class="piece"><img src="images/pic_2s.jpg"/></div>
+                <div class="piece"><img src="images/pic_3s.jpg"/></div>
+                <div class="piece"><img src="images/pic_4s.jpg"/></div>
+            </div>
+        </div>
+        <!--滾動 結束-->
+    </div>
+<!--基本滾動模組 結束-->
+
+
+
+</div>
+</body>
+</html>

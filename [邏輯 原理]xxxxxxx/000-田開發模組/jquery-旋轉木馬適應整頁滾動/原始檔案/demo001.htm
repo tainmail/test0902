@@ -1,0 +1,134 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>OB嚴選品牌旗艦店</title>
+<script type="text/javascript" src="jquery-1.4.2.js"></script>
+
+
+<style type="text/css">
+body { overflow-x:hidden; }
+ul,
+li { margin: 0; padding: 0; list-style: none; }
+a img { border: none; }
+#abgne { margin: 0 auto; width: 950px;	/* 框架圖片的寬 */ height: 550px;	/* 框架圖片的高 */ position: relative; }
+#abgne a.prev { position: absolute; top: 0px; right:950px; display: block; width: 100%;	/* 左右鈕圖片的寬 */ height: 550px;	/* 左右鈕圖片的高 */ text-indent: -9999px; }
+#abgne a.next { position: absolute; top: 0px; left:950px; display: block; width: 100%;	/* 左右鈕圖片的寬 */ height: 550px;	/* 左右鈕圖片的高 */ text-indent: -9999px; }
+#abgne .prev { -moz-opacity:.7; -khtml-opacity:.7; -webkit-opacity:.7; opacity:.7; filter:alpha(opacity=70); background-image: url(left-950.jpg); background-repeat: no-repeat; background-position: right; }
+#abgne .next { right: 0; -moz-opacity:.7; -khtml-opacity:.7; -webkit-opacity:.7; opacity:.7; filter:alpha(opacity=70); background-image: url(right-950.jpg); background-repeat: no-repeat; background-position: left; }
+#abgne .slides { /*overflow: hidden;*/
+position: relative; top: 0px; left: 0px; width: 950px;	/* 框架中間區塊的寬 */ height: 550px;	/* 框架中間區塊的高 */ }
+#abgne .slides ul { position: relative; height: 100%; width: 5700px; float:left; }
+#abgne .ct { /*最重要的一條，沒有這項的話~內容就會跟著透明*/}
+#abgne .slides li { width: 950px;	/* 框架中間區塊的寬 */ height: 100%; float: left; }
+</style>
+</head>
+<body>
+<!--大圖輪播效果程式開始-->
+
+<script type="text/javascript">
+$(function(){
+	// 先取得必要的元素並用 jQuery 包裝
+	// 再來取得 $block 的寬度及設定動畫時間
+	var $block = $('#abgne'), 
+	$slides = $block.find('.slides'), 
+	$ul = $slides.find('ul'), 
+	_width = $slides.width(), 
+	_left = _width * -1, 
+	_animateSpeed = 400, 
+	
+	// 加入計時器, 輪播時間及控制開關
+	timer, _showSpeed = 3000, _stop = false;
+
+	// 先把最後一個 li 的內容插入到第一個 li 前面
+	// 並設定 $ul 的 left 及 width
+	$ul.find('li:first').before($ul.find('li:last')).end().css({
+		left: _left,
+		width: _width * ($ul.find('dt') + 1)
+	});
+
+	// 當點擊到 a.prev 時
+	var $prev = $block.find('a.prev').click(function(){
+		// 移動 $ul
+		$ul.stop(false, true).animate({'left' : _left + _width}, _animateSpeed, function () {
+			// 把最後一個 li 的內容插入到第一個 li 前面
+			$ul.find('li:first').before($ul.find('li:last')).end().css('left', _left);
+			
+			// 當移動到正確位置後, 依判斷來啟動計時器
+			if(!_stop) {
+				clearTimeout(timer);
+				timer = setTimeout(move, _showSpeed);
+			}
+		});
+		return false;
+	});
+
+
+	// 當點擊到 a.next 時
+	var $next = $block.find('a.next').click(function(){
+		// 移動 $ul
+		$ul.stop(false, true).animate({'left' : _left - _width}, _animateSpeed, function () {
+			// 把第一個 li 的內容插入到最後一個 li 後面
+			$ul.find('li:last').after($ul.find('li:first')).end().css('left', _left);
+			// 當移動到正確位置後, 依判斷來啟動計時器
+			if(!_stop) {
+				clearTimeout(timer);
+				timer = setTimeout(move, _showSpeed);
+			}
+		});
+		return false;
+	});
+
+		
+
+	// 如果滑鼠移入 $block 時
+	$block.hover(function(){
+		// 關閉開關及計時器
+		_stop = true;
+		clearTimeout(timer);
+		}, function(){
+			// 如果滑鼠移出 $block 時
+			// 開啟開關及計時器
+			_stop = false;
+			timer = setTimeout(move, _showSpeed);
+		}).find('a').focus(function(){
+			this.blur();
+		});
+
+	// 計時器使用
+	function move(){
+		$next.click();
+	};
+	
+	timer = setTimeout(move, _showSpeed);
+
+});
+
+</script> 
+
+<!--大圖輪播效果程式結束-->
+
+<!--大圖輪播開始-->
+
+
+
+<div id="abgne">
+		<div class="slides">
+			<ul>
+				<li><a href="#"><img src="1.jpg" alt="" /></a></li>
+				<li><a href="#"><img src="2_0516.jpg" alt="" /></a></li>
+				<li><a href="#"><img src="3-.jpg" alt="" /></a></li>
+                <li><a href="#"><img src="4-.jpg" alt="" /></a></li>
+                <li><a href="#"><img src="5-.jpg" alt="" /></a></li>
+                <li><a href="#"><img src="6.jpg" alt="" /></a></li>
+			</ul>
+		</div>
+		<a href="#" class="prev">&lt;</a>
+		<a href="#" class="next">&gt;</a>
+    </div>
+
+<!--大圖輪播結束-->
+
+
+</body>
+</html>

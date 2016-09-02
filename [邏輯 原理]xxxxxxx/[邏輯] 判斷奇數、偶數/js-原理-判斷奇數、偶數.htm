@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>判斷奇數、偶數</title>
+<style>
+/*控制pre*/
+pre { border:2px solid pink; padding:5px; font-size:12px; background:#fff; clear:both; font-size:12px; font-family:Verdana; white-space: pre-wrap;
+word-wrap: break-word;}
+pre strong { color:#CC0000; }
+pre em { font-style:normal; font-weight:bold; color:#006600; }
+</style>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script>
+$(function(){
+	function isEven(value) {
+		if (value%2 == 0){
+			alert("偶數");
+		}else{
+			alert("奇數");
+		}
+	};
+	
+	isEven(3);
+	
+});
+</script>
+</head>
+
+<body>
+<table style="margin:0 auto;" width="1000" border="1" cellspacing="0" cellpadding="5">
+    <tr>
+        <td width="874" align="left" valign="top"><h1>判斷奇數、偶數</h1></td>
+    </tr>
+    <tr>
+        <td align="left" valign="top"><pre>function isEven(value) {<br />   if (value%2 == 0){<br />      alert(&quot;偶數&quot;);<br />   }else{<br />      alert(&quot;奇數&quot;);<br />   }<br />};<br />	<br />isEven(3); //奇數</pre></td>
+    </tr>
+</table>
+
+</body>
+</html>

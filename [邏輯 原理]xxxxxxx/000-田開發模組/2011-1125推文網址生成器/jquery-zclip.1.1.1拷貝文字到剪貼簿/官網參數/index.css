@@ -1,0 +1,100 @@
+/* ::::: http://steamdev.com/zclip/css/screen.css ::::: */
+
+/* ::::: http://steamdev.com/zclip/css/reset.css ::::: */
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video { margin: 0pt; padding: 0pt; border: 0pt none; }
+body { line-height: 1; }
+ul { list-style: none outside none; }
+table { border-collapse: collapse; border-spacing: 0pt; }
+body { background: url('bg.gif') repeat scroll 0pt 0pt rgb(204, 204, 204); font-family: Arial,Helvetica,sans-serif; color: rgb(255, 255, 255); font-weight: bold; }
+a, a:link, a:visited { color: rgb(102, 102, 102); text-decoration: underline; text-shadow: none; }
+a:hover, a.hover { text-decoration: none; }
+a.anchor { visibility: hidden; }
+.strike { text-decoration: line-through; }
+.fixed { color: green; }
+.right { float: right ! important; }
+.page-width { width: 900px; overflow: hidden; margin: 10px auto; }
+.header ul { display: block; width: 100%; overflow: hidden; clear: both; }
+.header li { float: left; display: inline-block; padding: 0pt 22px 0pt 20px; }
+.header .logo { margin-right: 5px; }
+.header .logo h4 { font-size: 14px; text-align: center; }
+.header .bdr { background: url('divider-v.gif') repeat-y scroll right 0pt transparent; }
+.header .lnk { padding-top: 5px; padding-bottom: 5px; margin-top: 25px; }
+.header a, .header a:link, .header a:visited, h1 { color: rgb(255, 255, 255); text-decoration: none; font-size: 24px; vertical-align: middle; text-shadow: 1px 1px 3px rgb(51, 51, 51); }
+.header a:hover { text-decoration: underline; }
+.header .pwr { float: right; text-align: center; }
+.header h5 { font-size: 12px; margin: 10px 0pt 3px; }
+.social { float: right; margin-bottom: 15px; margin-top: 0px; display: block; overflow: hidden; height: 35px; width: 260px; }
+.sect { clear: both; display: block; overflow: hidden; padding-bottom: 25px; margin-bottom: 25px; background: url('divider-h.gif') repeat-x scroll 0pt bottom transparent; }
+.notice { line-height: 20px; padding: 20px; margin-bottom: 15px; background: none repeat scroll 0% 0% rgb(204, 204, 204); color: rgb(102, 102, 102); border: 4px solid rgb(102, 102, 102); border-radius: 10px 10px 10px 10px; position: relative; }
+.notice h3 { color: rgb(255, 255, 255); display: block; margin-bottom: 10px; text-decoration: underline; }
+.notice .close { position: absolute; top: 7px; right: 10px; }
+.notice .date { position: absolute; bottom: 7px; right: 10px; color: rgb(255, 255, 255); font-size: 12px; }
+p { line-height: 1.4em; margin-bottom: 15px; clear: both; }
+p, li, h2, h3, h4, h5, h6 { text-shadow: 1px 1px 1px rgb(85, 85, 85); }
+h1 { background: url('bullet.png') no-repeat scroll 0pt 6px transparent; font-size: 32px; margin-bottom: 20px; padding-left: 30px; }
+ul.features { width: 50%; float: left; }
+ul.features li { display: block; margin-bottom: 15px; line-height: 1.2em; margin-left: 30px; padding-left: 25px; background: url('bullet-sm.png') no-repeat scroll 0pt 3px transparent; }
+div.try { width: 45%; float: right; }
+.try textarea { display: block; width: 375px; padding: 10px; margin: 15px 0pt; height: 75px; border-radius: 10px 10px 10px 10px; }
+.try #text-to-copy { border: 4px solid rgb(102, 102, 102); margin-top: 0pt; }
+.try #copy-button { width: 110px; height: 50px; background: url('button.png') no-repeat scroll 0pt 0pt transparent; display: block; overflow: hidden; color: rgb(255, 255, 255); text-decoration: none; text-indent: 27px; line-height: 43px; vertical-align: middle; margin: 0pt auto; }
+.try #copy-button:hover, .try #copy-button.hover { color: rgb(204, 204, 204); }
+.try #copy-button:active, .try #copy-button.active { color: rgb(51, 51, 51); }
+.dl { width: 215px; height: 65px; background: url('dl-block.png') no-repeat scroll 0pt 0pt transparent; padding: 10px; float: left; margin-right: 20px; }
+.dl h6 { font-size: 12px; margin-bottom: 10px; }
+.dl a { color: rgb(255, 255, 255); display: inline-block; padding-left: 15px; text-shadow: 1px 1px 3px rgb(51, 51, 51); }
+.dl span { font-size: 12px; font-weight: normal; }
+.usage p { margin: 10px 0pt; }
+#callback-paragraph { width: 75%; padding: 15px; border: 4px solid rgb(255, 255, 255); border-radius: 10px 10px 10px 10px; text-shadow: 1px 1px 1px rgb(0, 0, 0); }
+.check { display: none; margin-left: 5px; margin-bottom: -5px; }
+table { border: 3px solid rgb(255, 255, 255); }
+table td, table th { padding: 10px; font-size: 14px; border: 1px solid rgb(255, 255, 255); }
+table h4 { font-size: 20px; }
+table h5 { font-size: 16px; }
+table#feedback { border: 0pt none; }
+#feedback td, #feedback th { padding: 0pt 0pt 10px; font-size: 12px; border: 0pt none; }
+#feedback p { font-size: 14px; }
+.mycounter { display: inline-block; font-size: 12px; margin-left: 25px; }
+.footer { margin-bottom: 0pt; background: none repeat scroll 0% 0% transparent; }
+.footer ul { padding: 0pt; margin: 0pt; }
+.footer ul li { list-style: none outside none; float: left; margin-right: 15px; }
+.footer ul li.last-child { background: none repeat scroll 0% 0% transparent; }
+.footer ul.right { font-size: 12px; }
+.sh_print { background: none repeat scroll 0% 0% transparent; padding: 0pt; margin: 0pt; border: 0pt none; }
+.sh_print .sh_sourceCode { background-color: rgb(255, 255, 255); color: rgb(0, 0, 0); font-weight: normal; font-style: normal; }
+.sh_print .sh_sourceCode .sh_keyword { color: rgb(0, 0, 0); font-weight: bold; font-style: normal; }
+.sh_print .sh_sourceCode .sh_type { color: rgb(0, 0, 0); font-weight: bold; font-style: normal; }
+.sh_print .sh_sourceCode .sh_string { color: rgb(0, 0, 0); font-weight: normal; font-style: normal; }
+.sh_print .sh_sourceCode .sh_comment { color: rgb(102, 102, 102); font-weight: normal; font-style: italic; }
+.sh_print .sh_sourceCode .sh_symbol { color: rgb(0, 0, 0); font-weight: bold; font-style: normal; }
+.sh_print .sh_sourceCode .sh_cbracket { color: rgb(0, 0, 0); font-weight: bold; font-style: normal; }
+.sh_print .sh_sourceCode .sh_url { color: rgb(0, 0, 0); font-weight: normal; font-style: normal; }
+.sh_print .sh_sourceCode .sh_selector { color: rgb(0, 0, 0); font-weight: bold; font-style: normal; }
+.sh_print .sh_sourceCode .sh_value { color: rgb(0, 0, 0); font-weight: normal; font-style: normal; }
+.snippet-wrap { position: relative; width: 97%; }
+.snippet-wrap li { text-shadow: none; }
+:first-child + html .snippet-wrap { display: inline-block; }
+.snippet-reveal { text-decoration: underline; }
+.snippet-wrap .snippet-menu, .snippet-wrap .snippet-hide { position: absolute; top: 10px; right: 15px; font-size: 0.9em; z-index: 1; background-color: transparent; }
+.snippet-wrap .snippet-hide { top: auto; bottom: 10px; }
+:first-child + html .snippet-wrap .snippet-hide { bottom: 25px; }
+.snippet-wrap .snippet-menu pre, .snippet-wrap .snippet-hide pre { background-color: transparent; margin: 0pt; padding: 0pt; }
+.snippet-wrap .snippet-menu a, .snippet-wrap .snippet-hide a { padding: 0pt 5px; text-decoration: underline; }
+.snippet-wrap pre.sh_sourceCode { padding: 1em; line-height: 1.8em; overflow: auto; position: relative; border-radius: 15px 15px 15px 15px; box-shadow: 2px 2px 5px rgb(0, 0, 0); }
+.snippet-wrap pre.snippet-textonly { padding: 2em; }
+:first-child + html .snippet-wrap pre.snippet-formatted { padding: 2em 1em; }
+.snippet-reveal pre.sh_sourceCode { padding: 0.5em 1em; text-align: right; }
+.snippet-wrap .snippet-num li { padding-left: 1.5em; }
+.snippet-wrap .snippet-num { margin: 1em 0pt 1em 1em; padding-left: 3em; }
+.snippet-wrap .snippet-num li { list-style: decimal-leading-zero outside none; }
+:first-child + html .snippet-wrap .snippet-num li.box { margin-left: -2.4em; }
+:first-child + html .snippet-wrap .snippet-num li .box-sp { width: 27px; }
+/* ::::: http://w.sharethis.com/button/css/buttons.c2ef6af30137dcaa4678de61c3787923.css ::::: */
+
+.stwrapper { position: absolute; width: 354px; z-index: 1000000; margin: 0pt; padding: 0pt; top: 0pt; left: 0pt; visibility: hidden; height: auto; }
+.stclose { z-index: 2000000; position: absolute; right: 3px; top: -2px; margin: 0pt; padding: 0pt; font-family: Helvetica,Arial,Sans-Serif; text-align: left; line-height: 1em; text-decoration: none; cursor: pointer; height: 28px; width: 26px; }
+.stButton { position: relative; z-index: 1; text-decoration: none; color: rgb(0, 0, 0); display: inline-block; cursor: pointer; margin-right: 3px; margin-left: 3px; font-size: 11px; line-height: 16px; }
+.stButton .stLarge { display: inline-block; height: 32px; width: 32px; position: relative; }
+.stButton .stLarge:hover { opacity: 0.75; }
+.stButton .stMainServices img, .stButton img { border: medium none ! important; margin: 0pt ! important; z-index: 100000 ! important; background: none repeat scroll 0% 0% transparent ! important; padding: 0pt ! important; float: none ! important; }

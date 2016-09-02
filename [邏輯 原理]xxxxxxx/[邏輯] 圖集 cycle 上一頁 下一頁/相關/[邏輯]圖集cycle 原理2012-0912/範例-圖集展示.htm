@@ -1,0 +1,127 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>無標題文件</title>
+<style>
+/*控制pre*/
+pre { border:2px solid pink; padding:5px; font-size:12px; background:#fff; clear:both; font-size:12px; font-family:Verdana; white-space: pre-wrap;
+word-wrap: break-word;}
+pre strong { color:#CC0000; }
+pre em { font-style:normal; font-weight:bold; color:#006600; }
+
+
+
+.gallery_1{ background:#CCC; width:450px; padding:10px; }
+.gallery_1 .box_1{ border:3px solid green; display:none; overflow:hidden;}
+.gallery_1 .box_1.current{ display:block;}
+.gallery_1 h2{}
+.menu{}
+.menu a{}
+
+.menu a.current{ background:#CC0000;}
+</style>
+
+<script src="js/jquery.js"></script>
+<script src="js/TweenMax.js"></script>
+
+
+
+<script>
+
+$(function(){
+	
+	//初始===============
+	$(".box_1").eq(0).addClass("current");
+	var oMyTimeLine = new TimelineMax
+	oMyTimeLine.to($(".box_1.current"), 0, {css:{scale:0, opacity:0}, ease:Expo.easeOut});
+	oMyTimeLine.to($(".box_1.current"), 1, {css:{scale:1, opacity:1}, ease:Expo.easeOut});
+	
+	
+	//點擊================
+	$(".menu a").click(function(iNo){
+		var iNo = $(this).index();
+		
+		//高亮
+		function fnAddCurrent(){
+			$(".box_1").eq(iNo).addClass("current").siblings().removeClass("current");
+			$(".menu a").eq(iNo).addClass("current").siblings().removeClass("current");
+		}
+		
+		//動畫腳本
+		var oMyTimeLine = new TimelineMax
+		//舊的出場
+		oMyTimeLine.to($(".box_1.current"), 0, {css:{scale:1, opacity:1}, ease:Expo.easeOut});
+		oMyTimeLine.to($(".box_1.current"), 1, {css:{scale:0, opacity:0}, ease:Expo.easeOut, onComplete:fnAddCurrent});
+		
+		//新的進場
+		oMyTimeLine.to($(".box_1:eq("+iNo+")"), 0, {css:{scale:0, opacity:0}, ease:Expo.easeOut});
+		oMyTimeLine.to($(".box_1:eq("+iNo+")"), 1, {css:{scale:1, opacity:1}, ease:Expo.easeOut});
+		
+	});
+	
+	
+	/*
+	//優化寫法=============================================
+	$(".menu a").click(function(iNo){
+		var iNo = $(this).index();
+		var $MyBox = $(".box_1");
+		var $MyBtn = $(".menu a");
+		var $OldOne = $(".box_1").filter(".current")
+		var $NewOne = $(".box_1").eq(iNo);
+		
+		
+		function fnAddCurrent(){
+			$MyBox.eq(iNo).addClass("current").siblings().removeClass("current");
+			$MyBtn.eq(iNo).addClass("current").siblings().removeClass("current");
+		}
+		
+		var oMyTimeLine = new TimelineMax
+		oMyTimeLine.to($OldOne, 0, {css:{scale:1, opacity:1}, ease:Expo.easeOut});
+		oMyTimeLine.to($OldOne, 1, {css:{scale:0, opacity:0}, ease:Expo.easeOut, onComplete:fnAddCurrent});
+		oMyTimeLine.to($NewOne, 0, {css:{scale:0, opacity:0}, ease:Expo.easeOut});
+		oMyTimeLine.to($NewOne, 1, {css:{scale:1, opacity:1}, ease:Expo.easeOut});
+		
+	});
+	*/
+	
+	
+});
+</script>
+
+</head>
+
+<body>
+<h1>TweenMax</h1>
+
+<div class="gallery_1">
+	<!--組 開始-->
+    <div class="box_1 current">
+    <img src="images/pic_1.jpg" width="400" height="400" />
+    <h2>圖1</h2>
+    </div>
+    <!--組 結束-->
+    <!--組 開始-->
+    <div class="box_1">
+    <img src="images/pic_2.jpg" width="400" height="400" />
+    <h2>圖1</h2>
+    </div>
+    <!--組 結束-->
+    <!--組 開始-->
+    <div class="box_1">
+    <img src="images/pic_3.jpg" width="400" height="400" />
+    <h2>圖1</h2>
+    </div>
+    <!--組 結束-->
+    </div>
+</div>
+
+<div class="menu">
+<a class="current" href="javascript:void(0)">11111111</a>
+<a href="javascript:void(0)">22222222</a>
+<a href="javascript:void(0)">33333333</a>
+</div>
+
+
+</body>
+</html>

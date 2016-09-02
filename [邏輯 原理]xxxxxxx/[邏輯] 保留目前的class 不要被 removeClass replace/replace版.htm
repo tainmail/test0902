@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>保留目前的class 不要被 removeClass</title>
+
+<style>
+*{ margin:0px; padding:0px; font-family: "微軟正黑體";}
+* { 
+-webkit-box-sizing: border-box;
+-moz-box-sizing: border-box;
+box-sizing: border-box;
+
+}
+
+/*清除 clearfix*/
+.clearfix:after { content: "."; display: block; height: 0; clear: both; visibility: hidden; }
+.clearfix {*zoom: 1; _zoom: 1; }
+
+/*控制pre*/
+pre { border:2px solid pink; padding:5px; font-size:12px; background:#fff; clear:both; font-size:12px; font-family:Verdana;}
+pre strong { color:#CC0000; }
+pre em { font-style:normal; font-weight:bold; color:#006600; }
+
+
+.box{ width:200px; height:100px; background:#ccc; border:5px solid #333;}
+
+.gold{ background:gold;}
+.yellowgreen{ background:yellowgreen;}
+.lightblue{ background:lightblue;}
+</style>
+
+<script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
+<script>
+$(function(){
+	$(".btn").click(function(){
+	    var sNewClass = $(this).val();
+		$(".box").removeClass(function(){
+			return $(this).attr("class").replace(/box/g, "");   //box讓它變空值，就不會被removeClass
+		})
+		.addClass(sNewClass);
+	});
+	
+	
+});
+</script>
+
+
+
+</head>
+
+<body>
+<h1>保留目前的class 不要被 removeClass</h1>
+<div class="box">這是目標物</div>
+
+<input class="btn" type="button" value="gold"/>
+<input class="btn" type="button" value="yellowgreen"/>
+<input class="btn" type="button" value="lightblue"/>
+
+<pre>
+範例1 =====================================<br />// replace()取代替換字元-jQuery教學
+// replace("要取代的東西","取代成什麼") 取代<br />// 將e 或 o 替換成 x 輸出 hxllx<br />        
+"hello".replace(/e|o/g, "x")<br /><br /><br />範例1 =====================================
+參考 jQuery removeClass except on current<br />http://stackoverflow.com/questions/7826379/jquery-removeclass-but-not-certain-classes
+<br />&lt;div id=&quot;test&quot; class=&quot;aa bb some other ones&quot;&gt;&lt;/div&gt;
+
+$('#test').removeClass(function() {<br />     return $(this).attr('class').replace(/aa|bb/g, '');    //aa bb讓它變空值，就不會被removeClass<br />});<br />    <br />//最後剩 aa bb<br />alert( $('#test').attr('class') );    
+	
+
+</pre>
+
+
+</body>
+</html>

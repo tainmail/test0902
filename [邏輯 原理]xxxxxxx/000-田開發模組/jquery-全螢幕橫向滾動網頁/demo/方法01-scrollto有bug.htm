@@ -1,0 +1,122 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>簡易顯示pre code碼</title>
+<style>
+*{ margin:0; padding:0px;}
+/*控制pre*/
+.my_code { border:1px solid orange; padding:5px; }
+.my_code pre { border:2px solid pink; padding:5px; font-size:12px; background:#fff; clear:both; font-size:12px; }
+.my_code pre strong { color:#CC0000; }
+.my_code pre em { font-style:normal; font-weight:bold; color:#006600; }
+
+body{ position:relative;}
+.nav{ width:800px; height:50px; background:#999; position:fixed; left:200px; top:0px;}
+
+.wrapper{height:500px; width:3000px; background:#ccc; margin-top:60px;}
+.box{ width:300px; width:800px; height:400px; float:left;}
+.box .inside{ width:800px; height:300px; background:#CC9966; margin:auto;}
+.box_1{ background:#FF9999;}
+.box_2{ background: #9CC;}
+.box_3{ background: #6C9;}
+</style>
+<script src="js/jquery.js"></script>
+<script src="js/jquery.scrollto-min.js"></script>
+<script>
+$(function(){
+	
+	var iAmount = $(".box").length
+	
+	
+	function fnReSize(){
+		//var iAmount = 3;
+		var iBodyW = $("body").width()
+		var iNavPos = ( iBodyW -( $(".nav").width() ) )   /2
+		var iWrapperW = iBodyW*iAmount
+		$(".nav").css({left:iNavPos});
+		$(".box").width(iBodyW);
+		$(".wrapper").width(iWrapperW);
+		
+	};
+	
+	
+	fnReSize();
+	
+	$(window).resize(function () {
+		fnReSize();
+	});
+	
+		
+		
+	$(".btn").click(function(){
+		var iNo=$(".btn").index(this);
+		$('body').stop().scrollTo( ".box:eq("+ iNo +")", 800, { axis:'x' } );
+	});
+	
+	$(".btn_start").click(function(){
+		$('body').stop().scrollTo( ".box:first", 800, { axis:'x' } );
+	});
+	
+	$(".btn_end").click(function(){
+		$('body').stop().scrollTo( ".box:last", 800, { axis:'x' } );
+	});
+	
+	
+	
+	
+	$(".btn_prev").click(function(){
+		var iCurrent= $(".box").index( $(this).parents(".box") )
+		if(iCurrent > 0 ){
+			$('body').stop().scrollTo( ".box:eq("+ (iCurrent -1) +")", 800, { axis:'x' });
+		}else{
+			$(this).hide();
+		}
+	});
+	
+	$(".btn_next").click(function(){
+		var iCurrent= $(".box").index( $(this).parents(".box") )
+		if(iCurrent < (iAmount-1) ){
+			$('body').stop().scrollTo( ".box:eq("+ (iCurrent +1) +")", 800, { axis:'x' } );
+		}
+	});
+	
+	$(".box:first").find(".btn_prev").hide();
+	$(".box:last").find(".btn_next").hide();
+	
+	
+	/*
+	var x1;
+	function xxx1(){
+		x1=Math.floor( ($(window).scrollLeft())/($("body").width()) )
+	}
+	*/
+	
+	
+	
+		
+});
+</script>
+</head>
+
+<body>
+<div class="nav">
+<input type="button" class="btn_start" value="最前" />
+<input type="button" class="btn" value="1" />
+<input type="button" class="btn" value="2" />
+<input type="button" class="btn" value="3" />
+<input type="button" class="btn_end" value="最後" />
+方法01：視窗resize後會有問題
+</div>
+
+<div class="wrapper">
+	<div class="box box_1"><div class="inside">11111<input type="button" class="btn_prev" value="prev" />
+<input type="button" class="btn_next" value="next" /></div></div>
+    <div class="box box_2"><div class="inside">22222<input type="button" class="btn_prev" value="prev" />
+<input type="button" class="btn_next" value="next" /></div></div>
+    <div class="box box_3"><div class="inside">3333<input type="button" class="btn_prev" value="prev" />
+<input type="button" class="btn_next" value="next" /></div></div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>zclip 複製文字到剪貼簿</title>
+
+<style>
+*{ margin:0px; padding:0px; color:#555; list-style:none; font-family:"微軟正黑體"; }
+.wrapper{ width:900px; margin:0 auto; margin-top:50px;}
+.wrapper h1{ margin-bottom:10px;}
+.wrapper li{ margin-bottom:15px;}
+</style>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="jquery.zclip.js"></script>
+<script>
+$(function(){
+	//拷貝到剪貼簿
+	$('#btn_copy').zclip({
+		path:'ZeroClipboard.swf',
+		copy:function(){return $('#mytxt').val();}
+	});
+	
+	
+});
+</script>
+</head>
+
+<body>
+<div class="wrapper">
+    <h1>zclip 複製文字到剪貼簿</h1>
+    <ul>
+        
+        <li>複制內容：
+            <input name="textfield" type="text" id="mytxt" size="100" value=""/>
+        </li>
+        <li>
+            <input type="button"  id="btn_copy" value="複製文字到剪貼簿" />
+        </li>
+    </ul>
+</div>
+
+</body>
+</html>

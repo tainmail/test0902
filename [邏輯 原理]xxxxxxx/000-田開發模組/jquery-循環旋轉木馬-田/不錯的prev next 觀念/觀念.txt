@@ -1,0 +1,9 @@
+function fnPrev(){
+	iCurrent = Math.max(iCurrent-1, 0); //如果第0個，就當0
+	fnScrollPiece( iGalleryW * iCurrent, iSpeed);
+};
+		
+function fnNext(){
+	iCurrent = Math.min(iCurrent+1, iAmount-1); //如果最末序，就當最未序
+	fnScrollPiece( iGalleryW * iCurrent, iSpeed);
+};

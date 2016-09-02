@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>無標題文件</title>
+<style>
+/*控制pre*/
+pre { border:2px solid pink; padding:5px; font-size:12px; background:#fff; clear:both; font-size:12px; font-family:Verdana; white-space: pre-wrap;
+word-wrap: break-word;}
+pre strong { color:#CC0000; }
+pre em { font-style:normal; font-weight:bold; color:#006600; }
+
+
+
+.gallery_1{ background:#CCC; width:450px; padding:10px; }
+.gallery_1 .box_1{ border:3px solid green; }
+
+
+</style>
+
+<script src="js/jquery.js"></script>
+<script src="js/TweenMax.js"></script>
+
+
+
+<script>
+
+$(function(){
+	
+	var iNo = 1
+
+	//換張========================
+	function fnNext(){
+		iNo++;
+		if(iNo>5){iNo = 1}
+		
+		TweenMax.to( $(".box_1 img"), 0.3, {css:{alpha:0}, ease:Expo.easeIn, onComplete:function(){
+            $(".box_1 img").attr("src","images/pic_"+ iNo +".jpg");
+            TweenMax.to($(".box_1 img"), 0.3, {css:{alpha:1}, ease:Expo.easeOut});
+        }});
+	}
+	
+	//播停====================
+	function fnSlide(){
+		var sOption = $(".switch option:selected").val();
+		if( $(".switch option:selected").val() == "play"){
+			 oTimer = setInterval(fnNext, 2000);
+		};
+		if( $(".switch option:selected").val() == "pause"){
+			clearInterval(oTimer);
+		};
+	};
+	
+	//初始=================
+	fnSlide();
+	
+	//切換================
+	$(".switch").on("change", function(){
+		fnSlide();
+	});
+	
+	
+	
+	
+	
+	
+});
+
+
+</script>
+
+</head>
+
+<body>
+<h1>TweenMax</h1>
+<select class="switch" name="">
+    <option value="play" selected="selected">播</option>
+    <option value="pause">停</option>
+</select>
+<div class="gallery_1">
+	<!--組 開始-->
+    <div class="box_1">
+    <img src="images/pic_1.jpg" width="400" height="400" />
+    </div>
+    <!--組 結束-->
+   
+</div>
+
+
+
+
+</body>
+</html>

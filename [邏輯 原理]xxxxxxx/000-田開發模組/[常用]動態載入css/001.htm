@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>動態載入css</title>
+<style>
+*{ margin:0px; padding:0px; font-family: "微軟正黑體", Microsoft Yahei, Verdana, Geneva, sans-serif, "新細明體";}
+/*清除 clearfix*/
+.clearfix:after { content: "."; display: block; height: 0; clear: both; visibility: hidden; }
+.clearfix {*zoom: 1; _zoom: 1; }
+
+/*控制pre*/
+pre { border:2px solid pink; padding:5px; font-size:12px; background:#fff; clear:both; font-size:12px; font-family:Verdana;}
+pre strong { color:#CC0000; }
+pre em { font-style:normal; font-weight:bold; color:#006600; }
+</style>
+
+
+
+<script src="jquery.js"></script>
+<script>
+
+//動態載入css
+/**/
+function fnLoadCss(cssPath) {
+	var $cssLink = $("<link>").attr({rel: "stylesheet", type: "text/css", href: cssPath});
+	$("head").append($cssLink);
+};
+
+
+
+/*
+//方法二
+function fnLoadCss(cssPath) {
+	$("head").append($('<link href="'+ cssPath +'" rel="stylesheet" type="text/css" />'));
+};
+*/
+
+
+
+$(function(){
+	
+	//調用
+	$(".btn_1").click(function(){
+		fnLoadCss("color-1.css");
+	});
+	
+	
+});
+</script>
+
+</head>
+
+<body>
+<table style="margin:0 auto;" width="1000" border="1" cellspacing="0" cellpadding="5">
+    <tr>
+        <td colspan="2" align="left" valign="top"><h1>動態載入css</h1></td>
+    </tr>
+    <tr>
+        <td colspan="2" align="left" valign="top"><input class="btn_1" type="button" value="動態載入css"/></td>
+    </tr>
+    <tr>
+        <td width="168" align="left" valign="top">&nbsp;</td>
+        <td width="706" align="left" valign="top"><pre>//動態載入css
+function fnLoadCss(cssPath) {
+	var $cssLink = $("<link>").attr({rel: "stylesheet", type: "text/css", href: cssPath});
+	$("head").append($cssLink);
+};
+
+
+
+//調用
+	$(".btn_1").click(function(){
+		fnLoadCss("color-1.css");
+	});</pre></td>
+    </tr>
+</table>
+</body>
+</html>

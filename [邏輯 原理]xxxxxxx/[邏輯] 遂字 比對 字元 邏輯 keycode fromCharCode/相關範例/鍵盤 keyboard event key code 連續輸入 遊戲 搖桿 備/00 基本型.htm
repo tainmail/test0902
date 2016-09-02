@@ -1,0 +1,94 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>鍵盤 事件 連續輸入</title>
+
+<script src="jquery.js"></script>
+
+
+<!--taintestinfo 測試開始-->
+<script>
+$.extend({
+	tainTestInfo: function(options){
+		var defaults = {className:"info", amount:3, width:200, posH:"right", posV:"top"};
+		var settings = $.extend( defaults, options);
+		var sTestInfoHtml='';
+		sTestInfoHtml += '<div class="'+settings.className+'" style="width:'+settings.width+'px; height:auto; padding:10px; background-color:rgba(0, 0, 0, 0.5); position:fixed; '+settings.posH+':0px; '+settings.posV+':0px;  z-index:1000;">'
+		for(var i=0; i<settings.amount; i++){
+			sTestInfoHtml += '<div class="'+settings.className+'_'+i+'" style="border:1px solid #000; margin-bottom:5px; color:#fff;">--</div>';
+		};
+		sTestInfoHtml += '</div>'
+		$("body").append(sTestInfoHtml);
+	}
+});
+
+
+$(function(){
+	$.tainTestInfo({className:"info", amount:3, width:200, posH:"right", posV:"top"}); 
+	$(".info_0").html("--");
+});
+</script>
+<!--taintestinfo 測試結束-->
+
+
+<script>
+$(function(){
+	
+	function fnGo(){
+		 $(".info_0").append("執行-");/////
+		 $(".lightbox3").addClass("active"); //lightbox 開
+	}
+	
+	function fnClearBuffer(){
+		codeBuffer = "";
+		$(".info_1").html("--");///////
+	};
+	
+	
+	var code1 = String.fromCharCode(38,38,40,40); //本例是上上下下。 把keyboard code 轉成對應字元
+	var codeBuffer = "";
+	var oClearTimer = null;
+	
+	$(document).keyup(function(e){
+		
+		if(oClearTimer){clearTimeout(oClearTimer)} //3秒要輸入完
+		oClearTimer = setTimeout(fnClearBuffer, 3000);
+		
+		codeBuffer += String.fromCharCode(e.which); //接收已輸入
+		
+		$(".info_1").html(codeBuffer);//////
+		
+		if (code1.substring(0, codeBuffer.length) == codeBuffer){  //遂字比對目前輸出
+			if (code1.length == codeBuffer.length) {   //滿足所有字元
+				fnGo();
+				fnClearBuffer();
+            }
+		}else{
+			fnClearBuffer();
+		}
+	});
+	
+	
+	
+	
+});
+
+
+
+</script>
+
+</head>
+
+<body>
+<h1>鍵盤 事件 連續輸入</h1>
+
+<p>本例： 鍵盤輸入 「上上下下」 會出現訊息</p>
+
+
+
+
+
+
+</body>
+</html>
